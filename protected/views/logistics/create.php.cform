@@ -1,0 +1,12 @@
+<?php
+$this->pageTitle=Yii::app()->name . ' - Login';
+$this->breadcrumbs=array(
+	'Login',
+);
+?>
+
+<h2>创建一个物流公司-CForm</h2>
+
+<div class="form">
+<?php echo $form;	// If CForm ?>
+</div><!-- form -->

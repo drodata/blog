@@ -1,0 +1,56 @@
+	1. 更改云主机root密码。登录管理控制台，进入ECS管理页面，选择重置密码并重启
+	   （右上角“重启”按钮）ECS;
+	2. 远程链接ECS. 使用putty来实现，putty是一款图形界面的远程连接工具。
+	具体步骤如下：
+		1. 安装。Debian 下直接 `apt-get install putty`.安装完成后在终端运行
+		`putty`会弹出启动窗口，如下：
+		![](/media/essay/2014/11/putty-1.png "")
+		2. 在"Host Name (or IP address)"栏内输入ECS公网IP，之后点击“连接”，
+		这时会弹出一个安全提示框，
+		![](/media/essay/2014/11/putty-2-alert.png "")
+		点击"Accept"即可，之后会弹出一个类似Terminal的界面，
+		![](/media/essay/2014/11/putty-3-login.png "")
+		输入`root`,然后输入前面修改过的ECS root 密码，回车后顺利连接到自己的
+		ECS.对于熟悉的Debian操作的自己来说，此时的putty界面就像在自己本地机器上
+		运行一个终端一样；
+	查看主机后发现，这个最便宜的ECS将20G硬盘只划分为一个分区(`/`),
+	这让自己心里有些不爽，用这种方式在ECS上存放数据相对不安全，
+	万一系统挂掉，数据很可能就保不住。阿里云提供单独购买独立云磁盘作为数据盘，
+	这种将系统和数据分离的方式能最大限度地确保数据安全。我计算了一下费用，
+	一块10G的独立云磁盘的费用是0.005/时，算下来，一年还不到50元，
+	不会这么便宜吧？
+	3. 安装常用软件。安装的方式自己已经很熟悉了，update 源后，安装了
+	`php5`, `apache2`两个软件；
+	4. 将域名与ECS绑定。登录 godaddy 域名管理页面 DNS Zone File,
+	在 "A(Host)"栏下将"@" Points To 的IP地址改成ECS的公网IP，之后保存，
+	生效几乎是瞬时的；
+	5. 由于前面已配置好 Apache, 此时在浏览器输入 http://www.drodata.com 
+	就会看到 Apache 的默认Index页。至此，ECS的使用告一段落。
+
+----
+### 安装 vsftpd, 让 lftp 能连上 ECS
+
+	1. 安装FTP服务器`vsftpd`
+	2. 配置vsftp: `vi /etc/vsftpd.conf`:
+		1. `anonymous_enable=NO`
+		2. `local_enable=YES`: 没有此行，将提示"Delaying before reconnect"错误
+		3. `write_enable=YES`: 默认为`NO`,即仅支持读权限，这个也好理解，
+		ftp 服务器以下载为主。这行不改的话，将提示"550 Permission denied"错误；
+	3. 新增一个名为`ftpadmin`的 ftp 用户:`useradd ftpadmin -d /var/www/`.
+	其中`-d /var/www/`指明ftp的根目录，一般设置为网站根目录；
+	4. 为新增的用户创建密码：`passwd ftpadmin`;
+	5. 将网站根目录的 user 改为 `ftpadmin`: `chown ftpadmin /var/www/`;
+	6. 重启vsftp:`/etc/init.d/vsftpd restart`
+	7. 创建 lftp bookmark 中新增一条记录，即可成功登录；
+	8. 登录后发现如下几个问题：
+		1. 文件/目录 user, group 信息显示如下：
+		```bash
+		-rw-r--r--    1 0        0              40 Nov 26 10:16 index.html
+		-rw-r--r--    1 0        0              20 Nov 25 21:58 index.php
+		```
+		注意里面的`0`;
+		2. 我在lftp里新建一个目录的权限信息如下：
+		```bash
+		-rwx------    2 ftpadmin  ftpadmin      40 Nov 26 10:16 index.html
+		```
+		换句话说，通过浏览器默认是不能访问此目录的；

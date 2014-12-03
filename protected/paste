@@ -1,0 +1,61 @@
+Validation scenarios
+February 16th, 2009
+http://php-thoughts.cubedwater.com/2009/validation-scenarios/
+
+As of Yii 1.0.2 you may now define validation scenarios. This is very useful if for instance you have multiple places in your application that you validate a model, but in each instance you may want different validation rules. For instance, perhaps in your user registration form you want to have the “username”, “email” and “password” fields to be required, while on your “user recovery” page, you only want the “email” field to be required. You may see a problem here. If you set all the fields to be required, then your user recovery page won’t work, as it does not allow a user to supply neither a password nor a username.
+
+The perfect solution to this are validation scenarios. You can attach a validation scenario to a validation rule through the ‘on’ property. You may already know you can set the ‘on’ property to either ‘insert’ or ‘update’, which will automatically cause the rule to only be used on the corresponding type of save. However sometimes these two options are not enough. So now with this new enhancement, you may set it to any value you want. Let me show an example:
+
+<?php
+//in user model
+public function rules() {
+	return array(
+		//Set required fields
+ 		//Applies to 'register' scenario
+ 		//Note 'on' property
+		array('username, password, password_repeat, email', 'required', 'on' => 'register'),
+ 
+		//Applies to 'recover' scenario
+		array('email', 'required', 'on' => 'recover'),
+ 
+		//Applies to all scenarios
+		array('username, password', 'length', 'max'=>35, 'min'=>3),
+ 
+		//This rule checks if the username is unique in the database in
+		//the 'register' scenario (we don't want it to check for uniqueness
+		//on the login page for instance)
+		array('username', 'unique', 'on' => 'register'),
+ 
+		//This rule applies to 'register' and 'update' scenarios
+		//Compares 'password' field to 'password_repeat' to make sure they are the same
+		array('password', 'compare', 'on' => 'register, update'),
+	);
+}
+With this setup Yii will be able to tell which fields are required in which scenarios. As a bonus I threw some other rules for example. Reading the comments will give you an understanding of that. You may also note from the ‘compare’ rule that you may define a rule to be used on multiple scenarios by separating them with commas.
+
+Now when you wish to run validation under a specific scenario you must define it in when calling CModel::validate(), as so
+
+<?php
+$user->validate('<scenarioName>'); //runs validation under the given scenario
+ 
+//example:
+if ($user->validate('register')) {
+	$user->save(false);
+}
+So the above example will validate the user under the ‘register’ scenario.
+
+Leave a comment if I have left any unanswered questions on this enhancement
+
+=====
+http://www.yiiframework.com/wiki/56/
+
+Scenarios 
+Each model object has a scenario property. Some scenarios are built-in and will be assigned automatically by Yii, but you can define your own.
+
+For instance, a CActiveRecord read from the database has the "update" scenario, while a new record has the "insert" scenario.
+
+$modelA = User::model()->findByPk(1); // $model->scenario = 'update'
+$modelB = new User();                 // $model->scenario = 'insert'
+$modelB->scenario = 'light';          // custom scenario
+if ($modelB->validate()) {            // will only apply rules of the "light" scenario
+As shown in the example of the first section, the rules can be restricted to a specific scenario through the "on" => "scenario" parameter.
