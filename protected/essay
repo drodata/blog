@@ -1,0 +1,91 @@
+<?php 
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+	'id'=>'dispatch-cu-dialog',
+	'options'=>array(
+		'modal' => true,
+		'title'=>'发货操作',
+		'autoOpen'=>false,
+		'resizable'=>false,
+		'width'=>'600',
+		'hide'=>'fade',
+		'show'=>'fade',
+	),
+));
+	$form = $this->beginWidget('bootstrap.widgets.ActiveForm', array(
+
+		'id'=>'dispatch-cu-form',
+		'type'=>'horizontal',
+
+	));
+
+	$model=new FormDispatch;
+
+	?>
+
+		<?php echo $form->staticRow($model,'receiverInfo', array(
+			'id'=>'receiverInfo',
+		)); ?>
+		<?php echo $form->radioButtonListInlineRow($model, 'deliver_way', Lookup::items('DispatchDeliverWay'), array(
+			'class'=>'noempty',
+			'uncheckValue' => NULL,
+		)); ?>
+		<div id="express-area"><!-- #express-area START -->
+			<?php echo $form->dropDownListRow($model,'logistics_branch_id', Address::getLogisticsBranchKV(),array(
+				'class'=>'noempty',
+				'prompt'=>'请选择',
+			));?>
+			<?php echo $form->textFieldRow($model,'list_UID', array(
+				'class'=>'noempty',
+			)); ?>
+			<?php echo $form->textFieldRow($model,'weight', array()); ?>
+			<?php echo $form->radioButtonListInlineRow($model, 'bill_type', Lookup::items('DispatchBillType'), array(
+				'class'=>'noempty',
+				'uncheckValue' => NULL,
+			)); ?>
+			<div id="prepaid-area"><!-- #prepaid-area START -->
+			<?php echo $form->radioButtonListInlineRow($model, 'payment_way', Lookup::items('DispatchPaymentWay'), array(
+				'class'=>'noempty',
+				'uncheckValue' => NULL,
+			)); ?>
+			<div id="charge-area"><!-- #charge-area START -->
+			<?php echo $form->textFieldRow($model,'charge', array(
+				'class'=>'noempty',
+			)); ?>
+			</div><!-- #charge-area ENDS -->
+			</div><!-- #prepaid-area ENDS -->
+			</div><!-- #express-area ENDS -->
+
+			<div class="form-actions">
+				<?php 
+				$this->widget('bootstrap.widgets.Button', array(
+					'buttonType'=>'button', 
+					'type'=>'success', 
+					'label'=>'发货',
+					//'size' => 'xs',
+					'htmlOptions' => array(
+						'id' => 'submit',
+					),
+				));
+                                $this->widget('bootstrap.widgets.Button', array(
+					'buttonType'=>'button', 
+					//'size' => 'xs',
+					'type'=>'default', 
+					'label'=>'取消',
+					'htmlOptions' => array(
+						'id' => 'cancel',
+					),
+				));
+                                
+				echo $form->hiddenField($model,'orderIdString');
+				echo $form->hiddenField($model,'action');
+				echo $form->hiddenField($model,'goods_type');
+				echo $form->hiddenField($model,'dispatchId');
+				?>
+			</div>
+
+	<?php $this->endWidget(); ?>
+<?php 
+	$this->endWidget('zii.widgets.jui.CJuiDialog'); 
+
+	//Yii::app()->clientScript->registerCssFile('/eo/css/print.express.css','print');
+?>

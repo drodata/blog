@@ -1,0 +1,15 @@
+# As git won't track an empty directory such as assets/ and runtime/,
+# we create an meaningless hide file (.gitignore) to make sure that 
+# these two important directories will also be tracked.
+
+assets/*
+!assets/.gitignore
+
+protected/runtime/*
+!protected/runtime/.gitignore
+
+protected/data/*.db
+themes/classic/views/
+
+# This file contains password.
+protected/config/pswd.php

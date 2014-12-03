@@ -1,0 +1,289 @@
+#page {
+    padding-top: 60px;
+}
+.essay {
+	margin-bottom:20px;
+	padding:10px;
+}
+.essay code {
+	font-size:11pt;
+	margin:0 2px;
+}
+.essay .title {
+	font-size:16pt;
+	padding:5px 0;
+}
+.essay .title a {
+	text-decoration:none;
+	color:#24b;
+}
+.essay .title a:hover {
+	color:#cc0000;
+}
+.essay .author {
+	color:#555555;
+	margin:5px auto;
+}
+.essay .nav
+{
+	margin:5px 0;
+	-moz-border-radius:7px;
+	padding: 5px;
+	background: #EFFDFF;
+}
+.essay .content p {
+	line-height:1.5;
+	font-size:10pt;
+	font-family:Georgia;
+}
+.essay h1,
+.essay h2,
+.essay h3,
+.essay h4
+{
+	font-family:Arial;
+	margin:10px 0px;
+	padding-bottom:5px;
+	border-bottom:0px solid #ddd;
+	font-weight:bold;
+	color:#222;
+}
+.essay h1 { font-size:14pt;}
+.essay h2 { font-size:13pt;}
+.essay h3 { font-size:12pt;}
+.essay h4 { font-size:11pt;}
+.essay .content h3,
+.essay .content h4
+{
+	font-size:13pt;
+	margin:15px 0px;
+	padding:5px;
+	border-bottom:1px dotted lightblue;
+	/*
+	color:green;
+	background-color:lightblue;
+	*/
+}
+
+.essay .content pre {
+	font-size: 10pt; 
+	margin: .7em 0; padding: .7em 0; 
+	padding:3px 0px 3px 10px;
+	border-left:0px solid orange;
+	background-color:#eee;
+}
+.essay .content blockquote {
+	padding:10px;
+	/*
+	background-color:#d9d2e9;
+	*/
+}
+.essay .content pre.tty { 			/* Console Style */
+  color:#ddd; background-color:#222;
+  padding:5px;
+  border:0px;
+}
+
+.essay .content img {
+	display:block;
+  	margin: 10px auto; padding: 0px;
+  	border:0px solid #555;
+  	max-width:640px;
+}
+.essay .content video {
+	display:block;
+	margin: 5px 0;
+	max-width: 640px;
+}
+/* 弃用 Boxy, 使用 jQueryUI 后的样式改变 @9/17/13 */
+span.required {color:red;}
+.ui-dialog-title,.ui-button-text {
+	font-size:10pt;
+}
+.ui-dialog-content {
+	font-size:10pt;
+}
+.ui-dialog-content form {
+	font-family: Verdana;
+}
+.ui-dialog-content form .row
+{
+	margin: 0;
+	padding: 4px 0;
+}
+.ui-dialog-content form .row label
+{
+	float: left;
+	margin-right: 10px;
+	position: relative;
+	text-align: right;
+	width: 100px;
+}
+.ui-dialog-content form .row div.radioR span input
+{
+	float: left;
+	margin-right: 3px;
+}
+.ui-dialog-content form .row div.radioR span label
+{
+	float: left;
+	width: auto;
+}
+.button-area,
+.ui-dialog-content form .button-area
+{
+	margin-top:20px;
+	margin-bottom:10px;
+	float:right;
+}
+.row input,
+.row textarea{
+	background-color:#fff;
+	border:1px solid #999;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+}
+.row input:disabled {
+	background-color:#ccc;
+	border:1px solid #999;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+}
+.ui-dialog-content form input:focus,
+.ui-dialog-content form textarea:focus {
+	background-color:#ffffee;
+}
+.row .empty, .empty
+{
+	background-color:#f4cccc;
+	color:red;
+}
+button#submit {
+	background-color:orange;
+}
+/* ================ 通用按钮样式  ================ */
+button {
+	color:#111;
+	font-size:13px;
+	margin:0px 5px;
+	padding:2px;
+	border-radius:1px;
+
+	background-color:#ddd;
+	border-left:1px solid #ddd;
+	border-top:1px solid #ddd;
+	border-right:1px solid #999;
+	border-bottom:1px solid #999;
+}
+button:hover {
+background-color:#ccc;
+	border-left:1px solid #ddd;
+	border-top:1px solid #ddd;
+	border-right:1px solid #999;
+	border-bottom:1px solid #999;
+}
+button:active {
+	background-color:#ddd;
+	border-left:1px solid #999;
+	border-top:1px solid #999;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+}
+button.cancel {
+	background-color:#ccc;
+	border-left:1px solid #eee;
+	border-top:1px solid #eee;
+	border-right:1px solid #bbb;
+	border-bottom:1px solid #bbb;
+}
+/**
+ * 这是 kuixy 自定义的 CSS 文件
+ */
+.rf {float:right;}
+.lf {float:left;}
+.cf {clear:both;}
+/* ----------------------------------------------------------- 
+ 	Color Box	
+   ----------------------------------------------------------- */
+div.colorBox {
+	border:1px solid #ccc;
+	margin:0px 10px 10px 0px;
+}
+div.colorBoxH {	/* Header*/
+	padding:5px;
+	border-bottom:4px solid #9fc5e8;
+}
+div.colorBoxM { 
+	padding:5px;
+}
+/* ------------------------------
+ 	Size: S,M,L(default)	*/
+div.large {
+	width:98%;
+}
+div.middle {
+	width:48%;
+	min-height:220px;
+}
+div.wide {
+	width:75%;
+	min-width:700px;
+}
+div.thin {
+	width:20%;
+	min-width:200px;
+}
+div.small {
+	width:30%;
+}
+/* ------------------------------
+ 	Color:			*/
+div.ready div.colorBoxH {
+	border-bottom:3px solid #f1c232;
+}
+/* ------------------------------
+ 				*/
+div.received div.colorBoxH {
+	border-bottom:3px solid #f6b26b;
+}
+/* ------------------------------
+ 				*/
+div.sent div.colorBoxH {
+	border-bottom:3px solid #8e7cc3;
+}
+/* ------------------------------
+ 				*/
+div.prepare div.colorBoxH {
+	border-bottom:3px solid #e06666;
+}
+/* ------------------------------
+ 				*/
+div.received div.colorBoxH {
+	border-bottom:3px solid #6aa84f;
+}
+/* ul li 表示表格样式　*/
+/*	Common		*/
+ul.divTable, ul.divTable li {
+	margin:0; padding:0;
+}
+ul.divTable li {
+	list-style-type:none;
+}
+ul.divTable li.cL {
+	width:48%;
+	text-align:right;
+	float:left;
+}
+ul.divTable li.cR {
+	width:48%;
+	text-align:left;
+	float:left;
+}
+/*	显示客户发货地址	*/
+ul.addressInfo li.cL {
+	width:25%;
+	color:#444444;
+}
+ul.addressInfo li.cR {
+	width:73%;
+}
