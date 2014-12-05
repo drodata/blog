@@ -117,9 +117,9 @@
 			*/
 		}
 		#essay-list {
-			background:#FAEF97;
 			position:absolute;
 			/*
+			background:#FAEF97;
 			background:#eee url("/blog/css/a.jpg") repeat-y;
 			*/
 			width:300px;
@@ -142,8 +142,8 @@
 		#essay-container {
 			position:absolute;
 			/*
-			*/
 			background:#FAEF97;
+			*/
 			top:30px;
 			left:500px; bottom:0;
 			right:0; 

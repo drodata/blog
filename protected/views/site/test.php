@@ -2,11 +2,15 @@
 <button id="a">
 go
 </button>
-<button id="b">submit</button>
+<input type="hidden" name="size" value="kuixy" />
+<input type="text" name="size" />
 <?php
 ?>
 <script type="text/javascript"> 
 	$(function(){
+		var size = $('[name=size]');
+
+		alert(size.val());
 		$('#a').click(function(){
 			$('#b').prop('disabled',true);
 		});
