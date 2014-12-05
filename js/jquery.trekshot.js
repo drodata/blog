@@ -16,7 +16,11 @@
 			name = ((tag == 'INPUT') && ($(this).attr('type') == 'checkbox')) 
 				? $(this).attr('name').split(prefix+'[')[1].slice(0,-3)
 				: $(this).attr('name').split(prefix+'[')[1].slice(0,-1);
-			if (!elements[name]) elements[name] = $(this);
+			if (!elements[name]) {
+				elements[name] = ((tag == 'INPUT') && ($(this).attr('type') == 'checkbox'))
+					? $('[name=' + prefix + '\\[' + name + '\\]\\[\\]]')
+					: $('[name=' + prefix + '\\[' + name + '\\]]');
+			}
 
 		});
 		return elements;
