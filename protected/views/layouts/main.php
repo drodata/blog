@@ -181,6 +181,7 @@
 			<?php echo $content; ?> 
 	</div>
 	<?php
+	/*
 	$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 		'id'=>'general-dialog',
 		'options'=>array(
@@ -194,6 +195,7 @@
 		),
 	));
 	$this->endWidget('zii.widgets.jui.CJuiDialog'); 
+	*/
 	?>
 </body>
 </html>
