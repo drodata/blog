@@ -56,13 +56,6 @@ return array(
 				'jquery-ui.min.js' => '/blog/js/jquery-ui.latest.js',
 			),
 		),
-		/*
-		'db'=>array(
-			'connectionString' => 'sqlite:protected/data/blog.db',
-			'tablePrefix' => 'tbl_',
-		),
-		*/
-		// uncomment the following to use a MySQL database
 		'db'=>array(
 			'connectionString' => $connectString,
 			'username' => $username,

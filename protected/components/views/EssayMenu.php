@@ -12,7 +12,6 @@
 <li>
 <?php echo CHtml::link('Test Page', Yii::app()->request->baseUrl.'/site/test',array()); ?>
 </li>
-<li>
-<?php echo CHtml::link('Playground', Yii::app()->request->baseUrl.'/z/playground',array()); ?>
-</li>
+<li><?php echo CHtml::link('Playground', Yii::app()->request->baseUrl.'/z/playground',array()); ?></li>
+<li><?php echo CHtml::link('Bootstrap JavaScript', Yii::app()->request->baseUrl.'/page/view/bootstrap-javascript',array()); ?></li>
 </ul>

@@ -1,5 +1,6 @@
 <?php $this->beginWidget('CMarkdown'); ?>
-#JavaScript
+# JavaScript
+
 ## Overview
 
 ### Individual or complied
@@ -230,13 +231,17 @@ Modal 虽轻巧，但它不支持重叠弹窗，从这点来说，还是 jQuery 
 		$('#button-btn-1').click(function(){
 			var btn = $(this);
 			btn.button('loading');
+			$.post('/blog/page/ajaxTest', '', function(response) {
+				btn.data('completeText', response.message);
+				btn.button('reset');
+			});
 		});
 
 		// Buttons
 	});
 </script>
 ## Buttons
-<button id="button-btn-1" class="btn btn-primary btn-sm" data-loading-text="Waiting 2 seconds pls.">Loading state</button>
+<button type="button" autocomplete="off" id="button-btn-1" class="btn btn-primary btn-sm" data-loading-text="正在提交，请稍后……">Loading state</button>
 ## Tabs
 
 	[html]
