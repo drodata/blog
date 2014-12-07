@@ -111,7 +111,7 @@ $(document).ready(function(){
 				style: d.style,
 				hide:{delay:1000},
 			});
-		});
+		}).fail( ajax_fail_handler);
 		return false;
 	});
 
@@ -136,11 +136,11 @@ $(document).ready(function(){
 				style: d.style,
 			});
 			renderEssayContent(id);
-		});
+		}).fail( ajax_fail_handler);
 		return false;
 	});
 
-	// Edit other attributes but content of an essay
+	// Save an essay, or edit other attributes but content of an existing essay
 	$(document).off('click','.EssayCU').on('click','.EssayCU',function(e){
 		e.preventDefault();
 		var wd = $("#essay-cu-dialog");

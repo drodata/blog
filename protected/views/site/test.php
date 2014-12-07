@@ -4,13 +4,16 @@ go
 </button>
 <input type="hidden" name="size" value="kuixy" />
 <input type="text" name="size" />
+
 <?php
 ?>
 <script type="text/javascript"> 
 	$(function(){
+
+		$('#general-modal').modal();
+
 		var size = $('[name=size]');
 
-		alert(size.val());
 		$('#a').click(function(){
 			$('#b').prop('disabled',true);
 		});
