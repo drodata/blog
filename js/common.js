@@ -18,7 +18,10 @@
 			break;
 		}
 
-		if (err) alert(err + "，请稍后再试");
+		if (err) {
+			$('#general-modal').find('.modal-body').html(err);
+			$('#general-modal').modal();
+		}
 
 	}
 	// label autocomplete
