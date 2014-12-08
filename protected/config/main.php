@@ -10,11 +10,6 @@ require "pswd.php";
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
-	/*
-	'aliases' => array(
-		'bootstrap' => dirname(__FILE__).'/../extensions/yiistrap',
-	),
-	*/
 	//'theme' => 'bootstrap',
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Respect Is Earned',
