@@ -11,5 +11,8 @@ protected/runtime/*
 protected/data/*.db
 themes/classic/views/
 
+# vim's
+*.swp
+
 # This file contains password.
 protected/config/pswd.php
