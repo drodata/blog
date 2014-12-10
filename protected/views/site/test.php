@@ -5,12 +5,22 @@ go
 <input type="hidden" name="size" value="kuixy" />
 <input type="text" name="size" />
 
+<form id="fm">
+<input type="text" name="size" value="kuixy" />
+<input type="text" name="name" value="hello" />
+<input type="text" name="disabled_name" value="helloo" disabled="disabled" />
+<input type="submit" name="submit" value="Go" />
+</form>
+
 <?php
 ?>
 <script type="text/javascript"> 
 	$(function(){
-
-		$('#general-modal').modal();
+		$('#fm').submit(function(e){
+			e.preventDefault();
+			alert($(this).serialize());
+		});
+		//$('#general-modal').modal();
 
 		var size = $('[name=size]');
 
