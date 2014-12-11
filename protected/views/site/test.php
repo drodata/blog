@@ -1,40 +1,28 @@
 <h3>Quick Test Page (<code>views/site/test.php</code>)</h3>
-<button id="a">
-go
-</button>
-<input type="hidden" name="size" value="kuixy" />
-<input type="text" name="size" />
+<button class="dd">open the dialog</button>
 
-<form id="fm">
-<input type="text" name="size" value="kuixy" />
-<input type="text" name="name" value="hello" />
-<input type="text" name="disabled_name" value="helloo" disabled="disabled" />
-<input type="submit" name="submit" value="Go" />
-</form>
-
+<button id="opener">open the dialog</button>
+<div id="dialog" title="Dialog Title">I'm a dialog</div>
+ 
+ <script>
+ $( "#dialog" ).dialog({ autoOpen: false });
+ $( "#opener" ).click(function() {
+   $( "#dialog" ).dialog( "open" );
+   });
+   </script>
 <?php
+Yii::app()->clientScript->registerCssFile('/blog/css/jqueryui/flick/jquery-ui.min.css');
+Yii::app()->clientScript->registerScriptFile('/blog/js/jquery-ui.latest.js');
 ?>
-<script type="text/javascript"> 
-	$(function(){
-		$('#fm').submit(function(e){
-			e.preventDefault();
-			alert($(this).serialize());
+ 
+ <script>
+ function popupwindow(url, title, w, h) {
+ 	var left = (screen.width/2)-(w/2);
+	var top = (screen.height/2)-(h/2);
+	return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+} 
+$('.dd').click(function(event) {
+    event.preventDefault();
+	popupwindow('http://baidu.com', 'gogo', 600, 300);
 		});
-		//$('#general-modal').modal();
-
-		var size = $('[name=size]');
-
-		$('#a').click(function(){
-			$('#b').prop('disabled',true);
-		});
-	/*
-	$.qtip_hint({
-		element: $('#a'),
-		message: 'good',
-		ready_show:true,
-		position:5,
-		style:'cluetip',
-	});
-	*/
-	});
-</script>
+   </script>
