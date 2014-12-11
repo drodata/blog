@@ -70,15 +70,13 @@
 			padding-top:60px;
 			margin:0;
 		}
-		/*
-		#content img {
+		.essay #content img {
 			display:block;
 			padding:5px;
 			border:1px solid #ddd;
 			margin:10px 0;
 		}
-		*/
-		#content p {
+		.essay #content p {
 			line-height: 1.5em;
 		}
 		.border-1 {
