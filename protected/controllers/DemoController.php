@@ -11,5 +11,15 @@ class DemoController extends Controller
 	public function actionJstree() {
 	        $this->render('jstree');
 	}
+	public function actionOn() {
+	        $this->render('on');
+	}
+	public function actionAjax() {
+		header("Content-type: application/json");
+		$d = array(
+			'entity' => '<button class="a btn btn-primary">Go</button>',
+		);
+		echo json_encode($d);
+	}
 
 }
