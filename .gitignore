@@ -16,3 +16,5 @@ themes/classic/views/
 
 # This file contains password.
 protected/config/pswd.php
+
+pad
