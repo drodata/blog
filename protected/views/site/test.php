@@ -26,3 +26,27 @@ $('.dd').click(function(event) {
 	popupwindow('http://baidu.com', 'gogo', 600, 300);
 		});
    </script>
+<hr>
+
+<div id="pa">
+	<div id="pb">
+	</div>
+</div>
+
+<style type="text/css">
+	#pa {
+		position:absolute;
+		width:600px;
+		height:600px;
+		margin:30px auto;
+		background: yellow;
+	}
+	#pb {
+		position:absolute;
+		width:300px;
+		height:100px;
+		background: green;
+		bottom:100px;
+		right:100px;
+	}
+</style>
