@@ -64,7 +64,7 @@
 	</div>
 </div>
 <div class="essay">
-	<h4>
+	<h4 class="center">
 		<?php echo CHtml::link(CHtml::encode($data->essay->title), '/blog/essay/view/'.$data->essay->id); ?>
 	</h4>
 	<div id="content">
