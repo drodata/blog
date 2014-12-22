@@ -155,7 +155,7 @@
 		.essay {
 			padding:30px;
 		}
-		.essay h4 {
+		.essay h4.center {
 			text-align:center;
 			font-size:30px;
 			margin-bottom:20px;
