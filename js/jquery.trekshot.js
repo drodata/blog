@@ -178,6 +178,10 @@
 		obj.ready_show = (obj.ready_show) ? obj.ready_show : false;
 		obj.style 	= (obj.style) ? obj.style : 'tipped';
 		obj.position 	= (typeof(obj.position) != 'undefined') ? obj.position : 1;
+		obj.hide = (typeof(obj.hide) != 'undefined') ? obj.hide : {
+			fixed:true,
+			delay:1000,
+		};
 		var pst = [
 			// 'my':以tip为参考，标明元素相对位置
 			// 'at':以元素为参考，标明tip相对位置
@@ -207,12 +211,8 @@
 				event: 'click',
 				ready: obj.ready_show,
 			},
-			hide: {
-				fixed:true,
-				delay:1000,
-			},
+			hide: obj.hide,
          		style: {
-            			//classes: 'ui-tooltip-'+obj.style+' ui-tooltip-shadow'
             			classes: 'qtip-'+obj.style+' qtip-shadow'
          		}
 		});
