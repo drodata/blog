@@ -72,6 +72,7 @@ $(document).ready(function(){
 			message: msg,
 			ready_show:true,
 			position:6,
+			hide:{event:'unfocus'},
 		});
 		$('#qtip-actions .btn-danger').live('click', function(event) {
 			event.preventDefault();
@@ -109,7 +110,7 @@ $(document).ready(function(){
 				ready_show:true,
 				position:d.position,
 				style: d.style,
-				hide:{delay:1000},
+				hide:{event:'unfocus'},
 			});
 		}).fail( ajax_fail_handler);
 		return false;
@@ -131,7 +132,7 @@ $(document).ready(function(){
 				element: active_element,
 				message: d.message,
 				ready_show:true,
-				hide:{delay:1000},
+				hide:{event:'unfocus'},
 				position:1,
 				style: d.style,
 			});
