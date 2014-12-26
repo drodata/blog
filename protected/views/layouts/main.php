@@ -75,6 +75,7 @@
 			padding:5px;
 			border:1px solid #ddd;
 			margin:10px 0;
+			max-width:100%;
 		}
 		.essay #content p {
 			line-height: 1.5em;
