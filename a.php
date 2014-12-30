@@ -4,4 +4,5 @@ class A {
 }
 $a = new A;
 print_r(A::BC);
+good
 ?>
