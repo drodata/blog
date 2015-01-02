@@ -24,6 +24,9 @@ return array(
 		'application.components.*',
 	),
 	'modules'=>array(
+		'pk' => array(
+			'nickname' => 'kuixy',
+		),
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>$password,
@@ -68,9 +71,10 @@ return array(
 			'showScriptName'=>false,
 			'caseSensitive'=>false,
 			'rules'=>array(
+				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+
 				'post/<id:\d+>/<title:.*?>'=>'post/view',
 				'posts/<tag:.*?>'=>'post/index',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 				'essay/view/<id:\d+>'=>'essay/view',
 				'essay/category/<slug:.*?>'=>'essay/category',
 				'essay/label/<name:.*?>'=>'essay/label',
@@ -79,6 +83,9 @@ return array(
 				/*
 				'essay/<category_slug:\d+>/<keyword:.*?>'=>'essay/search',
 				*/
+               'pk'=>'pk/dashboard',
+               'pk/<controller:\w+>'=>'pk/<controller>',
+               'pk/<controller:\w+>/<action:\w+>'=>'pk/<controller>/<action>',
 			),
 		),
 		'log'=>array(
