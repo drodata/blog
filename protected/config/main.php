@@ -49,9 +49,11 @@ return array(
 		),
 		'clientScript' => array(
 			'scriptMap' => array(
+				/*
 				'jquery-ui.css' => '/blog/css/jqueryui/flick/jquery-ui.min.css',
 				'jquery.js' => '/blog/js/jquery-latest.js',
 				'jquery-ui.min.js' => '/blog/js/jquery-ui.latest.js',
+				*/
 			),
 		),
 		'db'=>array(
