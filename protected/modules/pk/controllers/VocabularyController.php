@@ -55,6 +55,11 @@ class VocabularyController extends Controller
 
 	public function actionIndex()
 	{
+		$this->render('index',array(
+		));
+	}
+	public function actionAdmin()
+	{
 		$model=new Vocabulary('search');
 		$model->unsetAttributes();
 		if(isset($_GET['Vocabulary']))
@@ -85,6 +90,34 @@ class VocabularyController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+	public function actionAjaxGetList()
+	{
+		header("Content-type: application/json");
+		$d = array();
+
+		$results = Vocabulary::model()->findAllByAttributes(array(
+			'language' => Vocabulary::LANGUAGE_ENGLISH,
+		));
+		if ($results) {
+			foreach ($results as $r) { 
+				$d[] = $r->name;
+			}
+		}
+		echo json_encode($d);
+	}
+	public function actionAjaxSearch()
+	{
+		header("Content-type: application/json");
+		$d = array();
+
+		$vocabulary = Vocabulary::model()->findByAttributes(array(
+			'name' => $_POST['name'],
+		));
+		$d['result'] = $this->renderPartial('_view',array(
+			'vocabulary' => $vocabulary,
+		),true);
+		echo json_encode($d);
 	}
 
 }
