@@ -1,7 +1,4 @@
-	<h4>
-		<?php echo $data->explanation->vocabulary->name.': '.$data->explanation->native_explanation;?>
-	</h4>
-	<div class="well">
+	<div class="alert alert-warning">
 		<?php 
 		$this->beginWidget('CMarkdown', array('purifyOutput'=>false));
 			echo $data->content; 
@@ -28,5 +25,3 @@
 	<?php
 	}
 	?>
-<hr>
-

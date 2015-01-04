@@ -66,6 +66,7 @@ class Explanation extends CActiveRecord
 		return array(
 			'vocabulary' 	=> array(self::BELONGS_TO, 'Vocabulary', 'vocabulary_id'),
 			'quotations' 	=> array(self::HAS_MANY, 'Quotation', 'explanation_id'),
+			'taxonomies'	=>array(self::MANY_MANY, 'Taxonomy', 'ts_explanation_taxonomy(explanation_id, taxonomy_id)'),
 		);
 	}
 
@@ -123,5 +124,20 @@ class Explanation extends CActiveRecord
 				),
 			),
 		));
+	}
+
+	public static function getTaxonomyString( $explanationId )
+	{
+		$map = ExplanationTaxonomy::model()->findAllByAttributes(array(
+			'explanation_id' => $explanationId,
+		));
+		if (sizeof($map) > 0) {
+			foreach ($map as $m) {
+				$a[] = $m->taxonomy->name;
+			}
+			return implode(', ',$a);
+		} else {
+			return null;
+		}
 	}
 }

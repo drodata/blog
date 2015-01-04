@@ -17,27 +17,43 @@ class ExplanationController extends Controller
 		}
 		return $this->_model;
 	}
+	public function actionAjaxGetTaxonomy()
+	{
+		header("Content-type: application/json");
+		$d = array();
+
+		$results = Taxonomy::model()->findAllByAttributes(array(
+			'category' => 'Explanation',
+		));
+		if ($results) {
+			foreach ($results as $r) { 
+				$d[] = $r->name;
+			}
+		}
+		echo json_encode($d);
+	}
 	public function actionCreate()
 	{
 		$model=new Explanation;
-		if(isset($_POST['ajax']) && $_POST['ajax']==='explanation-cu-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-                
+		$formTaxonomy = new FormTaxonomy;
 		if(isset($_POST['Explanation']) )
 		{
 			$model->attributes=$_POST['Explanation'];
 			$model->c_time = new CDbExpression('NOW()');
                 
 			if ( $model->validate()) {
-				if ($model->save())
-					//$this->redirect('index');
-					$this->redirect(Yii::app()->request->urlReferrer);
+				if ($model->save()) {
+					// 1. store taxonomy
+					Taxonomy::sv($_POST['FormTaxonomy']['taxonomy'], $model->id, 'create');
+					// 2. redirect
+					$this->redirect(Yii::app()->request->baseUrl . '/'. $this->module->id . '/explanation/');
+				}
 			}
 		}
-		$this->render('create', array( 'model'=>$model,));
+		$this->render('create', array( 
+			'model'=>$model,
+			'formTaxonomy' => $formTaxonomy,
+		));
 	}
 
 	public function actionDelete()
@@ -46,6 +62,9 @@ class ExplanationController extends Controller
 		{
 			// we only allow deletion via POST request
 			$this->loadModel()->delete();
+			ExplanationTaxonomy::model()->deleteAllByAttributes(array(
+				'explanation_id'=> $this->loadModel()->id,
+			));
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
@@ -55,37 +74,52 @@ class ExplanationController extends Controller
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
-	public function actionIndex()
+	public function actionAdmin()
 	{
 		$model=new Explanation('search');
 		$model->unsetAttributes();
 		if(isset($_GET['Explanation']))
 			$model->attributes=$_GET['Explanation'];
                 
-		$this->render('index',array(
+		$this->render('admin',array(
 			'model'=>$model,
+		));
+	}
+	public function actionIndex()
+	{
+		$criteria=new CDbCriteria;
+		$criteria->order = 'c_time DESC';
+
+		$dataProvider=new CActiveDataProvider('Explanation', array(
+			'pagination'=>array(
+				'pageSize'=>Yii::app()->params['postsPerPage'],
+			),
+			'criteria'=>$criteria,
+		));
+
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
 		));
 	}
 
 	public function actionUpdate()
 	{
 		$model=$this->loadModel();
-		if(isset($_POST['ajax']) && $_POST['ajax']==='explanation-cu-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
+		$formTaxonomy = new FormTaxonomy;
+		$formTaxonomy->taxonomy = Explanation::getTaxonomyString( $model->id );
 		if(isset($_POST['Explanation']))
 		{
 			$model->attributes=$_POST['Explanation'];
 			if ( $model->validate()) {
-				if ($model->update())
-					$this->redirect('index');
+				$model->update();
+				Taxonomy::sv($_POST['FormTaxonomy']['taxonomy'], $model->id, 'update');
+				$this->redirect(Yii::app()->request->baseUrl . '/'. $this->module->id . '/explanation/');
 			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
+			'formTaxonomy' => $formTaxonomy,
 		));
 	}
 

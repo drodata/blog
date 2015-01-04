@@ -1,33 +1,40 @@
-<h1><code><?php echo $this->id . '/' . $this->action->id; ?></code></h1>
 
-<?php $this->widget('bootstrap.widgets.Button', array(
-	'buttonType'=>'link', 
-	'type'=>'primary', 
-	'label'=>'Create',
-	'url' => Yii::app()->request->baseUrl.'/'.$this->module->id.'/'.$this->id.'/create',
-	'htmlOptions'=> array(
-		//'id' => 'submit',
-	),
-)); ?>
+<input type="text" class="vocabulary-search form-control" />
+
+<div class="search-result"></div>
 
 <?php
-$this->widget('bootstrap.widgets.GridView', array(
-	'type' => array('striped', 'condensed'),
-	'id'=>'section-grid',
-	'dataProvider'=>$model->search(),
-	'selectableRows'=>0,
-	'filter'=>$model,
-	'columns'=>array(
-		'name',
-		array(
-			'name'=>'language',
-			'value'=>'Lookup::item("VocabularyLanguage", $data->language)',
-			'filter'=>Lookup::items('VocabularyLanguage'),
-		),
-		array(
-			'class'=>'CButtonColumn',
-			'template'=>'{update} {delete}',
-		),
-	),
-)); 
+Yii::app()->clientScript->registerCoreScript('jquery.ui');
+Yii::app()->clientScript->registerCssFile(
+	Yii::app()->clientScript->getCoreScriptUrl().
+	'/jui/css/base/jquery-ui.css'
+);
+Yii::app()->clientScript->registerScript(
+	'vocabulary-search-autocomplete',
+	'
+	$(".vocabulary-search").focus();
+	$.ajax({ 
+	 	type: "POST" 
+		,url: "/blog/pk/vocabulary/ajaxGetList" 
+		,dateType: "json"
+	}).done(function( list ) {
+		$(".vocabulary-search").autocomplete({
+			source: list,
+			minLength: 2,
+			autoFocus: true,
+			select: function( event, ui ) {
+				$.ajax({ 
+				 	type: "POST" 
+					,url: "/blog/pk/vocabulary/ajaxSearch" 
+					,dateType: "json"
+					,data: { name: ui.item.value }
+				}).done(function( d ) {
+					$(".search-result").html( d.result );
+				});
+			}
+		});
+	});
+	',
+	CClientScript::POS_END
+);
 ?>

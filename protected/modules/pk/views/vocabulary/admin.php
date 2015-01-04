@@ -4,7 +4,7 @@
 	'buttonType'=>'link', 
 	'type'=>'primary', 
 	'label'=>'Create',
-	'url' => Yii::app()->request->baseUrl.'/'.$this->module->id.'/taxonomy/create',
+	'url' => Yii::app()->request->baseUrl.'/'.$this->module->id.'/'.$this->id.'/create',
 	'htmlOptions'=> array(
 		//'id' => 'submit',
 	),
@@ -13,21 +13,17 @@
 <?php
 $this->widget('bootstrap.widgets.GridView', array(
 	'type' => array('striped', 'condensed'),
-	'id'=>'taxonomy-grid',
+	'id'=>'section-grid',
 	'dataProvider'=>$model->search(),
 	'selectableRows'=>0,
 	'filter'=>$model,
 	'columns'=>array(
 		'name',
-		'slug',
 		array(
-			'name'=>'category',
-			'value'=>'$data->category',
-			//'filter'=>Taxonomy::getCategoryFilterListData(),
+			'name'=>'language',
+			'value'=>'Lookup::item("VocabularyLanguage", $data->language)',
+			'filter'=>Lookup::items('VocabularyLanguage'),
 		),
-		'parent',
-		'position',
-		'note',
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{update} {delete}',

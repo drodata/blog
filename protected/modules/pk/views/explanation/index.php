@@ -4,32 +4,15 @@
 	'buttonType'=>'link', 
 	'type'=>'primary', 
 	'label'=>'Create',
-	'url' => Yii::app()->request->baseUrl.'/'.$this->module->id.'/'.$this->id.'/create',
+	'url' => Yii::app()->request->baseUrl.'/'.$this->id.'/create',
 	'htmlOptions'=> array(
 		//'id' => 'submit',
 	),
 )); ?>
 
-<?php
-$this->widget('bootstrap.widgets.GridView', array(
-	'type' => array('striped', 'condensed'),
-	'id'=>'section-grid',
-	'dataProvider'=>$model->search(),
-	'selectableRows'=>0,
-	'filter'=>$model,
-	'columns'=>array(
-		'vocabulary_id',
-		array(
-			'name'=>'class',
-			'value'=>'Lookup::item("ExplanationClass", $data->class)',
-			'filter'=>Lookup::items('ExplanationClass'),
-		),
-		'explanation',
-		'c_time',
-		array(
-			'class'=>'CButtonColumn',
-			'template'=>'{update} {delete}',
-		),
-	),
-)); 
-?>
+<?php 
+$this->widget('bootstrap.widgets.TbListView', array(
+	'dataProvider'=>$dataProvider,
+	'itemView'=>'_view',
+	'template'=>"{items}\n{pager}",
+)); ?>

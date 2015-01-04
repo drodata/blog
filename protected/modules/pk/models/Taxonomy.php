@@ -37,10 +37,8 @@ class Taxonomy extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-			array('name, category', 'required'),
+			array('category', 'required'),
 			array('position', 'numerical', 'integerOnly'=>true),
 			array('name, note', 'length', 'max'=>200),
 			array('slug, category', 'length', 'max'=>80),
@@ -59,6 +57,7 @@ class Taxonomy extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'explanations'=>array(self::MANY_MANY, 'Explanation', 'ts_explanation_taxonomy(taxonomy_id, explanation_id)'),
 		);
 	}
 
@@ -109,5 +108,34 @@ class Taxonomy extends CActiveRecord
 				),
 			),
 		));
+	}
+
+	public static function sv($taxonomyString , $id, $action) {
+		$taxonomy = explode(',',$taxonomyString);
+
+		if ($action == 'update') {
+			ExplanationTaxonomy::model()->deleteAllByAttributes(array(
+				'explanation_id'=> $id,
+			));
+		}
+		foreach ($taxonomy as $t) {
+			$name = trim($t);	
+        
+			$_t = Taxonomy::model()->findByAttributes(array(
+				'category' => 'Explanation',
+				'name'=>$name,
+			));
+        
+			if (!$_t) {
+				$_t = new Taxonomy;
+				$_t->name = $name;
+				$_t->category = 'Explanation';
+				$_t->save();
+			}
+			$et = new ExplanationTaxonomy;
+			$et->explanation_id = $id;
+			$et->taxonomy_id = $_t->id;
+			$et->save();
+		}
 	}
 }

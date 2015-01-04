@@ -4,7 +4,6 @@
 	$form = $this->beginWidget('bootstrap.widgets.ActiveForm', array(
 		'id'=>$this->id.'-cu-form',
 		'type'=>'horizontal',
-		'enableAjaxValidation' => true,
 	));
 	?>
 
@@ -14,6 +13,9 @@
 			'class'=>'form-control',
 		));
 		?>
+		<?php echo $form->textFieldRow($formTaxonomy,'taxonomy', array(
+			'class' => 'AutoCompleteExplanationTaxonomy',
+		)); ?> 
 		<?php echo $form->radioButtonListInlineRow($model,'is_main',array('1'=>'Yes', '0'=> 'No'),array()); ?>
 		<?php echo $form->dropDownListRow($model,'class',Lookup::items('ExplanationClass'),array(
 			'empty'=>'',
@@ -69,10 +71,13 @@
 	</div>
 </div>
 	<?php
-	/*
+Yii::app()->clientScript->registerCoreScript('jquery.ui');
+Yii::app()->clientScript->registerCssFile(
+	Yii::app()->clientScript->getCoreScriptUrl().
+	'/jui/css/base/jquery-ui.css'
+);
 	Yii::app()->clientScript->registerScriptFile(
-		Yii::app()->baseUrl.'/js/section.js',
+		Yii::app()->baseUrl.'/js/explanation.js',
 		CClientScript::POS_END
 	);
-	*/
 	?>
