@@ -1,17 +1,17 @@
 	<h5>
 		<?php echo $data->title;?>
 	</h5>
-	<div class="well">
+	<blockquote>
 		<?php 
 		$this->beginWidget('CMarkdown', array('purifyOutput'=>false));
 			echo $data->content; 
 		$this->endWidget('CMarkdown');
 		?>
-		<p>
-			<?php echo $data->section->source->name.', @'.$data->c_time; ?>
+		<footer>
+			Folder: <?php echo $data->folder->name.', '.$data->section->source->name.', @'.$data->c_time; ?>
 			<?php echo CHtml::link('Update',Yii::app()->request->baseUrl.'/pk/clip/update?id='.$data->id); ?>
-		</p>
-	</div>
+		</footer>
+	</blockquote>
 	<?php
 	if ($data->note) {
 	?>
