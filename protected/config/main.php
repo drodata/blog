@@ -26,6 +26,7 @@ return array(
 	'modules'=>array(
 		'pk' => array(
 			'nickname' => 'kuixy',
+			'defaultController' => 'vocabulary',
 		),
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
@@ -85,7 +86,6 @@ return array(
 				/*
 				'essay/<category_slug:\d+>/<keyword:.*?>'=>'essay/search',
 				*/
-               'pk'=>'pk/dashboard',
                'pk/<controller:\w+>'=>'pk/<controller>',
                'pk/<controller:\w+>/<action:\w+>'=>'pk/<controller>/<action>',
 			),

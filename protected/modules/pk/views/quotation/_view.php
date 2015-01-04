@@ -1,4 +1,4 @@
-	<div class="alert alert-warning">
+	<div class="well">
 		<?php 
 		$this->beginWidget('CMarkdown', array('purifyOutput'=>false));
 			echo $data->content; 
