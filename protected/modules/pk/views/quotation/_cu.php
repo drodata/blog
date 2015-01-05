@@ -4,7 +4,6 @@
 	$form = $this->beginWidget('bootstrap.widgets.ActiveForm', array(
 		'id'=>$this->id.'-cu-form',
 		'type'=>'horizontal',
-		'enableAjaxValidation' => true,
 	));
 	?>
 

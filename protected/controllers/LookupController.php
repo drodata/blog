@@ -1,6 +1,6 @@
 <?php
 
-class VocabularyController extends Controller
+class LookupController extends Controller
 {
 	public $layout = 'column1';
 	private $_model;
@@ -10,7 +10,7 @@ class VocabularyController extends Controller
 		{
 			if(isset($_GET['id']))
 			{
-				$this->_model=Vocabulary::model()->findByPk($_GET['id']);
+				$this->_model=Lookup::model()->findByPk($_GET['id']);
 			}
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
@@ -19,15 +19,20 @@ class VocabularyController extends Controller
 	}
 	public function actionCreate()
 	{
-		$model=new Vocabulary;
-		if(isset($_POST['Vocabulary']) )
+		$model=new Lookup;
+		if(isset($_POST['ajax']) && $_POST['ajax']=== $this->id.'-cu-form')
 		{
-			$model->attributes=$_POST['Vocabulary'];
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+                
+		if(isset($_POST['Lookup']) )
+		{
+			$model->attributes=$_POST['Lookup'];
                 
 			if ( $model->validate()) {
 				if ($model->save())
-					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id
-						.'/explanation/create?vocabulary_id='.$model->id);
+					$this->redirect('index');
 			}
 		}
 		$this->render('create', array( 'model'=>$model,));
@@ -50,15 +55,27 @@ class VocabularyController extends Controller
 
 	public function actionIndex()
 	{
-		$this->render('index',array(
-		));
-	}
-	public function actionAdmin()
-	{
-		$model=new Vocabulary('search');
+
+		$model=new Lookup('search');
+		/*
+		if(isset($_POST['ajax']) && $_POST['ajax']=== $this->id.'-cu-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+		if(isset($_POST['Lookup']) )
+		{
+			$model->attributes=$_POST['Lookup'];
+                
+			if ( $model->validate()) {
+				if ($model->save())
+					$this->redirect('index');
+			}
+		}
+		*/
 		$model->unsetAttributes();
-		if(isset($_GET['Vocabulary']))
-			$model->attributes=$_GET['Vocabulary'];
+		if(isset($_GET['Lookup']))
+			$model->attributes=$_GET['Lookup'];
                 
 		$this->render('index',array(
 			'model'=>$model,
@@ -68,14 +85,14 @@ class VocabularyController extends Controller
 	public function actionUpdate()
 	{
 		$model=$this->loadModel();
-		if(isset($_POST['ajax']) && $_POST['ajax']==='vocabulary-cu-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']===$this->id.'-cu-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
-		if(isset($_POST['Vocabulary']))
+		if(isset($_POST['Lookup']))
 		{
-			$model->attributes=$_POST['Vocabulary'];
+			$model->attributes=$_POST['Lookup'];
 			if ( $model->validate()) {
 				if ($model->update())
 					$this->redirect('index');
@@ -85,34 +102,6 @@ class VocabularyController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
-	}
-	public function actionAjaxGetList()
-	{
-		header("Content-type: application/json");
-		$d = array();
-
-		$results = Vocabulary::model()->findAllByAttributes(array(
-			'language' => Vocabulary::LANGUAGE_ENGLISH,
-		));
-		if ($results) {
-			foreach ($results as $r) { 
-				$d[] = $r->name;
-			}
-		}
-		echo json_encode($d);
-	}
-	public function actionAjaxSearch()
-	{
-		header("Content-type: application/json");
-		$d = array();
-
-		$vocabulary = Vocabulary::model()->findByAttributes(array(
-			'name' => $_POST['name'],
-		));
-		$d['result'] = $this->renderPartial('_view',array(
-			'vocabulary' => $vocabulary,
-		),true);
-		echo json_encode($d);
 	}
 
 }

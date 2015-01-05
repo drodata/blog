@@ -16,6 +16,9 @@ class Vocabulary extends CActiveRecord
 	const LANGUAGE_ENGLISH = 1;
 	const LANGUAGE_MODERN_CHINESE = 2;
 	const LANGUAGE_ANCIENT_CHINESE = 3;
+
+	public $language = self::LANGUAGE_ENGLISH;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.

@@ -35,6 +35,9 @@ class ExplanationController extends Controller
 	public function actionCreate()
 	{
 		$model=new Explanation;
+		if (isset($_GET['vocabulary_id'])) {
+			$model->vocabulary_id = $_GET['vocabulary_id'];
+		}
 		$formTaxonomy = new FormTaxonomy;
 		if(isset($_POST['Explanation']) )
 		{
@@ -46,7 +49,8 @@ class ExplanationController extends Controller
 					// 1. store taxonomy
 					Taxonomy::sv($_POST['FormTaxonomy']['taxonomy'], $model->id, 'create');
 					// 2. redirect
-					$this->redirect(Yii::app()->request->baseUrl . '/'. $this->module->id . '/explanation/');
+					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id
+						.'/quotation/create?explanation_id='.$model->id);
 				}
 			}
 		}

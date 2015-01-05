@@ -69,7 +69,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a accesskey="z" class="navbar-brand" href="<?php echo Yii::app()->request->baseUrl; ?>">
+			<a accesskey="h" class="navbar-brand" href="<?php echo Yii::app()->request->baseUrl; ?>">
 				<?php echo Yii::app()->name; ?></a>
 		</div> 
 		
@@ -79,6 +79,8 @@
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/dashboard">Dashboard</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/source">Source</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/section">Section</a></li>
+
+				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/clip">Clip</a></li>
 
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/vocabulary">Vocabulary</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/explanation">Explanation</a></li>

@@ -1,9 +1,16 @@
 
-<input type="text" class="vocabulary-search form-control" />
+<div style="margin-top:50px;">
+	<input type="text" class="vocabulary-search form-control" />
+</div>
 
 <div class="search-result"></div>
-
 <?php
+echo CHtml::link( 'Create', Yii::app()->request->baseUrl.'/'.$this->module->id.'/'.$this->id.'/create', array(
+		'accesskey' => 'v',
+	)
+
+);
+
 Yii::app()->clientScript->registerCoreScript('jquery.ui');
 Yii::app()->clientScript->registerCssFile(
 	Yii::app()->clientScript->getCoreScriptUrl().
@@ -20,7 +27,7 @@ Yii::app()->clientScript->registerScript(
 	}).done(function( list ) {
 		$(".vocabulary-search").autocomplete({
 			source: list,
-			minLength: 2,
+			minLength: 1,
 			autoFocus: true,
 			select: function( event, ui ) {
 				$.ajax({ 

@@ -8,7 +8,6 @@
 		<?php echo $form->textFieldRow($model,'title', array(
 			'class'=>'noempty',
 		)); ?> 
-
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'c_date', array(
 				'class' => 'col-sm-2 control-label',

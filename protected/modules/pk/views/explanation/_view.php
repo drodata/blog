@@ -1,4 +1,5 @@
 	<p>
+		<?=Lookup::item('ExplanationClass', $data->class)?>: 
 		<?=$data->explanation?>
 		<i><?=$data->native_explanation?></i>
 		<?php echo CHtml::link('Update',Yii::app()->request->baseUrl.'/'.$this->module->id.'/explanation/update?id='.$data->id); ?>

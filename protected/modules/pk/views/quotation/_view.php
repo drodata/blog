@@ -6,7 +6,7 @@
 		?>
 		<p>
 			<?php echo $data->section->source->name.', @'.$data->c_time; ?>
-			<?php echo CHtml::link('Update',Yii::app()->request->baseUrl.'/'.$this->module->id.'/'.$this->id.'/update?id='.$data->id); ?>
+			<?php echo CHtml::link('Update',Yii::app()->request->baseUrl.'/'.$this->module->id.'/quotation/update?id='.$data->id); ?>
 		</p>
 	</div>
 	<?php
