@@ -20,6 +20,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 
 		<?php echo $form->textFieldRow($model,'title', array(
 			'class'=>'noempty',
+			'tabindex' => '1',
 		)); ?> 
 
 		<div class="form-group">
@@ -36,7 +37,8 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 						'dateFormat'=>'yy-mm-dd',
 					),
 					'htmlOptions'=>array(
-						'class'=>'form-control noempty'
+						'class'=>'form-control noempty',
+						'tabindex' => '4',
                                 
 					),
 				));
@@ -46,13 +48,16 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 
 		<?php echo $form->dropDownListRow($model,'status', Lookup::items('EssayStatus'), array(
 			'class' => 'noempty',
+			'tabindex' => '5',
 		)); ?> 
 		<?php echo $form->dropDownListRow($model,'category', Category::treeList(), array(
 			'class' => 'noempty',
 			'encode' => false,
+			'tabindex' => '2',
 		)); ?> 
 		<?php echo $form->textFieldRow($model,'label', array(
 			'class' => 'AutoCompleteEssayLabel',
+			'tabindex' => '3',
 		)); ?> 
 
 		<div class="form-actions form-group">
@@ -64,6 +69,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 					'label'=>'Create',
 					'htmlOptions'=> array(
 						'id' => 'submit',
+						'tabindex' => '6',
 					),
 				)); ?>
 				<?php $this->widget('bootstrap.widgets.Button', array(

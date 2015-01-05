@@ -1,7 +1,7 @@
 <?php $this->beginContent('/layouts/main'); ?>
 	<div class="row">
 		<div class="col-md-12" id="top">
-		go
+			<input accesskey="j" type="text" class="vocabulary-search" />
 		</div>
 	</div>
 	<div class="row">
@@ -36,5 +36,35 @@
 			return false;
 		});
 	");
+
+	Yii::app()->clientScript->registerScript(
+		'vocabulary-search-autocomplete',
+		'
+		$.ajax({ 
+		 	type: "POST" 
+			,url: "/blog/pk/vocabulary/ajaxGetList" 
+			,dateType: "json"
+		}).done(function( list ) {
+			$(".vocabulary-search").autocomplete({
+				source: list,
+				minLength: 2,
+				autoFocus: true,
+				select: function( event, ui ) {
+					$.ajax({ 
+					 	type: "POST" 
+						,url: "/blog/pk/vocabulary/ajaxSearch" 
+						,dateType: "json"
+						,data: { name: ui.item.value }
+					}).done(function( d ) {
+						$("#general-modal").find(".modal-body").html( d.result );
+						$("#general-modal").find(".modal-dialog").addClass("modal-lg");
+						$("#general-modal").modal();
+					});
+				}
+			});
+		});
+	',
+	CClientScript::POS_END
+	);
 	?>
 <?php $this->endContent(); ?>

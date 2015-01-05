@@ -20,20 +20,18 @@ class QuotationController extends Controller
 	public function actionCreate()
 	{
 		$model=new Quotation;
-		if(isset($_POST['ajax']) && $_POST['ajax']==='quotation-cu-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
+		if (isset($_GET['explanation_id'])) {
+			$model->explanation_id = $_GET['explanation_id'];
 		}
-                
 		if(isset($_POST['Quotation']) )
 		{
 			$model->attributes=$_POST['Quotation'];
 			$model->c_time = new CDbExpression('NOW()');
                 
 			if ( $model->validate()) {
-				if ($model->save())
-					$this->redirect(Yii::app()->request->urlReferrer);
+				if ($model->save()) {
+					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/vocabulary');
+				}
 			}
 		}
 		$this->render('create', array( 'model'=>$model,));
@@ -70,6 +68,17 @@ class QuotationController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+	public function actionAdmin()
+	{
+		$model=new Quotation('search');
+		$model->unsetAttributes();
+		if(isset($_GET['Quotation']))
+			$model->attributes=$_GET['Quotation'];
+                
+		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
 
 	public function actionUpdate()
 	{
@@ -83,8 +92,9 @@ class QuotationController extends Controller
 		{
 			$model->attributes=$_POST['Quotation'];
 			if ( $model->validate()) {
-				if ($model->update())
-					$this->redirect('index');
+				if ($model->update()) {
+					$this->redirect(Yii::app()->request->baseUrl);
+				}
 			}
 		}
 

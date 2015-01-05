@@ -4,7 +4,7 @@
 	'buttonType'=>'link', 
 	'type'=>'primary', 
 	'label'=>'Create',
-	'url' => Yii::app()->request->baseUrl.'/source/create',
+	'url' => Yii::app()->request->baseUrl.'/'.$this->module->id.'/'.$this->id.'/create',
 	'htmlOptions'=> array(
 		//'id' => 'submit',
 	),

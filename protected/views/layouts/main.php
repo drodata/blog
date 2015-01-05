@@ -95,6 +95,16 @@
 			left:0;
 			right:0; 
 		}
+		#top input.vocabulary-search {
+			color:#111;
+			width:400px;
+			display:block;
+			margin:1px auto;
+			background:#ddd;
+		}
+		#top input.vocabulary-search:focus {
+			background:#fff;
+		}
 		#side-navi {
 			position:absolute;
 			width:200px;
@@ -180,7 +190,7 @@
 			<?php echo $content; ?> 
 	</div>
 
-	<div class="modal fade" id="general-modal">
+	<div class="modal fade" id="general-modal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">

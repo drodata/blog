@@ -15,6 +15,7 @@
 		?>
 		<?php echo $form->textFieldRow($formTaxonomy,'taxonomy', array(
 			'class' => 'AutoCompleteExplanationTaxonomy',
+			'tabindex' => 1,
 		)); ?> 
 		<?php echo $form->radioButtonListInlineRow($model,'is_main',array('1'=>'Yes', '0'=> 'No'),array()); ?>
 		<?php echo $form->dropDownListRow($model,'class',Lookup::items('ExplanationClass'),array(
