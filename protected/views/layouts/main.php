@@ -30,6 +30,12 @@
 	</script>
 
 	<style type="text/css">
+
+		/* add a gap between bootstrap's labels */
+		.label {margin-right:5px;}
+
+		/* change fontawesome link color in Bootstrap Modal */
+		.modal a i.fa {color:#888;}
 		pre, .terminal {
 			padding:0;
 			margin: 15px 0;

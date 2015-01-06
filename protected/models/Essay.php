@@ -129,9 +129,9 @@ class Essay extends CActiveRecord
 		));
 		if (sizeof($map) > 0) {
 			foreach ($map as $m) {
-				$a[] = CHtml::link($m->label->name, Yii::app()->request->baseUrl.'/essay/label/'.$m->label->name);
+				$a[] = '<span class="label label-default">'.$m->label->name.'</span>';
 			}
-			return implode(', ',$a);
+			return implode('',$a);
 		} else {
 			return null;
 		}

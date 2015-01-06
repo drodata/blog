@@ -1,5 +1,8 @@
 <?php
-
+spl_autoload_unregister(array('YiiBase','autoload')); 
+Yii::import('application.vendors.*');
+require_once('Parsedown.php');
+spl_autoload_register(array('YiiBase','autoload'));
 class VocabularyController extends Controller
 {
 	public $layout = 'column1';
@@ -105,6 +108,7 @@ class VocabularyController extends Controller
 	{
 		header("Content-type: application/json");
 		$d = array();
+		$parsedown = new Parsedown();
 
 		$vocabulary = Vocabulary::model()->findByAttributes(array(
 			'name' => $_POST['name'],
@@ -114,6 +118,7 @@ class VocabularyController extends Controller
 		),true);
 		$d['result'] = $this->renderPartial('_view',array(
 			'vocabulary' => $vocabulary,
+			'parsedown' => $parsedown,
 		),true);
 		echo json_encode($d);
 	}

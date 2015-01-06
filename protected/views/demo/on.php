@@ -1,3 +1,7 @@
+<?php
+$a=['kuixy','go','a8'];
+echo array_shift($a);
+?>
 <button class="a btn btn-primary">Go</button>
 <button id="b" class="btn btn-primary">Copy</button>
 <hr>

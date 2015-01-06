@@ -117,7 +117,7 @@ class ExplanationController extends Controller
 			if ( $model->validate()) {
 				$model->update();
 				Taxonomy::sv($_POST['FormTaxonomy']['taxonomy'], $model->id, 'update');
-				$this->redirect(Yii::app()->request->baseUrl . '/'. $this->module->id . '/explanation/');
+				$this->redirect(Yii::app()->request->baseUrl);
 			}
 		}
 
