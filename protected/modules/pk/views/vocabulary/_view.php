@@ -1,8 +1,9 @@
-<h1> 
-<?=$vocabulary->name?>
-<?=$vocabulary->pronunciation ? ' /'.$vocabulary->pronunciation.'/' : ''?>
-<?php echo CHtml::link('U',Yii::app()->request->baseUrl.'/'.$this->module->id.'/'.$this->id.'/update?id='.$vocabulary->id); ?>
-</h1>
+<p>
+<a href="<?=Yii::app()->request->baseUrl.'/'.$this->module->id
+	.'/explanation/create?vocabulary_id='.$vocabulary->id?>">
+	<i class="fa fa-plus"></i>
+</a>
+</p>
 <ol>
 <?php
 	foreach ($vocabulary->explanations as $exp) {

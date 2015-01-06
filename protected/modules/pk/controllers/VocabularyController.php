@@ -109,6 +109,9 @@ class VocabularyController extends Controller
 		$vocabulary = Vocabulary::model()->findByAttributes(array(
 			'name' => $_POST['name'],
 		));
+		$d['title'] = $this->renderPartial('_title',array(
+			'vocabulary' => $vocabulary,
+		),true);
 		$d['result'] = $this->renderPartial('_view',array(
 			'vocabulary' => $vocabulary,
 		),true);
