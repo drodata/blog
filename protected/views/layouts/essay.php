@@ -56,6 +56,7 @@
 						,dateType: "json"
 						,data: { name: ui.item.value }
 					}).done(function( d ) {
+						$("#general-modal").find(".modal-title").html( d.title );
 						$("#general-modal").find(".modal-body").html( d.result );
 						$("#general-modal").find(".modal-dialog").addClass("modal-lg");
 						$("#general-modal").modal();
