@@ -1,10 +1,4 @@
 <?php
-spl_autoload_unregister(array('YiiBase','autoload')); 
-Yii::import('application.vendors.*');
-require_once('Parsedown.php');
-spl_autoload_register(array('YiiBase','autoload'));
-
-
 class BackController extends Controller
 {
 	public $layout='essay';

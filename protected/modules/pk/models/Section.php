@@ -110,4 +110,16 @@ class Section extends CActiveRecord
 			),
 		));
 	}
+	/**
+	 * Store a section's full name in an array
+	 */
+	public static function nameList ($id, $a=array()) {
+		$current = Section::model()->findByPk($id);
+		$a[] = $current->name;
+		if ($current->parent != 0) {
+			return self::nameList($current->parent, $a);
+		}
+		rsort($a);
+		return $a;
+	}
 }

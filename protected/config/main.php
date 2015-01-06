@@ -26,7 +26,7 @@ return array(
 	'modules'=>array(
 		'pk' => array(
 			'nickname' => 'kuixy',
-			'defaultController' => 'vocabulary',
+			'defaultController' => 'dashboard',
 		),
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',

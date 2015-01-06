@@ -59,6 +59,9 @@
 						$("#general-modal").find(".modal-title").html( d.title );
 						$("#general-modal").find(".modal-body").html( d.result );
 						$("#general-modal").find(".modal-dialog").addClass("modal-lg");
+						$("#general-modal").find("pre code").each(function(i, block) {
+							hljs.highlightBlock(block);
+						});
 						$("#general-modal").modal();
 					});
 				}

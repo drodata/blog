@@ -10,6 +10,7 @@
 		echo '<li>';
 		$this->renderPartial('/explanation/_view', array(
 			'data' => $exp,
+			'parsedown' => $parsedown,
 		));
 		echo '</li>';
 	}

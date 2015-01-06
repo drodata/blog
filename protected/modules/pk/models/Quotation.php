@@ -23,6 +23,7 @@ class Quotation extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
 	
 	/**
 	 * @return string the associated database table name
@@ -109,5 +110,11 @@ class Quotation extends CActiveRecord
 				),
 			),
 		));
+	}
+
+	public static function getCompleteSource($quotation) {
+		$names = Section::nameList($quotation->section->id);
+		array_unshift($names, $quotation->section->source->name);
+		return implode(' - ', $names);
 	}
 }

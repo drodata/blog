@@ -126,6 +126,9 @@ class Explanation extends CActiveRecord
 		));
 	}
 
+	/**
+	 * for update action
+	 */
 	public static function getTaxonomyString( $explanationId )
 	{
 		$map = ExplanationTaxonomy::model()->findAllByAttributes(array(
@@ -136,6 +139,23 @@ class Explanation extends CActiveRecord
 				$a[] = $m->taxonomy->name;
 			}
 			return implode(', ',$a);
+		} else {
+			return null;
+		}
+	}
+	/**
+	 * for view action
+	 */
+	public static function taxonomyString( $explanationId )
+	{
+		$map = ExplanationTaxonomy::model()->findAllByAttributes(array(
+			'explanation_id' => $explanationId,
+		));
+		if (sizeof($map) > 0) {
+			foreach ($map as $m) {
+				$a[] = '<span class="label label-default">'.$m->taxonomy->name.'</span>';
+			}
+			return implode('',$a);
 		} else {
 			return null;
 		}
