@@ -9,13 +9,6 @@
 	?>
 
 		<?php
-		echo $form->dropDownListRow($model,'folder_id',Folder::treeList(),array(
-			'empty'=>'',
-			'class'=>'form-control',
-			'encode' => false,
-		));
-		?>
-		<?php
 		echo $form->dropDownListRow($model,'section_id',Source::CompleteList(),array(
 			'empty'=>'',
 			'class'=>'form-control',

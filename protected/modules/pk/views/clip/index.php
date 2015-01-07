@@ -19,7 +19,6 @@ $this->widget('bootstrap.widgets.GridView', array(
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
-		'folder_id',
 		'section_id',
 		'content',
 		'c_time',

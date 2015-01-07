@@ -119,9 +119,6 @@ class ClipController extends Controller
 		$p = $_POST;
 
 		$criteria = new CDbCriteria;
-		//if (isset($p['folder']))
-		if ($p['folder'])
-			$criteria->compare('folder_id', $p['folder']);
 		if (isset($p['section']))
 			$criteria->compare('section_id', $p['section']);
 		$criteria->order = 'c_time DESC';
