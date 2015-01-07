@@ -7,6 +7,10 @@
 
 
 	<!-- jQuery plugins -->
+	<!-- 	Highlight.js ['tomorrow-night-blue', 'github']-->
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/highlight-style/github.css" />
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/highlight.pack.js"></script>
+
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/common.js?time=<?=time()?>"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.trekshot.js"></script>
 
@@ -16,9 +20,21 @@
 
 	<script type="text/javascript"> 
 		$(document).ready(function(){
+			hljs.initHighlightingOnLoad();
 		});
 	</script>
 	<style type="text/css">
+		/* change hljs style */
+		pre, .terminal {
+			padding:0;
+			margin: 15px 0;
+			border:0px solid red;
+		}
+		pre code {
+			font-family:"Droid sans mono","Courier New";
+			font-size:10pt;
+		}
+
 		#tree-navi {
 		position: relative;
 		float: left;
@@ -76,7 +92,6 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/dashboard">Dashboard</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/source">Source</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/section">Section</a></li>
 

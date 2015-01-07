@@ -25,8 +25,8 @@ return array(
 	),
 	'modules'=>array(
 		'pk' => array(
-			'nickname' => 'kuixy',
-			'defaultController' => 'dashboard',
+			'nickname' => 'kuixy', // a test
+			'defaultController' => 'clip/view',
 		),
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',

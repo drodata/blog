@@ -3,9 +3,7 @@
 	</h5>
 	<blockquote>
 		<?php 
-		$this->beginWidget('CMarkdown', array('purifyOutput'=>false));
-			echo $data->content; 
-		$this->endWidget('CMarkdown');
+		echo $parsedown->text( $data->content );
 		?>
 		<footer>
 			Folder: <?php echo $data->folder->name.', '.$data->section->source->name.', @'.$data->c_time; ?>
@@ -18,9 +16,7 @@
 		<div>
 		<p>
 			<?php 
-			$this->beginWidget('CMarkdown', array('purifyOutput'=>false));
-				echo $data->note; 
-			$this->endWidget('CMarkdown');
+			echo $parsedown->text( $data->note );
 			?>
 		</p>
 		</div>

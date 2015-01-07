@@ -1,3 +1,5 @@
+<?php
+?>
 <ul>
 <li>
 <?php echo CHtml::link('Create', Yii::app()->request->baseUrl.'/essay/create',array(

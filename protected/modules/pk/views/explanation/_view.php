@@ -1,16 +1,17 @@
-	<span class="h3 text-info">
-		<?=$parsedown->text($data->explanation)?>
-	</span>
 	<span class="label label-primary">
 		<?=Lookup::item('ExplanationClass', $data->class)?>
 	</span>
 	<?=Explanation::taxonomyString($data->id)?>
-	<span class="h6">
-		<?=$data->native_explanation?>
-	</span>
 	<a href="<?=Yii::app()->request->baseUrl.'/'.$this->module->id.'/explanation/update?id='.$data->id?>">
 		<i class="fa fa-pencil"></i>
 	</a>
+	<span class="h6 native-exp">
+		<?=$data->native_explanation?>
+	</span>
+
+	<span class="h3 text-info">
+		<?=$parsedown->text($data->explanation)?>
+	</span>
 	<p>
 		<a href="<?=Yii::app()->request->baseUrl.'/'.$this->module->id
 			.'/quotation/create?explanation_id='.$data->id?>">
