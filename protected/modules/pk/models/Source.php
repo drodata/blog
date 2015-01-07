@@ -110,7 +110,7 @@ class Source extends CActiveRecord
 		));
 	}
 
-	public function nameList()
+	public static function nameList()
 	{
 		$model = Source::model()->findAll();
 		return CHtml::listData($model, 'id', 'name');

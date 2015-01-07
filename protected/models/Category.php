@@ -110,7 +110,7 @@ class Category extends CActiveRecord
 			),
 		));
 	}
-	public function treeList($parent=0, $indent=0) {
+	public static function treeList($parent=0, $indent=0) {
 
 		//$indent_str = '__';
 		$indent_str = "&nbsp;&nbsp;&nbsp;&nbsp;";
