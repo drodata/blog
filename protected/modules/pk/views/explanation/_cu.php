@@ -26,9 +26,8 @@
 			'class'=>'form-control',
 			'rows' => 4,
 		)); ?> 
-		<?php echo $form->textAreaRow($model,'native_explanation', array(
+		<?php echo $form->textFieldRow($model,'native_explanation', array(
 			'class'=>'form-control',
-			'rows' => 2,
 		)); ?> 
 		<?php echo $form->textAreaRow($model,'example', array(
 			'class'=>'form-control',

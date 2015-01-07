@@ -11,6 +11,10 @@
 )); ?>
 
 <?php
+
+//print_r(Section::model()->nameList(25));
+print_r(Section::nameList(25));
+
 $this->widget('bootstrap.widgets.GridView', array(
 	'type' => array('striped', 'condensed'),
 	'id'=>'section-grid',
