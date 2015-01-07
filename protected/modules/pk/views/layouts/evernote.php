@@ -1,8 +1,9 @@
 <?php $this->beginContent('/layouts/main'); ?>
-	<!--
 	<div class="bg-warning" id="tree-navi">
+	<!--
 		<h3>Folder</h3>
 		<div class="col-sm-12 tree" id="folder-tree" style="overflow:auto;"></div>
+	-->
 
 		<h3>Sources</h3>
 		<div class="col-sm-12 tree" id="section-tree"></div>
@@ -17,7 +18,6 @@
 		</div>
 	</div>
 </div>
-	-->
 <script type="text/javascript"> 
 	$(document).ready(function(){
 		$('.tree').on('changed.jstree', function(e, data){
@@ -30,7 +30,7 @@
 			$.ajax({ 
 				 type: "POST" 
 				,dataType: "json"
-				,url: "/pk/clip/ajaxSearch" 
+				,url: "/blog/pk/clip/ajaxSearch" 
 				,data: r
 				//,beforeSend:loading
 			}).done(function( d ) {
@@ -38,6 +38,7 @@
 				$('#content-div').html( d.content );
 			});
 		});
+		/*
 		$('#folder-tree').jstree({
 			'core' : {
 				'data' : {
@@ -48,11 +49,12 @@
 				}
 			}
 		});
+		*/
 
 		$('#section-tree').jstree({
 			'core' : {
 				'data' : {
-					'url' : '/pk/section/ajaxGetChildren',
+					'url' : '/blog/pk/section/ajaxGetChildren',
 					'data' : function (node) {
 						return { 'id' : node.id };
 					}

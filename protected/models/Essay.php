@@ -129,7 +129,7 @@ class Essay extends CActiveRecord
 		));
 		if (sizeof($map) > 0) {
 			foreach ($map as $m) {
-				$a[] = '<span class="label label-default">'.$m->label->name.'</span>';
+				$a[] = '<span class="label label-success">'.$m->label->name.'</span>';
 			}
 			return implode('',$a);
 		} else {

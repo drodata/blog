@@ -1,5 +1,6 @@
 <h1><code><?php echo $this->module->id . '/' . $this->id . '/' . $this->action->id; ?></code></h1>
 
+
 <?php $this->widget('bootstrap.widgets.Button', array(
 	'buttonType'=>'link', 
 	'type'=>'primary', 
@@ -11,9 +12,6 @@
 )); ?>
 
 <?php
-
-//print_r(Section::model()->nameList(25));
-print_r(Section::nameList(25));
 
 $this->widget('bootstrap.widgets.GridView', array(
 	'type' => array('striped', 'condensed'),

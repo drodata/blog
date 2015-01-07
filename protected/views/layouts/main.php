@@ -36,6 +36,8 @@
 
 		/* change fontawesome link color in Bootstrap Modal */
 		.modal a i.fa {color:#888;}
+
+		/* change hljs style */
 		pre, .terminal {
 			padding:0;
 			margin: 15px 0;
@@ -209,7 +211,9 @@
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<!--
 					<button type="button" class="btn btn-primary">Save changes</button>
+					-->
 				</div>
 			</div>
 		</div>

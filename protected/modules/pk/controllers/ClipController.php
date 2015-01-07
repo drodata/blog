@@ -1,4 +1,8 @@
 <?php
+spl_autoload_unregister(array('YiiBase','autoload')); 
+Yii::import('application.vendors.*');
+require_once('Parsedown.php');
+spl_autoload_register(array('YiiBase','autoload'));
 
 class ClipController extends Controller
 {
@@ -67,6 +71,8 @@ class ClipController extends Controller
 	}
 	public function actionView()
 	{
+		$parsedown = new Parsedown();
+
 		$criteria=new CDbCriteria;
 		if (isset($_GET['section_id']))
 			$criteria->compare('section_id',$_GET['section_id']);
@@ -81,7 +87,9 @@ class ClipController extends Controller
 
 		$this->render('view',array(
 			'dataProvider'=>$dataProvider,
+			'parsedown' => $parsedown,
 		));
+
 	}
 
 	public function actionUpdate()

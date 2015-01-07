@@ -62,7 +62,18 @@
 						$("#general-modal").find("pre code").each(function(i, block) {
 							hljs.highlightBlock(block);
 						});
-						$("#general-modal").modal();
+
+						$("#general-modal").find(".native-exp").hide();
+						$("li.explanation").hover(
+							function() {
+								$(this).find(".native-exp").show();
+							}, function() {
+								$(this).find(".native-exp").hide();
+							}
+						);
+						$("#general-modal").modal({
+							backdrop: false,
+						});
 					});
 				}
 			});

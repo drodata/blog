@@ -18,7 +18,10 @@ if ( isset($_GET['section_id']) ) {
 <?php 
 $this->widget('bootstrap.widgets.TbListView', array(
 	'dataProvider'=>$dataProvider,
-	'itemView'=>'/dashboard/_view',
+	'itemView'=>'_view',
+	'viewData' => array(
+		'parsedown' => $parsedown,
+	),
 	'template'=>"{items}\n{pager}",
 )); ?>
 

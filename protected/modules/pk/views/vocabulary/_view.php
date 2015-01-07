@@ -7,7 +7,7 @@
 <ol>
 <?php
 	foreach ($vocabulary->explanations as $exp) {
-		echo '<li>';
+		echo '<li class="explanation">';
 		$this->renderPartial('/explanation/_view', array(
 			'data' => $exp,
 			'parsedown' => $parsedown,
