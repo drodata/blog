@@ -6,7 +6,7 @@
 		echo $parsedown->text( $data->content );
 		?>
 		<footer>
-			Folder: <?php echo $data->folder->name.', '.$data->section->source->name.', @'.$data->c_time; ?>
+			Source: <?php echo $data->section->source->name.', @'.$data->c_time; ?>
 			<?php echo CHtml::link('Update',Yii::app()->request->baseUrl.'/pk/clip/update?id='.$data->id); ?>
 		</footer>
 	</blockquote>

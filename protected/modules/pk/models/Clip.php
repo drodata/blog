@@ -5,7 +5,6 @@
  *
  * The followings are the available columns in table '{{clip}}':
  * @property string $id
- * @property string $folder_id
  * @property string $section_id
  * @property string $title
  * @property string $content
@@ -41,14 +40,14 @@ class Clip extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('folder_id, section_id, content', 'required'),
-			array('folder_id, section_id', 'length', 'max'=>20),
+			array('section_id, content', 'required'),
+			array('section_id', 'length', 'max'=>20),
 			array('title', 'length', 'max'=>100),
 			array('anchor', 'length', 'max'=>100),
 			array('content, note, c_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, folder_id, section_id,title, content, note, anchor, c_time', 'safe', 'on'=>'search'),
+			array('id, section_id,title, content, note, anchor, c_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,7 +60,6 @@ class Clip extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'section' 	=> array(self::BELONGS_TO, 'Section', 'section_id'),
-			'folder' 	=> array(self::BELONGS_TO, 'Folder', 'folder_id'),
 		);
 	}
 
@@ -72,7 +70,6 @@ class Clip extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'folder_id' => 'Folder',
 			'section_id' => 'Section',
 			'title' => 'Title',
 			'content' => 'Content',
@@ -94,7 +91,6 @@ class Clip extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('folder_id',$this->folder_id,true);
 		$criteria->compare('section_id',$this->section_id,true);
 		$criteria->compare('title',$this->content,true);
 		$criteria->compare('content',$this->content,true);
