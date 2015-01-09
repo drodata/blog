@@ -58,6 +58,7 @@ class Taxonomy extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'explanations'=>array(self::MANY_MANY, 'Explanation', 'ts_explanation_taxonomy(taxonomy_id, explanation_id)'),
+			'clips'=>array(self::MANY_MANY, 'Clip', 'ts_clip_taxonomy(taxonomy_id, clip_id)'),
 		);
 	}
 
@@ -110,32 +111,75 @@ class Taxonomy extends CActiveRecord
 		));
 	}
 
-	public static function sv($taxonomyString , $id, $action) {
+	public static function sv($category, $taxonomyString , $id, $action) {
 		$taxonomy = explode(',',$taxonomyString);
 
-		if ($action == 'update') {
-			ExplanationTaxonomy::model()->deleteAllByAttributes(array(
-				'explanation_id'=> $id,
-			));
+		if ($action == 'update') 
+		{
+			if ($category == 'Explanation') 
+			{
+				ExplanationTaxonomy::model()->deleteAllByAttributes(array(
+					'explanation_id'=> $id,
+				));
+			} 
+			else if ($category == 'Clip') 
+			{
+				ClipTaxonomy::model()->deleteAllByAttributes(array(
+					'clip_id'=> $id,
+				));
+			}
 		}
 		foreach ($taxonomy as $t) {
 			$name = trim($t);	
         
 			$_t = Taxonomy::model()->findByAttributes(array(
-				'category' => 'Explanation',
+				'category' => $category,
 				'name'=>$name,
 			));
         
 			if (!$_t) {
 				$_t = new Taxonomy;
 				$_t->name = $name;
-				$_t->category = 'Explanation';
+				$_t->category = $category;
 				$_t->save();
 			}
-			$et = new ExplanationTaxonomy;
-			$et->explanation_id = $id;
+			if ($category == 'Explanation')
+			{
+				$et = new ExplanationTaxonomy;
+				$et->explanation_id = $id;
+			} 
+			else if ($category == 'Clip')
+			{
+				$et = new ClipTaxonomy;
+				$et->clip_id = $id;
+			}
 			$et->taxonomy_id = $_t->id;
 			$et->save();
+		}
+	}
+	/**
+	 * for update action of clip and explanation
+	 */
+	public static function getTaxonomyString( $type, $id )
+	{
+		if ($type == 'Explanation') 
+		{
+			$map = ExplanationTaxonomy::model()->findAllByAttributes(array(
+				'explanation_id' => $id,
+			));
+		} else if ($type == 'Clip') 
+		{
+			$map = ClipTaxonomy::model()->findAllByAttributes(array(
+				'clip_id' => $id,
+			));
+		}
+		if (sizeof($map) > 0) {
+			foreach ($map as $m) {
+				$a[] = $m->taxonomy->name;
+			}
+			return implode(', ',$a);
+		} else {
+			return null;
 		}
 	}
 }

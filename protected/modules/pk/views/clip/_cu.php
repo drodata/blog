@@ -4,7 +4,6 @@
 	$form = $this->beginWidget('bootstrap.widgets.ActiveForm', array(
 		'id'=> $this->id.'-cu-form',
 		'type'=>'horizontal',
-		'enableAjaxValidation' => true,
 	));
 	?>
 
@@ -15,6 +14,10 @@
 			'encode' => false,
 		));
 		?>
+		<?php echo $form->textFieldRow($formTaxonomy,'taxonomy', array(
+			'class' => 'AutoCompleteClipTaxonomy',
+			'tabindex' => 1,
+		)); ?> 
 		<?php echo $form->textFieldRow($model,'title', array(
 			'class'=>'form-control',
 		)); ?> 
@@ -58,3 +61,15 @@
 	<div class="col-md-6">
 	</div>
 </div>
+
+<?php
+Yii::app()->clientScript->registerCoreScript('jquery.ui');
+Yii::app()->clientScript->registerCssFile(
+	Yii::app()->clientScript->getCoreScriptUrl().
+	'/jui/css/base/jquery-ui.css'
+);
+Yii::app()->clientScript->registerScriptFile(
+	Yii::app()->baseUrl.'/js/clip.js',
+	CClientScript::POS_END
+);
+?>

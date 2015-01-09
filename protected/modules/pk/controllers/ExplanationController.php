@@ -47,7 +47,7 @@ class ExplanationController extends Controller
 			if ( $model->validate()) {
 				if ($model->save()) {
 					// 1. store taxonomy
-					Taxonomy::sv($_POST['FormTaxonomy']['taxonomy'], $model->id, 'create');
+					Taxonomy::sv('Explanation',$_POST['FormTaxonomy']['taxonomy'], $model->id, 'create');
 					// 2. redirect
 					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id
 						.'/quotation/create?explanation_id='.$model->id);
@@ -116,7 +116,7 @@ class ExplanationController extends Controller
 			$model->attributes=$_POST['Explanation'];
 			if ( $model->validate()) {
 				$model->update();
-				Taxonomy::sv($_POST['FormTaxonomy']['taxonomy'], $model->id, 'update');
+				Taxonomy::sv('Explanation',$_POST['FormTaxonomy']['taxonomy'], $model->id, 'update');
 				$this->redirect(Yii::app()->request->baseUrl);
 			}
 		}

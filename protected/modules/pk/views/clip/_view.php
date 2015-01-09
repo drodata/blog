@@ -1,3 +1,4 @@
+<div class="clip-item">
 	<h5>
 		<?php echo $data->title;?>
 	</h5>
@@ -7,7 +8,19 @@
 		?>
 		<footer>
 			Source: <?php echo $data->section->source->name.', @'.$data->c_time; ?>
-			<?php echo CHtml::link('Update',Yii::app()->request->baseUrl.'/pk/clip/update?id='.$data->id); ?>
+
+			<a href="<?=Yii::app()->request->baseUrl.'/'.$this->module->id
+				.'/clip/update?id='.$data->id?>">
+				<i class="fa fa-pencil"></i>
+			</a>
+			<a href="<?=Yii::app()->request->baseUrl.'/'.$this->module->id
+				.'/clip/delete?id='.$data->id?>">
+				<i class="fa fa-times"></i>
+			</a>
+			<span class="clip-taxonomy">
+				<?=Clip::taxonomyString($data->id)?>
+			</span>
+
 		</footer>
 	</blockquote>
 	<?php
@@ -24,5 +37,5 @@
 	<?php
 	}
 	?>
+</div>
 
-<hr>

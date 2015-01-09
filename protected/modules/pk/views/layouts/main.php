@@ -23,6 +23,10 @@
 			hljs.initHighlightingOnLoad();
 		});
 	</script>
+
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/pk.css" />
+
 	<style type="text/css">
 		/* change hljs style */
 		pre, .terminal {
@@ -92,6 +96,7 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
+				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/">Pk</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/source">Source</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/section">Section</a></li>
 
