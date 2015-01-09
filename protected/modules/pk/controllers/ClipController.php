@@ -24,31 +24,58 @@ class ClipController extends Controller
 	public function actionCreate()
 	{
 		$model=new Clip;
-		if(isset($_POST['ajax']) && $_POST['ajax']=== $this->id.'-cu-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
+		$formTaxonomy = new FormTaxonomy;
                 
 		if(isset($_POST['Clip']) )
 		{
 			$model->attributes=$_POST['Clip'];
 			$model->c_time = new CDbExpression('NOW()');
                 
-			if ( $model->validate()) {
-				if ($model->save())
-					$this->redirect(Yii::app()->request->urlReferrer);
+			if ($model->save())
+			{
+				// 1. store taxonomy
+				Taxonomy::sv('Clip',$_POST['FormTaxonomy']['taxonomy'], $model->id, 'create');
+				// 2. redirect
+				$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id);
 			}
 		}
-		$this->render('create', array( 'model'=>$model,));
+		$this->render('create', array( 
+			'model'=>$model,
+			'formTaxonomy' => $formTaxonomy,
+		));
+	}
+
+	public function actionAjaxGetTaxonomy()
+	{
+		header("Content-type: application/json");
+		$d = array();
+
+		$results = Taxonomy::model()->findAllByAttributes(array(
+			'category' => 'Clip',
+		));
+		if ($results) {
+			foreach ($results as $r) { 
+				$d[] = $r->name;
+			}
+		}
+		echo json_encode($d);
 	}
 
 	public function actionDelete()
 	{
+			$this->loadModel()->delete();
+			ClipTaxonomy::model()->deleteAllByAttributes(array(
+				'clip_id'=> $this->loadModel()->id,
+			));
+			$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id);
+		/*
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
 			$this->loadModel()->delete();
+			ClipTaxonomy::model()->deleteAllByAttributes(array(
+				'clip_id'=> $this->loadModel()->id,
+			));
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
@@ -56,6 +83,7 @@ class ClipController extends Controller
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		*/
 	}
 
 	public function actionIndex()
@@ -95,22 +123,22 @@ class ClipController extends Controller
 	public function actionUpdate()
 	{
 		$model=$this->loadModel();
-		if(isset($_POST['ajax']) && $_POST['ajax']=== $this->id.'-cu-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
+		$formTaxonomy = new FormTaxonomy;
+		$formTaxonomy->taxonomy = Taxonomy::getTaxonomyString( 'Clip', $model->id );
 		if(isset($_POST['Clip']))
 		{
 			$model->attributes=$_POST['Clip'];
-			if ( $model->validate()) {
-				if ($model->update())
-					$this->redirect('index');
+			if ( $model->validate()) 
+			{
+				$model->update();
+				Taxonomy::sv('Clip',$_POST['FormTaxonomy']['taxonomy'], $model->id, 'update');
+				$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id);
 			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
+			'formTaxonomy' => $formTaxonomy,
 		));
 	}
 	public function actionAjaxSearch() {
@@ -137,6 +165,29 @@ class ClipController extends Controller
 			$d['slice'] = '<p>no results</p>';
 			$d['content'] = '<p>no results</p>';
 		}
+		echo json_encode($d);
+	}
+	public function actionAjaxQuickAddTaxonomy() {
+		header("Content-type: application/json");
+		$d = array();
+
+		$taxo = Taxonomy::model()->findByAttributes(array(
+			'category' => 'Clip',
+			'name' => trim($_POST['name']),
+		));
+		if (!isset($taxo)) 
+		{
+			$taxo = new Taxonomy;
+			$taxo->name = trim($_POST['name']);
+			$taxo->category = 'Clip';
+			$taxo->save();
+		}
+		$clip_taxonomy = new ClipTaxonomy;
+		$clip_taxonomy->clip_id = $_POST['id'];
+		$clip_taxonomy->taxonomy_id = $taxo->id;
+		$clip_taxonomy->save();
+		$d['redirectUrl'] = Yii::app()->request->baseUrl.'/'.$this->module->id;
+		$d['new'] = Clip::taxonomyString($_POST['id']);
 		echo json_encode($d);
 	}
 

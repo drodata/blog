@@ -60,6 +60,7 @@ class Clip extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'section' 	=> array(self::BELONGS_TO, 'Section', 'section_id'),
+			'taxonomies'	=>array(self::MANY_MANY, 'Taxonomy', 'ts_clip_taxonomy(clip_id, taxonomy_id)'),
 		);
 	}
 
@@ -109,5 +110,24 @@ class Clip extends CActiveRecord
 				),
 			),
 		));
+	}
+	/**
+	 * for view action
+	 */
+	public static function taxonomyString( $clipId )
+	{
+		$a = array();
+		$map = ClipTaxonomy::model()->findAllByAttributes(array(
+			'clip_id' => $clipId,
+		));
+		if (sizeof($map) > 0) {
+			foreach ($map as $m) {
+				$a[] = '<span class="label label-default">'.$m->taxonomy->name.'</span>';
+			}
+		}
+		$a[] = '<span>
+			<i class="fa fa-plus" data-id="'.$clipId.'"></i>
+		</span>';
+		return implode('',$a);
 	}
 }

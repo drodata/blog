@@ -1,0 +1,12 @@
+		/* add a gap between bootstrap's labels */
+		.label {
+			margin-right:5px;
+			cursor:default;
+		}
+
+		/* change fontawesome link color in Clip and Explanation view page */
+		.modal a i.fa,
+		.clip-item a i.fa
+		{color:#888;}
+
+

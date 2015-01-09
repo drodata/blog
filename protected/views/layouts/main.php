@@ -22,6 +22,8 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.trekshot.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/common.js?time=<?=time()?>"></script>
 
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/common.css" />
+
 	<script type="text/javascript"> 
 	$(document).ready(function(){
 		// activate hihglight.js plugin
@@ -30,12 +32,6 @@
 	</script>
 
 	<style type="text/css">
-
-		/* add a gap between bootstrap's labels */
-		.label {margin-right:5px;}
-
-		/* change fontawesome link color in Bootstrap Modal */
-		.modal a i.fa {color:#888;}
 
 		/* change hljs style */
 		pre, .terminal {
