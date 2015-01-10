@@ -25,7 +25,7 @@
 	</script>
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/common.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/pk.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetsUrl; ?>/pk.css" />
 
 	<style type="text/css">
 		/* change hljs style */
