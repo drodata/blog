@@ -46,6 +46,7 @@ class Vocabulary extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, language', 'required'),
+			array('name', 'unique'),
 			array('language, parent', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>40),
 			array('pronunciation', 'length', 'max'=>20),
