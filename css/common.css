@@ -1,12 +1,18 @@
-		/* add a gap between bootstrap's labels */
-		.label {
-			margin-right:5px;
-			cursor:default;
-		}
+/* workaround to remove the border of a focus input element in Chrome */
+input[type=text], textarea
+{
+	outline:none;
+}
 
-		/* change fontawesome link color in Clip and Explanation view page */
-		.modal a i.fa,
-		.clip-item a i.fa
-		{color:#888;}
+/* add a gap between bootstrap's labels */
+.label {
+	margin-right:5px;
+	cursor:default;
+}
+
+/* change fontawesome link color in Clip and Explanation view page */
+.modal a i.fa,
+.clip-item a i.fa
+{color:#888;}
 
 

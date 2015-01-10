@@ -1,0 +1,8 @@
+	.quick-add-taxonomy {
+		background:#ffffee;
+		border:0px solid red;
+	}
+	.quick-add-taxonomy:focus {
+		border:0px solid red;
+	}
+
