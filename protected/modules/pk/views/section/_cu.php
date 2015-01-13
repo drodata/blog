@@ -59,7 +59,7 @@
 </div>
 	<?php
 	Yii::app()->clientScript->registerScriptFile(
-		Yii::app()->baseUrl.'/js/section.js',
+		$this->module->assetsUrl.'/js/section.js',
 		CClientScript::POS_END
 	);
 	?>
