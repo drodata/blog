@@ -2,7 +2,7 @@
 
 class SectionController extends Controller
 {
-	public $layout = 'evernote';
+	//public $layout = 'evernote';
 	private $_model;
 	public function loadModel()
 	{

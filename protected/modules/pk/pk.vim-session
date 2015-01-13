@@ -21,16 +21,17 @@ set wildmode=longest,list
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/www/blog/vim-session
+cd ~/www/blog/protected/modules/pk
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
+badd +1 ../protected/modules/pk/models/
 argglobal
 silent! argdel *
 argadd ../protected/modules/pk/models/
 set stal=2
-edit ~/www/blog/protected/modules/pk/models
+edit models
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -156,11 +157,11 @@ setlocal nowinfixwidth
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 8 - ((7 * winheight(0) + 21) / 42)
+let s:l = 12 - ((11 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-8
+12
 normal! 0
 lcd ~/www/blog/protected/modules/pk
 tabedit ~/www/blog/protected/modules/pk/views
@@ -289,7 +290,7 @@ setlocal nowinfixwidth
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 8 - ((7 * winheight(0) + 21) / 42)
+let s:l = 8 - ((4 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -422,7 +423,7 @@ setlocal nowinfixwidth
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 8 - ((7 * winheight(0) + 21) / 42)
+let s:l = 8 - ((4 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -555,7 +556,7 @@ setlocal nowinfixwidth
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 8 - ((7 * winheight(0) + 21) / 42)
+let s:l = 8 - ((4 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
