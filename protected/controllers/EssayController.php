@@ -122,14 +122,14 @@ class EssayController extends Controller
 			if ($model->action == 'create') {
 				$essay = new Essay;
 				$essay->title = $model->title;
-				$essay->content = file_get_contents('/home/ts/www/blog/pad.php');
+				$essay->content = file_get_contents('/home/ts/www/pad.php');
 				$essay->status = $model->status;
 				$essay->category_id = $model->category;
 				$essay->is_lock = 1;
 				$essay->c_time = $essay->m_time = $model->c_date.' '.date('H:i:s');
 
 				$essay->save();
-				file_put_contents('/home/ts/www/blog/pad.php', '');
+				file_put_contents('/home/ts/www/pad.php', '');
                 
 				$d['message'] = "saved.";
 				$d['id'] = $essay->id;
@@ -188,7 +188,7 @@ class EssayController extends Controller
 
 			$essay = new Essay;
 			$essay->title = $p['title'];
-			$essay->content = file_get_contents('/home/ts/www/blog/pad.php');
+			$essay->content = file_get_contents('/home/ts/www/pad.php');
 			$essay->status = $p['status'];
 			$essay->category_id = $p['category'];
 			$essay->is_lock = 1;
@@ -196,7 +196,7 @@ class EssayController extends Controller
 
 			$essay->save();
 
-			file_put_contents('/home/ts/www/blog/pad.php', '');
+			file_put_contents('/home/ts/www/pad.php', '');
 
 			$d['message'] = "saved.";
 			$d['id'] = $essay->id;
@@ -256,14 +256,14 @@ class EssayController extends Controller
 			$d['position'] = 6;
 			$d['style'] = 'red';
 		} else {
-			if ( file_get_contents('/home/ts/www/blog/pad.php') != '' ) {
+			if ( file_get_contents('/home/ts/www/pad.php') != '' ) {
 				$d['message'] = "pad 内容不为空，请先清空pad内容";
 				$d['status'] = false;
 				$d['position'] = 6;
 				$d['style'] = 'red';
 			} else {
 				$essay = Essay::model()->findByPk( $p['id'] );
-				if ( file_put_contents('/home/ts/www/blog/pad.php', $essay->content) === FALSE ) {
+				if ( file_put_contents('/home/ts/www/pad.php', $essay->content) === FALSE ) {
 					$d['message'] = "&radic; 写入失败";
 					$d['status'] = false;
 				} else {
@@ -292,9 +292,9 @@ class EssayController extends Controller
 			$d['status'] = false;
 			$d['style'] = 'red';
 		} else {
-			$essay->content = file_get_contents('/home/ts/www/blog/pad.php');
+			$essay->content = file_get_contents('/home/ts/www/pad.php');
 			if ( $essay->update(array('content')) ) {
-				file_put_contents('/home/ts/www/blog/pad.php', '');
+				file_put_contents('/home/ts/www/pad.php', '');
 
 				$essay->is_lock = 1;
 				$essay->update(array('is_lock'));
