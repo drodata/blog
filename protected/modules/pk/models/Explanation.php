@@ -66,7 +66,10 @@ class Explanation extends CActiveRecord
 		return array(
 			'vocabulary' 	=> array(self::BELONGS_TO, 'Vocabulary', 'vocabulary_id'),
 			'quotations' 	=> array(self::HAS_MANY, 'Quotation', 'explanation_id'),
-			'taxonomies'	=>array(self::MANY_MANY, 'Taxonomy', 'ts_explanation_taxonomy(explanation_id, taxonomy_id)'),
+			'taxonomies' =>array(
+				self::MANY_MANY, 'Taxonomy', 'ts_map(f_id, t_id)',
+				'condition' => 'taxonomies_taxonomies.category="ExplanationTaxonomy"'
+			),
 		);
 	}
 
@@ -127,37 +130,18 @@ class Explanation extends CActiveRecord
 	}
 
 	/**
-	 * for update action
-	 */
-	public static function getTaxonomyString( $explanationId )
-	{
-		$map = ExplanationTaxonomy::model()->findAllByAttributes(array(
-			'explanation_id' => $explanationId,
-		));
-		if (sizeof($map) > 0) {
-			foreach ($map as $m) {
-				$a[] = $m->taxonomy->name;
-			}
-			return implode(', ',$a);
-		} else {
-			return null;
-		}
-	}
-	/**
 	 * for view action
 	 */
 	public static function taxonomyString( $explanationId )
 	{
-		$map = ExplanationTaxonomy::model()->findAllByAttributes(array(
-			'explanation_id' => $explanationId,
-		));
-		if (sizeof($map) > 0) {
-			foreach ($map as $m) {
-				$a[] = '<span class="label label-default">'.$m->taxonomy->name.'</span>';
+		$a = array();
+		$taxonomies = Explanation::model()->findByPk($explanationId)->taxonomies;
+		if (sizeof($taxonomies) > 0) {
+			foreach ($taxonomies as $t) {
+				$a[] = '<span class="label label-default">'.$t->name.'</span>';
 			}
 			return implode('',$a);
-		} else {
+		} else
 			return null;
-		}
 	}
 }

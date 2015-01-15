@@ -64,26 +64,11 @@ class ClipController extends Controller
 	public function actionDelete()
 	{
 			$this->loadModel()->delete();
-			ClipTaxonomy::model()->deleteAllByAttributes(array(
-				'clip_id'=> $this->loadModel()->id,
+			Map::model()->deleteAllByAttributes(array(
+				'f_id'=> $this->loadModel()->id,
+				'category' => 'ClipTaxonomy',
 			));
 			$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id);
-		/*
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel()->delete();
-			ClipTaxonomy::model()->deleteAllByAttributes(array(
-				'clip_id'=> $this->loadModel()->id,
-			));
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-		*/
 	}
 
 	public function actionIndex()
@@ -124,7 +109,13 @@ class ClipController extends Controller
 	{
 		$model=$this->loadModel();
 		$formTaxonomy = new FormTaxonomy;
-		$formTaxonomy->taxonomy = Taxonomy::getTaxonomyString( 'Clip', $model->id );
+		$_a = array();
+		foreach ($model->taxonomies as $t)
+		{
+			if (trim($t->name) != '')
+				$_a[] = $t->name;
+		}
+		$formTaxonomy->taxonomy = implode(', ',$_a);
 		if(isset($_POST['Clip']))
 		{
 			$model->attributes=$_POST['Clip'];
@@ -182,10 +173,11 @@ class ClipController extends Controller
 			$taxo->category = 'Clip';
 			$taxo->save();
 		}
-		$clip_taxonomy = new ClipTaxonomy;
-		$clip_taxonomy->clip_id = $_POST['id'];
-		$clip_taxonomy->taxonomy_id = $taxo->id;
-		$clip_taxonomy->save();
+		$map = new Map;
+		$map->f_id = $_POST['id'];
+		$map->t_id = $taxo->id;
+		$map->category = 'ClipTaxonomy';
+		$map->save();
 		$d['redirectUrl'] = Yii::app()->request->baseUrl.'/'.$this->module->id;
 		$d['new'] = Clip::taxonomyString($_POST['id']);
 		echo json_encode($d);

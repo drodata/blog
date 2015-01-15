@@ -20,27 +20,44 @@ class SiteController extends Controller
 		);
 	}
 
-	public function actionTest() {
-	        $this->render('test');
-	}
-
 	public function actionUpdate() {
 		switch ($_GET['version'])
 		{
 			case '0.1.2':
+				/**
+				 * Merge all MANY_MANY maps into table 'ts_map'
+				 */
 				Yii::app()->db->createCommand()->setText('
 					drop table if exists `ts_map`;
 					create table `ts_map`
 					(
 					   `f_id`		BIGINT(20) DEFAULT NULL,
 					   `t_id`		BIGINT(20) DEFAULT NULL,
-					   `category`	VARCHAR(80) DEFAULT NULL,
+					   `category`	VARCHAR(80) DEFAULT NULL
 					) engine InnoDB DEFAULT CHARSET=utf8;
 				')->execute();
 
-				ClipTaxonomy::model()->findAll();
-				break;
-			case '0.1.1':
+				foreach ( ClipTaxonomy::model()->findAll() as $r)
+				{
+					$map = new Map;
+					$map->category = 'ClipTaxonomy';
+					$map->f_id = $r->clip_id;
+					$map->t_id = $r->taxonomy_id;
+					$map->save();
+				}
+				foreach ( ExplanationTaxonomy::model()->findAll() as $r)
+				{
+					$map = new Map;
+					$map->category = 'ExplanationTaxonomy';
+					$map->f_id = $r->explanation_id;
+					$map->t_id = $r->taxonomy_id;
+					$map->save();
+				}
+				Yii::app()->db->createCommand()->setText('
+					DROP TABLE ts_clip_taxonomy;
+					DROP TABLE ts_explanation_taxonomy;
+				')->execute();
+				/*
 				Yii::app()->db->createCommand()->setText('
 					ALTER TABLE ts_category ADD parent int(4) DEFAULT NULL AFTER name;
 					ALTER TABLE ts_category ADD position int(4) DEFAULT NULL AFTER parent;
@@ -48,6 +65,9 @@ class SiteController extends Controller
 					ALTER TABLE ts_category DROP slug;
 					ALTER TABLE ts_category DROP cat_desc;
 				')->execute();
+				*/
+				break;
+			case '0.1.1':
 
 				break;
 			default:

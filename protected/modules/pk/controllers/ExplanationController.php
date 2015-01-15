@@ -66,8 +66,9 @@ class ExplanationController extends Controller
 		{
 			// we only allow deletion via POST request
 			$this->loadModel()->delete();
-			ExplanationTaxonomy::model()->deleteAllByAttributes(array(
-				'explanation_id'=> $this->loadModel()->id,
+			Map::model()->deleteAllByAttributes(array(
+				'f_id'=> $this->loadModel()->id,
+				'category' => 'ExplanationTaxonomy',
 			));
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -110,7 +111,13 @@ class ExplanationController extends Controller
 	{
 		$model=$this->loadModel();
 		$formTaxonomy = new FormTaxonomy;
-		$formTaxonomy->taxonomy = Explanation::getTaxonomyString( $model->id );
+		$_a = array();
+		foreach ($model->taxonomies as $t)
+		{
+			if (trim($t->name) != '')
+				$_a[] = $t->name;
+		}
+		$formTaxonomy->taxonomy = implode(', ',$_a);
 		if(isset($_POST['Explanation']))
 		{
 			$model->attributes=$_POST['Explanation'];
