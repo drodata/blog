@@ -61,7 +61,10 @@ class Clip extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'section' 	=> array(self::BELONGS_TO, 'Section', 'section_id'),
-			'taxonomies'	=>array(self::MANY_MANY, 'Taxonomy', 'ts_clip_taxonomy(clip_id, taxonomy_id)'),
+			'taxonomies' =>array(
+				self::MANY_MANY, 'Taxonomy', 'ts_map(f_id, t_id)',
+				'condition' => 'taxonomies_taxonomies.category="ClipTaxonomy"'
+			),
 		);
 	}
 
@@ -118,12 +121,10 @@ class Clip extends CActiveRecord
 	public static function taxonomyString( $clipId )
 	{
 		$a = array();
-		$map = ClipTaxonomy::model()->findAllByAttributes(array(
-			'clip_id' => $clipId,
-		));
-		if (sizeof($map) > 0) {
-			foreach ($map as $m) {
-				$a[] = '<span class="label label-default">'.$m->taxonomy->name.'</span>';
+		$taxonomies = Clip::model()->findByPk($clipId)->taxonomies;
+		if (sizeof($taxonomies) > 0) {
+			foreach ($taxonomies as $t) {
+				$a[] = '<span class="label label-default">'.$t->name.'</span>';
 			}
 		}
 		$a[] = '<span>

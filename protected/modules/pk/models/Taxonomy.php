@@ -57,8 +57,6 @@ class Taxonomy extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'explanations'=>array(self::MANY_MANY, 'Explanation', 'ts_explanation_taxonomy(taxonomy_id, explanation_id)'),
-			'clips'=>array(self::MANY_MANY, 'Clip', 'ts_clip_taxonomy(taxonomy_id, clip_id)'),
 		);
 	}
 
@@ -116,18 +114,10 @@ class Taxonomy extends CActiveRecord
 
 		if ($action == 'update') 
 		{
-			if ($category == 'Explanation') 
-			{
-				ExplanationTaxonomy::model()->deleteAllByAttributes(array(
-					'explanation_id'=> $id,
-				));
-			} 
-			else if ($category == 'Clip') 
-			{
-				ClipTaxonomy::model()->deleteAllByAttributes(array(
-					'clip_id'=> $id,
-				));
-			}
+			Map::model()->deleteAllByAttributes(array(
+				'category'=> $category.'Taxonomy',
+				'f_id' =>$id,
+			));
 		}
 		foreach ($taxonomy as $t) {
 			$name = trim($t);	
@@ -143,43 +133,11 @@ class Taxonomy extends CActiveRecord
 				$_t->category = $category;
 				$_t->save();
 			}
-			if ($category == 'Explanation')
-			{
-				$et = new ExplanationTaxonomy;
-				$et->explanation_id = $id;
-			} 
-			else if ($category == 'Clip')
-			{
-				$et = new ClipTaxonomy;
-				$et->clip_id = $id;
-			}
-			$et->taxonomy_id = $_t->id;
-			$et->save();
-		}
-	}
-	/**
-	 * for update action of clip and explanation
-	 */
-	public static function getTaxonomyString( $type, $id )
-	{
-		if ($type == 'Explanation') 
-		{
-			$map = ExplanationTaxonomy::model()->findAllByAttributes(array(
-				'explanation_id' => $id,
-			));
-		} else if ($type == 'Clip') 
-		{
-			$map = ClipTaxonomy::model()->findAllByAttributes(array(
-				'clip_id' => $id,
-			));
-		}
-		if (sizeof($map) > 0) {
-			foreach ($map as $m) {
-				$a[] = $m->taxonomy->name;
-			}
-			return implode(', ',$a);
-		} else {
-			return null;
+			$map = new Map;
+			$map->category = $category.'Taxonomy';
+			$map->f_id = $id;
+			$map->t_id = $_t->id;
+			$map->save();
 		}
 	}
 }

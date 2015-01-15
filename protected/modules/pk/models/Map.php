@@ -1,21 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "{{clip_taxonomy}}".
+ * This is the model class for table "{{map}}".
  *
- * The followings are the available columns in table '{{clip_taxonomy}}':
- * @property string $id
- * @property string $clip_id
- * @property string $taxonomy_id
+ * The followings are the available columns in table '{{map}}':
+ * @property string $f_id
+ * @property string $t_id
+ * @property string $category
  */
-class ClipTaxonomy extends CActiveRecord
+class Map extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{clip_taxonomy}}';
+		return '{{map}}';
 	}
 
 	/**
@@ -26,10 +26,11 @@ class ClipTaxonomy extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('clip_id, taxonomy_id', 'length', 'max'=>20),
+			array('f_id, t_id', 'length', 'max'=>20),
+			array('category', 'length', 'max'=>80),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, clip_id, taxonomy_id', 'safe', 'on'=>'search'),
+			array('f_id, t_id, category', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -41,8 +42,7 @@ class ClipTaxonomy extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'clip' 		=> array(self::BELONGS_TO, 'Clip', 'clip_id'),
-			'taxonomy' 	=> array(self::BELONGS_TO, 'Taxonomy', 'taxonomy_id'),
+			'clips'=>array(self::MANY_MANY, 'Clip', 'ts_map(t_id, f_id)', 'condition'=>'category="ClipTaxonomy"'),
 		);
 	}
 
@@ -52,9 +52,9 @@ class ClipTaxonomy extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'clip_id' => 'Clip',
-			'taxonomy_id' => 'Taxonomy',
+			'f_id' => 'F',
+			't_id' => 'T',
+			'category' => 'Category',
 		);
 	}
 
@@ -76,9 +76,9 @@ class ClipTaxonomy extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('clip_id',$this->clip_id,true);
-		$criteria->compare('taxonomy_id',$this->taxonomy_id,true);
+		$criteria->compare('f_id',$this->f_id,true);
+		$criteria->compare('t_id',$this->t_id,true);
+		$criteria->compare('category',$this->category,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -89,7 +89,7 @@ class ClipTaxonomy extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return ClipTaxonomy the static model class
+	 * @return Map the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
