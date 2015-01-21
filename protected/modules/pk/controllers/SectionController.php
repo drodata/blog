@@ -81,34 +81,21 @@ class SectionController extends Controller
 		$criteria->compare('section_id',$_GET['id']);
 		$criteria->order = 'c_time DESC';
 
-		/*
 		foreach (array('Clip','Quotation') as $model)
 		{
 			$name = $model.'DataProvider';
-			$name = new CActiveDataProvider($model, array(
+			$$name = new CActiveDataProvider($model, array(
 				'pagination'=>array(
 					'pageSize'=>Yii::app()->params['postsPerPage'],
 				),
 				'criteria'=>$criteria,
 			));
+			$model = self::loadModel();
 		}
-		*/
-			$clipDataProvider = new CActiveDataProvider('Clip', array(
-				'pagination'=>array(
-					'pageSize'=>Yii::app()->params['postsPerPage'],
-				),
-				'criteria'=>$criteria,
-			));
-			$quotationDataProvider = new CActiveDataProvider('Quotation', array(
-				'pagination'=>array(
-					'pageSize'=>Yii::app()->params['postsPerPage'],
-				),
-				'criteria'=>$criteria,
-			));
-
 		$this->render('view',array(
-			'clipDataProvider'=>$clipDataProvider,
-			//'quotationDataProvider'=>$quotationDataProvider,
+			'clipDataProvider'=>$ClipDataProvider,
+			'quotationDataProvider'=>$QuotationDataProvider,
+			'model' => $model,
 			'parsedown' => $parsedown,
 		));
 

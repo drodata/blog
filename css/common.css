@@ -15,4 +15,15 @@ input[type=text], textarea
 .clip-item a i.fa
 {color:#888;}
 
+/**
+ * Compatibility between Bootstrap and jQuery UI
 
+If you put a JUI autocomplete search input field into Bootstrap's
+Navbar component, autocomplete dropdown items will display behind
+the navbar. because the z-index property value (1030)
+of .navbar-fixed-top is bigger than the one (100) of .ui-front,
+in order to autocomplete input field's search results display in front of
+nav bar, we override z-index property of jquery-ui.css
+and set a bigger value.
+ */
+.ui-front {z-index:1031;}
