@@ -25,7 +25,7 @@
 	</script>
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/common.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetsUrl; ?>/pk.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetsUrl; ?>/css/pk.css" />
 
 	<style type="text/css">
 		/* change hljs style */
@@ -95,6 +95,11 @@
 		
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<?php echo $this->renderPartial('application.modules.pk.views.vocabulary._search');?>
+				</div>
+			</form>
 			<ul class="nav navbar-nav">
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/">Pk</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/source">Source</a></li>
@@ -113,6 +118,7 @@
 					</ul>
 				</li>
 			</ul>
+			
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
@@ -124,5 +130,26 @@
 		<?php echo 'Yii Version: <code>'.Yii::getVersion().'</code>'; ?>, 
 		<?php echo 'PHP Version: <code>'.phpversion().'</code>'; ?>
 	</div><!-- footer -->
+
+	<div class="modal fade" id="general-modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Information</h4>
+				</div>
+
+				<div class="modal-body">
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<!--
+					<button type="button" class="btn btn-primary">Save changes</button>
+					-->
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -94,12 +94,26 @@ class VocabularyController extends Controller
 		header("Content-type: application/json");
 		$d = array();
 
+		/*
 		$results = Vocabulary::model()->findAllByAttributes(array(
 			'language' => Vocabulary::LANGUAGE_ENGLISH,
 		));
 		if ($results) {
 			foreach ($results as $r) { 
 				$d[] = $r->name;
+			}
+		}
+		*/
+		 if(isset($_GET['term'])&&($keyword=trim($_GET['term']))!=='')
+		{
+			$criteria=new CDbCriteria;
+			$criteria->compare('language',Vocabulary::LANGUAGE_ENGLISH);
+			$criteria->compare('name',$keyword,true);
+			$results = Vocabulary::model()->findAll($criteria);
+			if ($results) {
+				foreach ($results as $r) { 
+					$d[] = $r->name;
+				}
 			}
 		}
 		echo json_encode($d);
