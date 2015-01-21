@@ -1,4 +1,8 @@
 <?php
+spl_autoload_unregister(array('YiiBase','autoload')); 
+Yii::import('application.vendors.*');
+require_once('Parsedown.php');
+spl_autoload_register(array('YiiBase','autoload'));
 
 class SectionController extends Controller
 {
@@ -63,6 +67,51 @@ class SectionController extends Controller
 		$this->render('index',array(
 			'model'=>$model,
 		));
+	}
+
+	/**
+	 * view all clip and quotations of a section
+	 * in a single page.
+	 */
+	public function actionView()
+	{
+		$parsedown = new Parsedown();
+
+		$criteria=new CDbCriteria;
+		$criteria->compare('section_id',$_GET['id']);
+		$criteria->order = 'c_time DESC';
+
+		/*
+		foreach (array('Clip','Quotation') as $model)
+		{
+			$name = $model.'DataProvider';
+			$name = new CActiveDataProvider($model, array(
+				'pagination'=>array(
+					'pageSize'=>Yii::app()->params['postsPerPage'],
+				),
+				'criteria'=>$criteria,
+			));
+		}
+		*/
+			$clipDataProvider = new CActiveDataProvider('Clip', array(
+				'pagination'=>array(
+					'pageSize'=>Yii::app()->params['postsPerPage'],
+				),
+				'criteria'=>$criteria,
+			));
+			$quotationDataProvider = new CActiveDataProvider('Quotation', array(
+				'pagination'=>array(
+					'pageSize'=>Yii::app()->params['postsPerPage'],
+				),
+				'criteria'=>$criteria,
+			));
+
+		$this->render('view',array(
+			'clipDataProvider'=>$clipDataProvider,
+			//'quotationDataProvider'=>$quotationDataProvider,
+			'parsedown' => $parsedown,
+		));
+
 	}
 
 	public function actionUpdate()
