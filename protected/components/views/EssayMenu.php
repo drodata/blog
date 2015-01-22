@@ -8,12 +8,6 @@
 	'data-action' => 'create',
 	)); ?>
 </li>
-<li>
-	<?php echo CHtml::link('Pk', Yii::app()->request->baseUrl.'/pk',array( 'accesskey'=>'p',)); ?>
-	,<?php echo CHtml::link('CV', Yii::app()->request->baseUrl.'/pk/vocabulary/create',array( 
-		'accesskey'=>'v',
-	)); ?>
-</li>
 </li>
 <li>
 <?php echo CHtml::link('Category Admin', Yii::app()->request->baseUrl.'/category',array()); ?>

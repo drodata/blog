@@ -1,10 +1,5 @@
 <?php $this->beginContent('/layouts/main'); ?>
-	<div class="row">
-		<div class="col-md-12" id="top">
-			<?php echo $this->renderPartial('application.modules.pk.views.vocabulary._search');?>
-		</div>
-	</div>
-	<div class="row">
+	<div class="row" id="main">
 		<div id="side-navi">
 			<?php $this->widget('EssayMenu'); ?>
 			<?php $this->widget('CategoryMenu'); ?>

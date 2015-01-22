@@ -70,10 +70,6 @@
 		label.checkbox-inline {
 			font-weight:normal;
 		}
-		#main {
-			padding-top:60px;
-			margin:0;
-		}
 		.essay #content img {
 			display:block;
 			padding:5px;
@@ -89,31 +85,11 @@
 			border-bottom:1px solid #333;
 		}
 
-		#top {
-			position:absolute;
-			width:100%;
-			height:30px;
-			background-color:#111;
-			color:#eee;
-			top:0;
-			left:0;
-			right:0; 
-		}
-		#top input.vocabulary-search {
-			color:#111;
-			width:400px;
-			display:block;
-			margin:1px auto;
-			background:#ddd;
-		}
-		#top input.vocabulary-search:focus {
-			background:#fff;
-		}
 		#side-navi {
 			position:absolute;
 			width:200px;
 			background:#E5FAE3;
-			top:30px;
+			top:50px;
 			left:0; bottom:0;
 			right:0; 
 			overflow:auto;
@@ -136,7 +112,7 @@
 			background:#eee url("/blog/css/a.jpg") repeat-y;
 			*/
 			width:300px;
-			top:30px;
+			top:50px;
 			left:200px; bottom:0;
 			right:0; 
 			overflow:auto;
@@ -157,7 +133,7 @@
 			/*
 			background:#FAEF97;
 			*/
-			top:30px;
+			top:50px;
 			left:500px; bottom:0;
 			right:0; 
 			overflow:auto;
@@ -189,7 +165,44 @@
 </head>
 
 <body>
-	<?php Yii::app()->bootstrap->register(); ?>
+
+<?php Yii::app()->bootstrap->register(); ?>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#blog-navi">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a accesskey="h" class="navbar-brand" href="<?php echo Yii::app()->request->baseUrl; ?>">
+				<?php echo Yii::app()->name; ?></a>
+		</div> 
+		
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="#blog-navi">
+			<form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<?php echo $this->renderPartial('application.modules.pk.views.vocabulary._search');?>
+				</div>
+			</form>
+			<ul class="nav navbar-nav">
+				<li><?php echo CHtml::link('Pk', Yii::app()->request->baseUrl.'/pk',array( 'accesskey'=>'p',)); ?></li>
+				<li><?php echo CHtml::link('CV', Yii::app()->request->baseUrl.'/pk/vocabulary/create',array( 'accesskey'=>'v',)); ?></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/gii">Gii</a></li>
+					</ul>
+				</li>
+			</ul>
+			
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
 	<div class="container-fluid">
 			<?php echo $content; ?> 
 	</div>
