@@ -5,4 +5,15 @@
 	.quick-add-taxonomy:focus {
 		border:0px solid red;
 	}
-
+/* better display in section/view page */
+.clip-item {
+	padding:10px;
+	margin-bottom:20px;
+}
+.clip-item blockquote {
+	font-family: Georgia;
+	font-size: 16px;
+}
+span.label{
+	font-family: Arial;
+}

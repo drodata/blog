@@ -23,6 +23,11 @@ class QuotationController extends Controller
 		if (isset($_GET['explanation_id'])) {
 			$model->explanation_id = $_GET['explanation_id'];
 		}
+		// create in section/view page
+		if (isset($_GET['section_id']))
+		{
+			$model->section_id = $_GET['section_id'];
+		}
 		if(isset($_POST['Quotation']) )
 		{
 			$model->attributes=$_POST['Quotation'];
@@ -30,7 +35,10 @@ class QuotationController extends Controller
                 
 			if ( $model->validate()) {
 				if ($model->save()) {
-					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/vocabulary');
+					if (isset($_GET['section_id']))
+						$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/section/view?id='.$_GET['section_id']);
+					else
+						$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/vocabulary');
 				}
 			}
 		}

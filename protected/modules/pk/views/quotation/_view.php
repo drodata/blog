@@ -1,3 +1,4 @@
+<div class="clip-item bg-warning">
 <blockquote>
 	<?=$parsedown->text($data->content)?>
 	<footer>
@@ -21,3 +22,4 @@
 	<?php
 	}
 	?>
+</div>

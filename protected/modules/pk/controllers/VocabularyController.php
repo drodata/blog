@@ -22,6 +22,9 @@ class VocabularyController extends Controller
 	}
 	public function actionCreate()
 	{
+		// create in section/view page
+		$sectionQueryStrting = isset($_GET['section_id']) ? '&section_id='.$_GET['section_id'] : '';
+
 		$model=new Vocabulary;
 		if(isset($_POST['Vocabulary']) )
 		{
@@ -30,7 +33,7 @@ class VocabularyController extends Controller
 			if ( $model->validate()) {
 				if ($model->save())
 					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id
-						.'/explanation/create?vocabulary_id='.$model->id);
+						.'/explanation/create?vocabulary_id='.$model->id.$sectionQueryStrting);
 			}
 		}
 		$this->render('create', array( 'model'=>$model,));

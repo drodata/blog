@@ -1,4 +1,4 @@
-<div class="clip-item">
+<div class="clip-item bg-success">
 	<h5>
 		<?php echo $data->title;?>
 	</h5>
