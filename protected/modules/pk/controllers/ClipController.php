@@ -25,6 +25,11 @@ class ClipController extends Controller
 	{
 		$model=new Clip;
 		$formTaxonomy = new FormTaxonomy;
+		// create in section/view page
+		if (isset($_GET['section_id']))
+		{
+			$model->section_id = $_GET['section_id'];
+		}
                 
 		if(isset($_POST['Clip']) )
 		{
@@ -36,7 +41,10 @@ class ClipController extends Controller
 				// 1. store taxonomy
 				Taxonomy::sv('Clip',$_POST['FormTaxonomy']['taxonomy'], $model->id, 'create');
 				// 2. redirect
-				$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id);
+				if (isset($_GET['section_id']))
+					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/section/view?id='.$_GET['section_id']);
+				else
+					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id);
 			}
 		}
 		$this->render('create', array( 

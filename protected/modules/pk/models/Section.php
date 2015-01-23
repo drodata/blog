@@ -79,10 +79,6 @@ class Section extends CActiveRecord
 		);
 	}
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
 	public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
@@ -93,7 +89,7 @@ class Section extends CActiveRecord
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('source_id',$this->source_id,true);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('link',$this->name,true);
+		$criteria->compare('link',$this->link,true);
 		$criteria->compare('parent',$this->parent,true);
 		$criteria->compare('position',$this->position);
 

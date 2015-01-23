@@ -22,6 +22,7 @@ $this->widget('bootstrap.widgets.GridView', array(
 	'columns'=>array(
 		'id',
 		'name',
+		'link',
 		array(
 			'name'=>'source_id',
 			'value'=>'$data->source->name',
