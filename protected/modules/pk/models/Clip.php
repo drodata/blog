@@ -5,16 +5,13 @@
  *
  * The followings are the available columns in table '{{clip}}':
  * @property string $id
- * @property string $section_id
  * @property string $title
- * @property string $content
  * @property string $note
- * @property string $anchor
  * @property string $c_time
+ * @property string $scrap_id
  */
 class Clip extends CActiveRecord
 {
-	public $section_id = 1; // Misc/misc
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -38,17 +35,12 @@ class Clip extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-			array('section_id, content', 'required'),
-			array('section_id', 'length', 'max'=>20),
+			array('scrap_id', 'required'),
+			array('scrap_id', 'length', 'max'=>20),
 			array('title', 'length', 'max'=>100),
-			array('anchor', 'length', 'max'=>100),
-			array('content, note, c_time', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, section_id,title, content, note, anchor, c_time', 'safe', 'on'=>'search'),
+			array('note', 'safe'),
+			array('id, scrap_id, title, note, c_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,7 +52,7 @@ class Clip extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'section' 	=> array(self::BELONGS_TO, 'Section', 'section_id'),
+			'scrap' 	=> array(self::BELONGS_TO, 'Scrap', 'scrap_id'),
 			'taxonomies' =>array(
 				self::MANY_MANY, 'Taxonomy', 'ts_map(f_id, t_id)',
 				'condition' => 'taxonomies_taxonomies.category="ClipTaxonomy"'
@@ -75,11 +67,8 @@ class Clip extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'section_id' => 'Section',
 			'title' => 'Title',
-			'content' => 'Content',
 			'note' => 'Note',
-			'anchor' => 'Anchor',
 			'c_time' => 'C Time',
 		);
 	}
@@ -96,11 +85,9 @@ class Clip extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('section_id',$this->section_id,true);
+		$criteria->compare('scrap_id',$this->scrap_id);
 		$criteria->compare('title',$this->content,true);
-		$criteria->compare('content',$this->content,true);
 		$criteria->compare('note',$this->note,true);
-		$criteria->compare('anchor',$this->anchor,true);
 		$criteria->compare('c_time',$this->c_time,true);
 
 		return new CActiveDataProvider($this, array(

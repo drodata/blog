@@ -7,30 +7,27 @@
 	));
 	?>
 
-		<?php
-		echo $form->dropDownListRow($model,'section_id',Source::CompleteList(),array(
-			'empty'=>'',
-			'class'=>'form-control',
-			'encode' => false,
-		));
-		?>
 		<?php echo $form->textFieldRow($formTaxonomy,'taxonomy', array(
 			'class' => 'AutoCompleteClipTaxonomy',
 			'tabindex' => 1,
 		)); ?> 
-		<?php echo $form->textFieldRow($model,'title', array(
-			'class'=>'form-control',
-		)); ?> 
-		<?php echo $form->textAreaRow($model,'content', array(
-			'class'=>'form-control',
-			'rows' => 15,
-		)); ?> 
-		<?php echo $form->textAreaRow($model,'note', array(
+		<?php echo $form->textAreaRow($modelScrap,'content', array(
 			'class'=>'form-control',
 			'rows' => 10,
+			'tabindex' => 2,
 		)); ?> 
-		<?php echo $form->textFieldRow($model,'anchor', array(
+		<?php echo $form->textFieldRow($modelScrap,'page', array(
 			'class'=>'form-control',
+			'tabindex' => 3,
+		)); ?> 
+		<?php echo $form->textFieldRow($modelClip,'title', array(
+			'class'=>'form-control',
+			'tabindex' => 4,
+		)); ?> 
+		<?php echo $form->textAreaRow($modelClip,'note', array(
+			'class'=>'form-control',
+			'rows' => 10,
+			'tabindex' => 5,
 		)); ?> 
 
 
@@ -40,8 +37,9 @@
 				<?php $this->widget('bootstrap.widgets.Button', array(
 					'buttonType'=> 'submit',
 					'type'=>'success', 
-					'label'=> $model->isNewRecord ? 'Create' : 'Save Update', 
+					'label'=> $modelClip->isNewRecord ? 'Create' : 'Save Update', 
 					'htmlOptions'=> array(
+						'tabindex' => 6,
 					),
 				)); ?>
 				<?php $this->widget('bootstrap.widgets.Button', array(

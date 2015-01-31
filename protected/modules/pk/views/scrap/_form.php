@@ -2,24 +2,26 @@
 	<div class="col-md-6">
 <?php 
 	$form = $this->beginWidget('bootstrap.widgets.ActiveForm', array(
-		'id'=>$this->id.'-cu-form',
+		'id'=> $this->id.'-cu-form',
 		'type'=>'horizontal',
 	));
 	?>
 
 		<?php
-		echo $form->dropDownListRow($model,'explanation_id',Vocabulary::CompleteList(),array(
+		echo $form->dropDownListRow($model,'section_id',Source::CompleteList(),array(
 			'empty'=>'',
 			'class'=>'form-control',
+			'encode' => false,
 		));
 		?>
-		<?php echo $form->textAreaRow($model,'note', array(
-			'rows' => 5,
+		<?php echo $form->textAreaRow($model,'content', array(
+			'class'=>'form-control',
+			'rows' => 15,
+		)); ?> 
+		<?php echo $form->textFieldRow($model,'page', array(
 			'class'=>'form-control',
 		)); ?> 
-		<?php echo $form->textFieldRow($model,'scrap_id', array(
-			'class'=>'form-control',
-		)); ?> 
+
 
 		<div class="form-actions form-group">
 			<div class="col-sm-2"></div>
@@ -48,11 +50,6 @@
 	<div class="col-md-6">
 	</div>
 </div>
-	<?php
-	/*
-	Yii::app()->clientScript->registerScriptFile(
-		Yii::app()->baseUrl.'/js/section.js',
-		CClientScript::POS_END
-	);
-	*/
-	?>
+
+<?php
+?>

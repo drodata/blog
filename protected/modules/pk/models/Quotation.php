@@ -5,12 +5,10 @@
  *
  * The followings are the available columns in table '{{quotation}}':
  * @property string $id
- * @property string $explanation_id
- * @property string $section_id
- * @property string $content
  * @property string $note
- * @property string $anchor
  * @property string $c_time
+ * @property string $explanation_id
+ * @property string $scrap_id
  */
 class Quotation extends CActiveRecord
 {
@@ -41,13 +39,10 @@ class Quotation extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('explanation_id, section_id, content', 'required'),
-			array('explanation_id, section_id', 'length', 'max'=>20),
-			array('anchor', 'length', 'max'=>100),
-			array('content, note, c_time', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, explanation_id, section_id, content, note, anchor, c_time', 'safe', 'on'=>'search'),
+			array('explanation_id, scrap_id', 'required'),
+			array('explanation_id, scrap_id', 'length', 'max'=>20),
+			array('note', 'safe'),
+			array('id, explanation_id, scrap_id, note, c_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,7 +54,7 @@ class Quotation extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'section' 	=> array(self::BELONGS_TO, 'Section', 'section_id'),
+			'scrap' 	=> array(self::BELONGS_TO, 'Scrap', 'scrap_id'),
 			'explanation' 	=> array(self::BELONGS_TO, 'Explanation', 'explanation_id'),
 		);
 	}
@@ -72,10 +67,8 @@ class Quotation extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'explanation_id' => 'Explanation',
-			'section_id' => 'Section',
-			'content' => 'Content',
+			'scrap_id' => 'Scrap',
 			'note' => 'Note',
-			'anchor' => 'Anchor',
 			'c_time' => 'C Time',
 		);
 	}
@@ -93,10 +86,8 @@ class Quotation extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('explanation_id',$this->explanation_id,true);
-		$criteria->compare('section_id',$this->section_id,true);
-		$criteria->compare('content',$this->content,true);
+		$criteria->compare('scrap_id',$this->scrap_id);
 		$criteria->compare('note',$this->note,true);
-		$criteria->compare('anchor',$this->anchor,true);
 		$criteria->compare('c_time',$this->c_time,true);
 
 		return new CActiveDataProvider($this, array(
@@ -113,8 +104,8 @@ class Quotation extends CActiveRecord
 	}
 
 	public static function getCompleteSource($quotation) {
-		$names = Section::nameList($quotation->section->id);
-		array_unshift($names, $quotation->section->source->name);
+		$names = Section::nameList($quotation->scrap->section->id);
+		array_unshift($names, $quotation->scrap->section->source->name);
 		return implode(' - ', $names);
 	}
 }

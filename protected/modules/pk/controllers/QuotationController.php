@@ -20,26 +20,29 @@ class QuotationController extends Controller
 	public function actionCreate()
 	{
 		$model=new Quotation;
-		if (isset($_GET['explanation_id'])) {
+		if (isset($_GET['explanation_id']))
+		{
 			$model->explanation_id = $_GET['explanation_id'];
 		}
-		// create in section/view page
-		if (isset($_GET['section_id']))
+		// create in a certain section page
+		if (isset($_GET['scrap_id']))
 		{
-			$model->section_id = $_GET['section_id'];
+			$model->scrap_id = $_GET['scrap_id'];
 		}
 		if(isset($_POST['Quotation']) )
 		{
 			$model->attributes=$_POST['Quotation'];
 			$model->c_time = new CDbExpression('NOW()');
                 
-			if ( $model->validate()) {
-				if ($model->save()) {
-					if (isset($_GET['section_id']))
-						$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/section/view?id='.$_GET['section_id']);
-					else
-						$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/vocabulary');
+			if ($model->save()) 
+			{
+				if (isset($_GET['scrap_id']))
+				{
+					$sectionId = Scrap::model()->findByPk($_GET['scrap_id'])->section_id;
+					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/section/view?id='.$sectionId);
 				}
+				else
+					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/vocabulary');
 			}
 		}
 		$this->render('create', array( 'model'=>$model,));

@@ -59,8 +59,7 @@ class Section extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'source' 	=> array(self::BELONGS_TO, 'Source', 'source_id'),
-			'clips' 	=> array(self::HAS_MANY, 'Clip', 'section_id'),
-			'quotations' 	=> array(self::HAS_MANY, 'Quotation', 'section_id'),
+			'scraps' 	=> array(self::HAS_MANY, 'Scrap', 'section_id'),
 		);
 	}
 
@@ -117,5 +116,28 @@ class Section extends CActiveRecord
 		}
 		rsort($a);
 		return $a;
+	}
+
+	public static function getChildren ($id = 0) 
+	{
+		$criteria = new CDbCriteria;
+		$criteria->compare('parent',$id);
+		$criteria->order = 'id ASC';
+		$results = self::model()->findAll($criteria);
+		if ($results) 
+		{
+			foreach ($results as $r) 
+			{
+				$a[$r->id] = $r->name;
+
+				$criteria = new CDbCriteria;
+				$criteria->compare('parent',$r->id);
+				$criteria->order = 'id ASC';
+				$sub_results = self::model()->findAll($criteria);
+				if ($sub_results)
+					$a += self::getChildren($r->id);
+			}
+			return $a;
+		}
 	}
 }

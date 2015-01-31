@@ -8,6 +8,18 @@ class ClipController extends Controller
 {
 	public $layout = 'column1';
 	private $_model;
+	private $_redirectUrl;
+	public function loadRedirectUrl()
+	{
+		if($this->_redirectUrl===null)
+		{
+			if(isset($_GET['redirect']))
+			{
+				$this->_redirectUrl = $_GET['redirect'];
+			}
+		}
+		return $this->_redirectUrl;
+	}
 	public function loadModel()
 	{
 		if($this->_model===null)
@@ -21,37 +33,80 @@ class ClipController extends Controller
 		}
 		return $this->_model;
 	}
+	/**
+	 * $_GET['section_id'] is required
+	 */
 	public function actionCreate()
 	{
-		$model=new Clip;
+		$modelClip=new Clip;
+		$modelScrap=new Scrap;
 		$formTaxonomy = new FormTaxonomy;
-		// create in section/view page
-		if (isset($_GET['section_id']))
-		{
-			$model->section_id = $_GET['section_id'];
-		}
-                
 		if(isset($_POST['Clip']) )
 		{
-			$model->attributes=$_POST['Clip'];
-			$model->c_time = new CDbExpression('NOW()');
-                
-			if ($model->save())
+			$modelScrap->attributes=$_POST['Scrap'];
+			$modelScrap->section_id=$_GET['section_id'];
+			$modelScrap->save();
+
+			$modelClip->attributes=$_POST['Clip'];
+			$modelClip->scrap_id = $modelScrap->id;
+			$modelClip->c_time = new CDbExpression('NOW()');
+			if ($modelClip->save())
 			{
 				// 1. store taxonomy
-				Taxonomy::sv('Clip',$_POST['FormTaxonomy']['taxonomy'], $model->id, 'create');
+				Taxonomy::sv('Clip',$_POST['FormTaxonomy']['taxonomy'], $modelClip->id, 'create');
 				// 2. redirect
-				if (isset($_GET['section_id']))
-					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/section/view?id='.$_GET['section_id']);
-				else
-					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id);
+				$this->redirect( $this->loadRedirectUrl() );
 			}
 		}
 		$this->render('create', array( 
-			'model'=>$model,
+			'modelClip'=>$modelClip,
+			'modelScrap'=>$modelScrap,
 			'formTaxonomy' => $formTaxonomy,
 		));
 	}
+	public function actionUpdate()
+	{
+		$modelClip=$this->loadModel();
+		$modelScrap = $modelClip->scrap;
+		$formTaxonomy = new FormTaxonomy;
+		$_a = array();
+		foreach ($modelClip->taxonomies as $t)
+		{
+			if (trim($t->name) != '')
+				$_a[] = $t->name;
+		}
+		$formTaxonomy->taxonomy = implode(', ',$_a);
+		if(isset($_POST['Clip']))
+		{
+			$modelScrap->attributes=$_POST['Scrap'];
+			$modelClip->attributes=$_POST['Clip'];
+			if ( $modelScrap->validate()) 
+			{
+				$modelScrap->update();
+				$modelClip->update();
+				Taxonomy::sv('Clip',$_POST['FormTaxonomy']['taxonomy'], $modelClip->id, 'update');
+				$this->redirect( $this->loadRedirectUrl() );
+			}
+		}
+
+		$this->render('update',array(
+			'modelClip'=>$modelClip,
+			'modelScrap'=>$modelScrap,
+			'formTaxonomy' => $formTaxonomy,
+		));
+	}
+
+	public function actionDelete()
+	{
+		$model = $this->loadModel();
+		Map::model()->deleteAllByAttributes(array(
+			'f_id'=> $model->id,
+			'category' => 'ClipTaxonomy',
+		));
+		$model->delete();
+		$this->redirect( $this->loadRedirectUrl() );
+	}
+
 
 	public function actionAjaxGetTaxonomy()
 	{
@@ -67,16 +122,6 @@ class ClipController extends Controller
 			}
 		}
 		echo json_encode($d);
-	}
-
-	public function actionDelete()
-	{
-			$this->loadModel()->delete();
-			Map::model()->deleteAllByAttributes(array(
-				'f_id'=> $this->loadModel()->id,
-				'category' => 'ClipTaxonomy',
-			));
-			$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id);
 	}
 
 	public function actionIndex()
@@ -113,33 +158,6 @@ class ClipController extends Controller
 
 	}
 
-	public function actionUpdate()
-	{
-		$model=$this->loadModel();
-		$formTaxonomy = new FormTaxonomy;
-		$_a = array();
-		foreach ($model->taxonomies as $t)
-		{
-			if (trim($t->name) != '')
-				$_a[] = $t->name;
-		}
-		$formTaxonomy->taxonomy = implode(', ',$_a);
-		if(isset($_POST['Clip']))
-		{
-			$model->attributes=$_POST['Clip'];
-			if ( $model->validate()) 
-			{
-				$model->update();
-				Taxonomy::sv('Clip',$_POST['FormTaxonomy']['taxonomy'], $model->id, 'update');
-				$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id);
-			}
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-			'formTaxonomy' => $formTaxonomy,
-		));
-	}
 	public function actionAjaxSearch() {
 		header("Content-type: application/json");
 		$d = array();
