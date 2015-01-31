@@ -22,8 +22,8 @@ class VocabularyController extends Controller
 	}
 	public function actionCreate()
 	{
-		// create in section/view page
-		$sectionQueryStrting = isset($_GET['section_id']) ? '&section_id='.$_GET['section_id'] : '';
+		// create in scrap/view page
+		$scrapQueryStrting = isset($_GET['scrap_id']) ? '&scrap_id='.$_GET['scrap_id'] : '';
 
 		$model=new Vocabulary;
 		if(isset($_POST['Vocabulary']) )
@@ -33,7 +33,7 @@ class VocabularyController extends Controller
 			if ( $model->validate()) {
 				if ($model->save())
 					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id
-						.'/explanation/create?vocabulary_id='.$model->id.$sectionQueryStrting);
+						.'/explanation/create?vocabulary_id='.$model->id.$scrapQueryStrting);
 			}
 		}
 		$this->render('create', array( 'model'=>$model,));
@@ -54,11 +54,6 @@ class VocabularyController extends Controller
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
-	public function actionIndex()
-	{
-		$this->render('index',array(
-		));
-	}
 	public function actionAdmin()
 	{
 		$model=new Vocabulary('search');
@@ -97,17 +92,7 @@ class VocabularyController extends Controller
 		header("Content-type: application/json");
 		$d = array();
 
-		/*
-		$results = Vocabulary::model()->findAllByAttributes(array(
-			'language' => Vocabulary::LANGUAGE_ENGLISH,
-		));
-		if ($results) {
-			foreach ($results as $r) { 
-				$d[] = $r->name;
-			}
-		}
-		*/
-		 if(isset($_GET['term'])&&($keyword=trim($_GET['term']))!=='')
+		if(isset($_GET['term'])&&($keyword=trim($_GET['term']))!=='')
 		{
 			$criteria=new CDbCriteria;
 			$criteria->compare('language',Vocabulary::LANGUAGE_ENGLISH);

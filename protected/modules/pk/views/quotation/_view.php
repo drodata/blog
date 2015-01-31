@@ -1,6 +1,7 @@
 <div class="clip-item bg-warning">
+<h4><?=$data->explanation->vocabulary->name?></h4>
 <blockquote>
-	<?=$parsedown->text($data->content)?>
+	<?=$parsedown->text($data->scrap->content)?>
 	<footer>
 		<i>
 		<?php echo Quotation::getCompleteSource($data).', @'.date('Y-n-j', strtotime($data->c_time)); ?>

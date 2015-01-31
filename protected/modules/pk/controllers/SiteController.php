@@ -23,6 +23,46 @@ class SiteController extends Controller
 	public function actionUpdate() {
 		switch ($_GET['version'])
 		{
+			case '0.1.3': // new clip structure
+				Yii::app()->db->createCommand()->setText('
+					drop table if exists `ts_scrap`;
+					create table `ts_scrap`
+					(
+					   `id`			BIGINT(20) DEFAULT NULL AUTO_INCREMENT,
+					   `content`	TEXT DEFAULT NULL,
+					   `page`	INT(3) DEFAULT NULL,
+					   `section_id`		BIGINT(20) DEFAULT NULL,
+					   PRIMARY KEY (`id`)
+					) engine InnoDB DEFAULT CHARSET=utf8;
+					ALTER TABLE ts_clip ADD scrap_id bigint(20) DEFAULT NULL AFTER c_time;
+					ALTER TABLE ts_quotation ADD scrap_id bigint(20) DEFAULT NULL AFTER c_time;
+					ALTER TABLE ts_clip DROP COLUMN section_id;
+					ALTER TABLE ts_clip DROP COLUMN content;
+					ALTER TABLE ts_clip DROP COLUMN anchor;
+					ALTER TABLE ts_quotation DROP COLUMN section_id;
+					ALTER TABLE ts_quotation DROP COLUMN content;
+					ALTER TABLE ts_quotation DROP COLUMN anchor;
+				')->execute();
+
+				foreach (Quotation::model()->findAll() as $quotation)
+				{
+					$scrap = new Scrap;
+					$scrap->content = $quotation->content;
+					$scrap->section_id = $quotation->section_id;
+					$scrap->save();
+					$quotation->scrap_id = $scrap->id;
+					$quotation->update(array('scrap_id'));
+				}
+				foreach (Clip::model()->findAll() as $clip)
+				{
+					$scrap = new Scrap;
+					$scrap->content = $clip->content;
+					$scrap->section_id = $clip->section_id;
+					$scrap->save();
+					$clip->scrap_id = $scrap->id;
+					$clip->update(array('scrap_id'));
+				}
+				break;
 			case '0.1.2':
 				/**
 				 * Merge all MANY_MANY maps into table 'ts_map'

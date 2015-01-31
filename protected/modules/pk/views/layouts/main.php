@@ -102,6 +102,7 @@
 			</form>
 			<ul class="nav navbar-nav">
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/">Pk</a></li>
+				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/scrap/create">Create Scrap</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/source">Source</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/section">Section</a></li>
 

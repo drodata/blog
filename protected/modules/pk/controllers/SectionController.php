@@ -78,7 +78,8 @@ class SectionController extends Controller
 		$parsedown = new Parsedown();
 
 		$criteria=new CDbCriteria;
-		$criteria->compare('section_id',$_GET['id']);
+		$criteria->with = array('scrap');
+		$criteria->compare('scrap.section_id',$_GET['id']);
 		$criteria->order = 'c_time DESC';
 
 		foreach (array('Clip','Quotation') as $model)

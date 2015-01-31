@@ -7,24 +7,14 @@
 	));?>
 </p>
 
-
 <?php $this->widget('bootstrap.widgets.Button', array(
 	'buttonType'=>'link', 
 	'type'=>'success', 
 	'label'=>'Create Clip',
-	'url' => Yii::app()->request->baseUrl.'/'. $this->module->id.'/clip/create?section_id='.$_GET['id'],
+	'url' => Yii::app()->request->baseUrl.'/'. $this->module->id.'/clip/create?section_id='
+		.$_GET['id'].'&redirect='.urlencode(Yii::app()->request->url),
 	'htmlOptions'=> array(
 		//'id' => 'submit',
-	),
-)); ?>
-
-<?php $this->widget('bootstrap.widgets.Button', array(
-	'buttonType'=>'link', 
-	'type'=>'success', 
-	'label'=>'Create Vocabulary',
-	'url' => Yii::app()->request->baseUrl.'/'. $this->module->id.'/vocabulary/create?section_id='.$_GET['id'],
-	'htmlOptions'=> array(
-		'accesskey'=>'v',
 	),
 )); ?>
 
@@ -55,3 +45,9 @@
 		?>
 	</div>
 </div>
+<?php
+	Yii::app()->clientScript->registerScriptFile(
+		$this->module->assetsUrl.'/js/quick-add-clip-taxonomy.js',
+		CClientScript::POS_END
+	);
+?>

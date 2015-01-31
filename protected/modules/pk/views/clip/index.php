@@ -19,7 +19,7 @@ $this->widget('bootstrap.widgets.GridView', array(
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
-		'section_id',
+		'scrap_id',
 		'content',
 		'c_time',
 		array(

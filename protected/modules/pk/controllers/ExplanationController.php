@@ -38,8 +38,8 @@ class ExplanationController extends Controller
 		if (isset($_GET['vocabulary_id'])) {
 			$model->vocabulary_id = $_GET['vocabulary_id'];
 		}
-		// create in section/view page
-		$sectionQueryStrting = isset($_GET['section_id']) ? '&section_id='.$_GET['section_id'] : '';
+		// create in scrap/view page
+		$queryStrtingTail = isset($_GET['scrap_id']) ? '&scrap_id='.$_GET['scrap_id'] : '';
 
 		$formTaxonomy = new FormTaxonomy;
 		if(isset($_POST['Explanation']) )
@@ -53,7 +53,7 @@ class ExplanationController extends Controller
 					Taxonomy::sv('Explanation',$_POST['FormTaxonomy']['taxonomy'], $model->id, 'create');
 					// 2. redirect
 					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id
-						.'/quotation/create?explanation_id='.$model->id.$sectionQueryStrting);
+						.'/quotation/create?explanation_id='.$model->id.$queryStrtingTail);
 				}
 			}
 		}
