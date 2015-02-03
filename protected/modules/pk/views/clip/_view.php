@@ -25,8 +25,9 @@
 					'confirm' => 'Note: delete clip will also delete clips/quotations belongs to it.',
 			));
 			echo CHtml::link(
-				', add a new vocabulary',
+				'<i class="fa fa-plus"></i>',
 				Yii::app()->request->baseUrl.'/'.$this->module->id.'/vocabulary/create?scrap_id='.$data->scrap->id, array(
+					'title' => 'Add a new vocabulary',
 				)
 			);
 			?>

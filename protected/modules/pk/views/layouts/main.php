@@ -102,16 +102,10 @@
 			</form>
 			<ul class="nav navbar-nav">
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/">Pk</a></li>
-				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/scrap/create">Create Scrap</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/source">Source</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/section">Section</a></li>
 
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/clip">Clip</a></li>
-
-				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/vocabulary">Vocabulary</a></li>
-				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/explanation">Explanation</a></li>
-				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/quotation">Quotation</a></li>
-				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/taxonomy">Taxonomy</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<b class="caret"></b></a>
 					<ul class="dropdown-menu">
