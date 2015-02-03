@@ -36,7 +36,9 @@ class SectionController extends Controller
                 
 			if ( $model->validate()) {
 				if ($model->save())
-					$this->redirect('index');
+					$this->redirect(array('section/view',
+						'id' => $model->id,
+					));
 			}
 		}
 		$this->render('create', array( 'model'=>$model,));
