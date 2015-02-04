@@ -1,4 +1,4 @@
-<div class="clip-item bg-success">
+<div class="clip-item">
 		<span class="clip-taxonomy">
 			<?=Clip::taxonomyString($data->id)?>
 		</span>
@@ -10,7 +10,13 @@
 		echo $parsedown->text( $data->scrap->content );
 		?>
 		<footer>
-			<?php echo $data->scrap->section->source->name; ?>
+			<?php 
+			echo CHtml::link(
+				$data->scrap->section->name,
+				Yii::app()->request->baseUrl.'/'.$this->module->id.'/section/view?id='.$data->scrap->section->id, array(
+					'title' => 'view all clips in '.implode(' - ', Section::nameList($data->scrap->section->id)),
+			));
+			?>
 
 			<?php 
 			echo CHtml::link(
