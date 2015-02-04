@@ -4,6 +4,18 @@ class QuotationController extends Controller
 {
 	public $layout = 'column1';
 	private $_model;
+	private $_redirectUrl;
+	public function loadRedirectUrl()
+	{
+		if($this->_redirectUrl===null)
+		{
+			if(isset($_GET['redirect']))
+			{
+				$this->_redirectUrl = $_GET['redirect'];
+			}
+		}
+		return $this->_redirectUrl;
+	}
 	public function loadModel()
 	{
 		if($this->_model===null)
@@ -37,12 +49,7 @@ class QuotationController extends Controller
 			if ($model->save()) 
 			{
 				if (isset($_GET['scrap_id']))
-				{
-					$sectionId = Scrap::model()->findByPk($_GET['scrap_id'])->section_id;
-					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/section/view?id='.$sectionId);
-				}
-				else
-					$this->redirect(Yii::app()->request->baseUrl.'/'.$this->module->id.'/vocabulary');
+					$this->redirect( $this->loadRedirectUrl() );
 			}
 		}
 		$this->render('create', array( 'model'=>$model,));
@@ -104,7 +111,7 @@ class QuotationController extends Controller
 			$model->attributes=$_POST['Quotation'];
 			if ( $model->validate()) {
 				if ($model->update()) {
-					$this->redirect(Yii::app()->request->baseUrl);
+					$this->redirect( $this->loadRedirectUrl() );
 				}
 			}
 		}

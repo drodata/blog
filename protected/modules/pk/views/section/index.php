@@ -33,22 +33,16 @@ $this->widget('bootstrap.widgets.GridView', array(
 		'position',
 		array(
 			'class'=>'CButtonColumn',
-			'template'=>'{clip} {vocabulary} {update} {delete}',
+			'template'=>'{scrap} {update} {delete}',
 			'htmlOptions' => array(
 				'style' => 'width:130px;',
 			),
 			'buttons'=>array(
-				'clip'=>array(
-					'label'=>'clip',
-					'url'=>'Yii::app()->request->baseUrl."/pk/clip/view?section_id=".$data->id',
+				'scrap'=>array(
+					'label'=>'scrap',
+					'url'=>'Yii::app()->request->baseUrl."/pk/section/view?id=".$data->id',
 					'options'=>array(
-						'class'=>'OrderUD',
-						'data-action'=>'update',
 					),
-				),
-				'vocabulary'=>array(
-					'label'=>'words',
-					'url'=>'Yii::app()->request->baseUrl."/pk/quotation/view?section_id=".$data->id',
 				),
 			),
 		),

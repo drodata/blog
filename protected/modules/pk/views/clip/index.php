@@ -1,5 +1,4 @@
 <h1><code><?php echo $this->id . '/' . $this->action->id; ?></code></h1>
-
 <?php $this->widget('bootstrap.widgets.Button', array(
 	'buttonType'=>'link', 
 	'type'=>'primary', 

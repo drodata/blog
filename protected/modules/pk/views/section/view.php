@@ -1,6 +1,6 @@
-<h2><i>
+<h4><i>
 	<?php echo $model->source->name.' - '.implode(' - ', Section::nameList($model->id))?>
-</i></h2>
+</i></h4>
 <p>
 	<?php echo CHtml::link($model->link,$model->link,array(
 		'target' => '_blank',

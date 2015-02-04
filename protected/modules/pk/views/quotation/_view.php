@@ -5,9 +5,13 @@
 	<footer>
 		<i>
 		<?php echo Quotation::getCompleteSource($data).', @'.date('Y-n-j', strtotime($data->c_time)); ?>
-		<a href="<?=Yii::app()->request->baseUrl.'/'.$this->module->id.'/quotation/update?id='.$data->id?>">
-			<i class="fa fa-pencil"></i>
-		</a>
+		<?php
+		echo CHtml::link(
+			'<i class="fa fa-pencil"></i>',
+			Yii::app()->request->baseUrl.'/'.$this->module->id.'/quotation/update?id='.$data->id
+			.'&redirect='.urlencode(Yii::app()->request->url), array(
+		));
+		?>
 		</i>
 	</footer>
 </blockquote>

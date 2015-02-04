@@ -114,7 +114,7 @@ class Section extends CActiveRecord
 		if ($current->parent != 0) {
 			return self::nameList($current->parent, $a);
 		}
-		rsort($a);
+		krsort($a);
 		return $a;
 	}
 
