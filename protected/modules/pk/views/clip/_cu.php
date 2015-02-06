@@ -7,9 +7,9 @@
 	));
 	?>
 
-		<?php echo $form->textFieldRow($formTaxonomy,'taxonomy', array(
-			'class' => 'AutoCompleteClipTaxonomy',
-			'tabindex' => 1,
+		<?php echo $form->textFieldRow($modelClip,'title', array(
+			'class'=>'form-control',
+			'tabindex' => 4,
 		)); ?> 
 		<?php echo $form->textAreaRow($modelScrap,'content', array(
 			'class'=>'form-control',
@@ -20,9 +20,9 @@
 			'class'=>'form-control',
 			'tabindex' => 3,
 		)); ?> 
-		<?php echo $form->textFieldRow($modelClip,'title', array(
-			'class'=>'form-control',
-			'tabindex' => 4,
+		<?php echo $form->textFieldRow($formTaxonomy,'taxonomy', array(
+			'class' => 'AutoCompleteClipTaxonomy',
+			'tabindex' => 1,
 		)); ?> 
 		<?php echo $form->textAreaRow($modelClip,'note', array(
 			'class'=>'form-control',

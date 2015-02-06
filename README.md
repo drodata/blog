@@ -1,10 +1,16 @@
 1. `git clone git@121.42.26.50:git/blog.git`;
 2. 在`protected/config/`下新建`pswd.php`文件，将MySQL密码信息输入进去；
-3. 修改两个文件的权限：
+可以考虑重建 blog 目录，先将此文件添加上，edit it after clone;
+3. Change file permission:
    
    ```bash
-   blog/protected$ chmod g+w runtime
-   blog$ chmod g+w assets
+   cd blog/
+   sudo chgrp -R www-data assets/ 
+   chmod g+w assets/
+   protected/runtime/
+   cd protected/
+   sudo chgrp -R runtime/ models/ controllers/ views/ 
+   chmod g+w runtime/ models/ controllers/ views/
    ```
 
 4. 步骤一中仅 clone `master` branch, 如果 remote 有多个分支，
