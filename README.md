@@ -8,5 +8,6 @@
    ```
 
 4. 步骤一中仅 clone `master` branch, 如果 remote 有多个分支，
-还需要逐个运行`git fetch <remote> <branch-name>`, 注意命令中的`<remote>`
+还需要逐个运行`git fetch <remote> <branch-name>`, 
+注意命令中的`<remote>`
 需提前在`blog/.git/config`内配置；

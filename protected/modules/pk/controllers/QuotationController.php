@@ -48,8 +48,11 @@ class QuotationController extends Controller
                 
 			if ($model->save()) 
 			{
-				if (isset($_GET['scrap_id']))
-					$this->redirect( $this->loadRedirectUrl() );
+				$url = $this->loadRedirectUrl();
+				if (isset($url))
+					$this->redirect($url);
+				else
+					$this->redirect( Yii::app()->baseUrl.'/'.$this->module->id.'/section/view?id='.$model->scrap->section_id );
 			}
 		}
 		$this->render('create', array( 'model'=>$model,));
@@ -101,11 +104,6 @@ class QuotationController extends Controller
 	public function actionUpdate()
 	{
 		$model=$this->loadModel();
-		if(isset($_POST['ajax']) && $_POST['ajax']==='quotation-cu-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
 		if(isset($_POST['Quotation']))
 		{
 			$model->attributes=$_POST['Quotation'];
