@@ -15,6 +15,7 @@
 				$data->scrap->section->name,
 				Yii::app()->request->baseUrl.'/'.$this->module->id.'/section/view?id='.$data->scrap->section->id, array(
 					'title' => 'view all clips in '.implode(' - ', Section::nameList($data->scrap->section->id)),
+					'rel' => 'tooltip',
 			));
 			?>
 

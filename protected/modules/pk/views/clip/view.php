@@ -5,25 +5,20 @@ if ( isset($_GET['section_id']) ) {
 	echo '<h2>Clips in《'.$section->source->name.'》—— '.$section_title.'</h2>';
 }
 ?>
-
-<?php $this->widget('bootstrap.widgets.Button', array(
-	'buttonType'=> 'link',
-	'type'=>'success', 
-	'url' => Yii::app()->request->baseUrl.'/'.$this->module->id.'/'.$this->id.'/create',
-	'label'=> 'Create',
-	'htmlOptions'=> array(
-	),
-)); ?>
-
-<?php 
-$this->widget('bootstrap.widgets.TbListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-	'viewData' => array(
-		'parsedown' => $parsedown,
-	),
-	'template'=>"{items}\n{pager}",
-)); ?>
+<h4><?=$this->module->id?> / <?=$this->id?> / <?=$this->action->id?></h4>
+<div class="row">
+	<div class="col-md-8">
+		<?php 
+		$this->widget('bootstrap.widgets.TbListView', array(
+			'dataProvider'=>$dataProvider,
+			'itemView'=>'_view',
+			'viewData' => array(
+				'parsedown' => $parsedown,
+			),
+			'template'=>"{items}\n{pager}",
+		)); ?>
+	</div>
+</div>
 
 <?php
 Yii::app()->clientScript->registerCoreScript('jquery.ui');
