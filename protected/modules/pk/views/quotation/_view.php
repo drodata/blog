@@ -1,5 +1,11 @@
 <div class="clip-item">
-<h4><?=$data->explanation->vocabulary->name?></h4>
+<h4>
+	<?=$data->explanation->vocabulary->name?>
+	<span class="h6">
+		<?=Lookup::item('ExplanationClass',$data->explanation->class)?>: 
+		<?=$data->explanation->explanation?>
+	</span>
+</h4>
 <blockquote>
 	<?=$parsedown->text($data->scrap->content)?>
 	<footer>
@@ -15,23 +21,20 @@
 		</i>
 	</footer>
 </blockquote>
+<div class="">
 	<?php
-	if ($data->note) {
+	if ($data->note)
+		echo $parsedown->text($data->note);
 	?>
-		<div class="">
-		<p>
-			<?=$parsedown->text($data->note)?>
-			<?php
-			echo CHtml::link(
-				'<i class="fa fa-pencil"></i>',
-				Yii::app()->request->baseUrl.'/'.$this->module->id.'/quotation/update?id='.$data->id
-				.'&redirect='.urlencode(Yii::app()->request->url), array(
-			));
-			?>
-		</p>
-		</div>
-
-	<?php
-	}
-	?>
+	<p>
+		<?php
+		echo CHtml::link(
+			'<i class="fa fa-pencil"></i>',
+			Yii::app()->request->baseUrl.'/'.$this->module->id.'/quotation/update?id='.$data->id
+			.'&redirect='.urlencode(Yii::app()->request->url), array(
+					'title' => 'edit quotation',
+		));
+		?>
+	</p>
+	</div>
 </div>

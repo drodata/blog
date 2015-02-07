@@ -58,11 +58,13 @@
 			echo CHtml::link('<i class="fa fa-pencil"></i>',
 				Yii::app()->request->baseUrl.'/'.$this->module->id.'/clip/update?id='.$data->id
 				.'&redirect='.urlencode(Yii::app()->request->url), array(
+					'title' => 'edit clip',
 			));
 			echo CHtml::link(
 				'<i class="fa fa-times"></i>',
 				Yii::app()->request->baseUrl.'/'.$this->module->id.'/clip/delete?id='.$data->id
 				.'&redirect='.urlencode(Yii::app()->request->url), array(
+					'title' => 'delete clip',
 					'confirm' => 'You are about to delete a clip, please confirm.',
 			));
 			?>
