@@ -209,4 +209,15 @@ class ClipController extends Controller
 		echo json_encode($d);
 	}
 
+	public function actionAjaxQuickDeleteTaxonomy() 
+	{
+		$rowsAffected = Map::model()->deleteAllByAttributes(array(
+			'category' => 'ClipTaxonomy',
+			'f_id' => $_POST['clip_id'],
+			't_id' => $_POST['taxonomy_id'],
+		));
+		if ($rowsAffected == 0)
+			throw new HttpException(404, 'deletion failed.');
+	}
+
 }

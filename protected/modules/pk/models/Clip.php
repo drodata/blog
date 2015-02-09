@@ -111,7 +111,7 @@ class Clip extends CActiveRecord
 		$taxonomies = Clip::model()->findByPk($clipId)->taxonomies;
 		if (sizeof($taxonomies) > 0) {
 			foreach ($taxonomies as $t) {
-				$a[] = '<span class="label label-default">'.$t->name.'</span>';
+				$a[] = '<span data-taxonomy-id="'.$t->id.'" class="label label-default">'.$t->name.'</span>';
 			}
 		}
 		$a[] = '<span>

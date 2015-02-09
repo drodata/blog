@@ -1,5 +1,5 @@
 <div class="clip-item">
-		<span class="clip-taxonomy">
+		<span class="clip-taxonomy" data-clip-id="<?=$data->id?>">
 			<?=Clip::taxonomyString($data->id)?>
 		</span>
 	<h4>

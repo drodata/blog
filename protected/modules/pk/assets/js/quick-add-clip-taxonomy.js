@@ -40,4 +40,34 @@ $(document).ready(function(){
 			$(this).remove();
 		});
 	});
+
+	$(document).on('click', '.clip-taxonomy .label', function(){
+		var $activeTaxonomy = $(this);
+		$('.clip-taxonomy .label').each(function(){
+			if ($(this).hasClass('label-primary'))
+				$(this).removeClass('label-primary').addClass('label-default');
+		});
+
+		var taxonomyId = $(this).data('taxonomyId');
+		var clipId = $(this).parent().data('clipId');
+		$(this).removeClass('label-default').addClass('label-primary');
+
+		$(document).unbind('keyup');
+		$(document).keyup(function(event){
+			if(event.which == 46) // Delete 
+			{
+				$.ajax({ 
+				 	type: "POST" 
+					,url: "/blog/pk/clip/ajaxQuickDeleteTaxonomy" 
+					,dateType: "json"
+					,data: {
+						taxonomy_id: taxonomyId,
+						clip_id: clipId,
+					}
+				}).done(function(d) {
+					$activeTaxonomy.remove();
+				}).fail( ajax_fail_handler);
+			}
+		});
+	});
 });
