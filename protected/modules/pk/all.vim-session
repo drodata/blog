@@ -18,7 +18,6 @@ set nrformats=
 set path=.,protected/models/**,protected/controllers/**,protected/views/**
 set tabstop=4
 set wildmode=longest,list
-set window=43
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -31,13 +30,13 @@ badd +1 ../protected/modules/pk/models/
 badd +58 protected/modules/pk/controllers/ClipController.php
 badd +1 protected/modules/pk/views/clip/create.php
 badd +1 protected/modules/pk/views/clip/update.php
-badd +1 protected/views/layouts/main.php
+badd +194 protected/views/layouts/main.php
 badd +118 protected/modules/pk/views/layouts/main.php
 badd +19 protected/modules/pk/views/section/view.php
 badd +38 protected/modules/pk/controllers/VocabularyController.php
 badd +56 protected/modules/pk/models/Vocabulary.php
 badd +56 protected/modules/pk/controllers/ExplanationController.php
-badd +39 protected/modules/pk/controllers/QuotationController.php
+badd +42 protected/modules/pk/controllers/QuotationController.php
 badd +4 protected/modules/pk/views/quotation/create.php
 badd +5 protected/modules/pk/views/section/index.php
 badd +91 protected/modules/pk/models/Section.php
@@ -49,19 +48,32 @@ badd +124 protected/modules/pk/controllers/ScrapController.php
 badd +39 protected/modules/pk/views/scrap/_view.php
 badd +23 protected/modules/pk/views/scrap/view.php
 badd +8 protected/modules/pk/views/scrap/_quotation.php
-badd +0 protected/modules/pk/models/Quotation.php
-badd +1 protected/modules/pk/views/quotation/_view.php
+badd +48 protected/modules/pk/models/Quotation.php
+badd +10 protected/modules/pk/views/quotation/_view.php
 argglobal
 silent! argdel *
-argadd protected/models
+argadd protected/models/
 set stal=2
-edit protected/modules/pk/models/Quotation.php
+edit protected/modules/pk/models
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+inoremap <buffer> <silent> <S-Up> :Pexplore
+inoremap <buffer> <silent> <S-Down> :Nexplore
+nmap <buffer>  <Plug>NetrwHideEdit
+nmap <buffer>  <Plug>NetrwRefresh
+nnoremap <buffer> <F1> :he netrw-quickhelp
+nnoremap <buffer> <silent> <S-Up> :Pexplore
+nnoremap <buffer> <silent> <S-Down> :Nexplore
+imap <buffer>  <Plug>NetrwHideEdit
+imap <buffer>  <Plug>NetrwRefresh
+let &cpo=s:cpo_save
+unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -70,7 +82,7 @@ setlocal nobinary
 setlocal nobreakindent
 setlocal breakindentopt=
 setlocal bufhidden=
-setlocal buflisted
+setlocal nobuflisted
 setlocal buftype=
 setlocal nocindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
@@ -87,15 +99,15 @@ setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
-setlocal nocursorline
+setlocal cursorline
 setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'php'
-setlocal filetype=php
+if &filetype != 'netrw'
+setlocal filetype=netrw
 endif
 setlocal foldcolumn=0
 setlocal foldenable
@@ -127,17 +139,17 @@ setlocal nolist
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
-setlocal modifiable
+setlocal nomodifiable
 setlocal nrformats=
 set number
-setlocal number
+setlocal nonumber
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
-setlocal noreadonly
+setlocal readonly
 setlocal norelativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
@@ -152,12 +164,12 @@ setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=
 setlocal suffixesadd=
-setlocal swapfile
+setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'php'
-setlocal syntax=php
+if &syntax != 'netrw'
+setlocal syntax=netrw
 endif
-setlocal tabstop=4
+setlocal tabstop=33
 setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
@@ -165,23 +177,36 @@ setlocal noundofile
 setlocal undolevels=-123456
 setlocal nowinfixheight
 setlocal nowinfixwidth
-setlocal wrap
+setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 45 - ((33 * winheight(0) + 21) / 42)
+let s:l = 8 - ((0 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-45
-normal! 048|
+8
+normal! 0
 lcd ~/www/blog/protected/modules/pk
-tabedit ~/www/blog/protected/modules/pk/views/quotation/_view.php
+tabedit ~/www/blog/protected/modules/pk/views
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+inoremap <buffer> <silent> <S-Up> :Pexplore
+inoremap <buffer> <silent> <S-Down> :Nexplore
+nmap <buffer>  <Plug>NetrwHideEdit
+nmap <buffer>  <Plug>NetrwRefresh
+nnoremap <buffer> <F1> :he netrw-quickhelp
+nnoremap <buffer> <silent> <S-Up> :Pexplore
+nnoremap <buffer> <silent> <S-Down> :Nexplore
+imap <buffer>  <Plug>NetrwHideEdit
+imap <buffer>  <Plug>NetrwRefresh
+let &cpo=s:cpo_save
+unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -190,7 +215,7 @@ setlocal nobinary
 setlocal nobreakindent
 setlocal breakindentopt=
 setlocal bufhidden=
-setlocal buflisted
+setlocal nobuflisted
 setlocal buftype=
 setlocal nocindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
@@ -207,15 +232,15 @@ setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
-setlocal nocursorline
+setlocal cursorline
 setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'php'
-setlocal filetype=php
+if &filetype != 'netrw'
+setlocal filetype=netrw
 endif
 setlocal foldcolumn=0
 setlocal foldenable
@@ -247,17 +272,17 @@ setlocal nolist
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
-setlocal modifiable
+setlocal nomodifiable
 setlocal nrformats=
 set number
-setlocal number
+setlocal nonumber
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
-setlocal noreadonly
+setlocal readonly
 setlocal norelativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
@@ -272,12 +297,12 @@ setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=
 setlocal suffixesadd=
-setlocal swapfile
+setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'php'
-setlocal syntax=php
+if &syntax != 'netrw'
+setlocal syntax=netrw
 endif
-setlocal tabstop=4
+setlocal tabstop=33
 setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
@@ -285,23 +310,36 @@ setlocal noundofile
 setlocal undolevels=-123456
 setlocal nowinfixheight
 setlocal nowinfixwidth
-setlocal wrap
+setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 10 - ((9 * winheight(0) + 21) / 42)
+let s:l = 8 - ((7 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-10
-normal! 09|
+8
+normal! 0
 lcd ~/www/blog/protected/modules/pk
-tabedit ~/www/blog/protected/modules/pk/controllers/QuotationController.php
+tabedit ~/www/blog/protected/modules/pk/controllers
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+inoremap <buffer> <silent> <S-Up> :Pexplore
+inoremap <buffer> <silent> <S-Down> :Nexplore
+nmap <buffer>  <Plug>NetrwHideEdit
+nmap <buffer>  <Plug>NetrwRefresh
+nnoremap <buffer> <F1> :he netrw-quickhelp
+nnoremap <buffer> <silent> <S-Up> :Pexplore
+nnoremap <buffer> <silent> <S-Down> :Nexplore
+imap <buffer>  <Plug>NetrwHideEdit
+imap <buffer>  <Plug>NetrwRefresh
+let &cpo=s:cpo_save
+unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -310,7 +348,7 @@ setlocal nobinary
 setlocal nobreakindent
 setlocal breakindentopt=
 setlocal bufhidden=
-setlocal buflisted
+setlocal nobuflisted
 setlocal buftype=
 setlocal nocindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
@@ -327,15 +365,15 @@ setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
-setlocal nocursorline
+setlocal cursorline
 setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'php'
-setlocal filetype=php
+if &filetype != 'netrw'
+setlocal filetype=netrw
 endif
 setlocal foldcolumn=0
 setlocal foldenable
@@ -367,17 +405,17 @@ setlocal nolist
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
-setlocal modifiable
+setlocal nomodifiable
 setlocal nrformats=
 set number
-setlocal number
+setlocal nonumber
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
-setlocal noreadonly
+setlocal readonly
 setlocal norelativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
@@ -392,12 +430,12 @@ setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=
 setlocal suffixesadd=
-setlocal swapfile
+setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'php'
-setlocal syntax=php
+if &syntax != 'netrw'
+setlocal syntax=netrw
 endif
-setlocal tabstop=4
+setlocal tabstop=33
 setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
@@ -405,15 +443,15 @@ setlocal noundofile
 setlocal undolevels=-123456
 setlocal nowinfixheight
 setlocal nowinfixwidth
-setlocal wrap
+setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 42 - ((29 * winheight(0) + 21) / 42)
+let s:l = 8 - ((0 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-42
-normal! 0103|
+8
+normal! 0
 lcd ~/www/blog/protected/modules/pk
 tabedit ~/www/blog/protected/modules/pk/assets
 set splitbelow splitright
@@ -541,11 +579,11 @@ setlocal nowinfixwidth
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 10 - ((9 * winheight(0) + 21) / 42)
+let s:l = 8 - ((7 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-10
+8
 normal! 0
 lcd ~/www/blog/protected/modules/pk
 tabedit ~/www/blog/protected/models
@@ -814,13 +852,26 @@ normal! zt
 8
 normal! 0
 lcd ~/www/blog/protected
-tabedit ~/www/blog/protected/views/layouts/main.php
+tabedit ~/www/blog/protected/controllers
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+inoremap <buffer> <silent> <S-Up> :Pexplore
+inoremap <buffer> <silent> <S-Down> :Nexplore
+nmap <buffer>  <Plug>NetrwHideEdit
+nmap <buffer>  <Plug>NetrwRefresh
+nnoremap <buffer> <F1> :he netrw-quickhelp
+nnoremap <buffer> <silent> <S-Up> :Pexplore
+nnoremap <buffer> <silent> <S-Down> :Nexplore
+imap <buffer>  <Plug>NetrwHideEdit
+imap <buffer>  <Plug>NetrwRefresh
+let &cpo=s:cpo_save
+unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -829,7 +880,7 @@ setlocal nobinary
 setlocal nobreakindent
 setlocal breakindentopt=
 setlocal bufhidden=
-setlocal buflisted
+setlocal nobuflisted
 setlocal buftype=
 setlocal nocindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
@@ -846,15 +897,15 @@ setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
-setlocal nocursorline
+setlocal cursorline
 setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'php'
-setlocal filetype=php
+if &filetype != 'netrw'
+setlocal filetype=netrw
 endif
 setlocal foldcolumn=0
 setlocal foldenable
@@ -886,17 +937,17 @@ setlocal nolist
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
-setlocal modifiable
+setlocal nomodifiable
 setlocal nrformats=
 set number
-setlocal number
+setlocal nonumber
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
-setlocal noreadonly
+setlocal readonly
 setlocal norelativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
@@ -911,12 +962,12 @@ setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=
 setlocal suffixesadd=
-setlocal swapfile
+setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'php'
-setlocal syntax=php
+if &syntax != 'netrw'
+setlocal syntax=netrw
 endif
-setlocal tabstop=4
+setlocal tabstop=33
 setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
@@ -924,15 +975,15 @@ setlocal noundofile
 setlocal undolevels=-123456
 setlocal nowinfixheight
 setlocal nowinfixwidth
-setlocal wrap
+setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 194 - ((28 * winheight(0) + 21) / 42)
+let s:l = 12 - ((4 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-194
-normal! 084|
+12
+normal! 0
 lcd ~/www/blog/protected
 tabedit ~/www/blog/css
 set splitbelow splitright
@@ -1200,7 +1251,7 @@ normal! zt
 8
 normal! 0
 lcd ~/www/blog/protected
-tabnext 2
+tabnext 1
 set stal=1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

@@ -6,7 +6,7 @@
 
 	<div class="" id="">
 		L: <input class="search-label" type="text" accesskey="l"/>
-		<br> <br>
+		<br>
 		<form class="search-keyword">
 			K: <input type="text" accesskey="k"/>
 		</form>

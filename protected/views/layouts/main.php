@@ -48,6 +48,10 @@
 			background-color:#eee;
 			color:#222222;
 		}
+		
+		.container #content { 
+			margin-top:50px;
+		}
 		.essay #content h1,
 		.essay #content h2,
 		.essay #content h3,
@@ -56,7 +60,13 @@
 		.essay #content h6,
 		.essay #content blockquote {
 			font-family: "Sans Serif", "WenQuanYi Zen Hei" ;
+			padding-top:20px;
 		}
+
+		.essay #content h2 { border-top: 5px solid #999; }
+		.essay #content h3 { border-top: 3px solid #aaa; }
+		.essay #content h4 { border-top: 1px solid #eee; }
+
 		.essay #content p ,
 		.essay #content li {
 			line-height:1.5;

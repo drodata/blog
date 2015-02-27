@@ -1,13 +1,20 @@
 <h1><code><?php echo $this->id . '/' . $this->action->id; ?></code></h1>
 
-
 <div class="row">
-	<div class="col-sm-12 tree" id="section-tree"></div>
+	<div class="col-sm-6 tree" id="section-tree"></div>
 </div>
 
 <script type="text/javascript"> 
 	$(document).ready(function(){
-		$('#section-tree').jstree({
+		$('#section-tree').on('changed.jstree', function(e, data){
+			if (data.selected.length == 1)
+			{
+				var type = data.instance.get_node(data.selected[0]).id.split('_')[0];
+				var id = data.instance.get_node(data.selected[0]).id.split('_')[1];
+				if (type == 'section')
+					window.location.href = '/blog/pk/section/view?id=' + id;
+			}
+		}).jstree({
 			'core' : {
 				'data' : {
 					'url' : '/blog/pk/section/ajaxGetChildren',
@@ -18,6 +25,7 @@
 			}
 		});
 		/* search clip
+
 		$('.tree').on('changed.jstree', function(e, data){
 			var i, j = [];
 			var r = {};

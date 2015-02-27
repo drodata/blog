@@ -127,60 +127,54 @@ class SectionController extends Controller
 	}
 	// ajax get source and section tree
 	public function actionAjaxGetChildren() {
+		header("Content-type: application/json");
+		$d = array();
+
 		if ($_GET['id'] == '#') {
 			$criteria = new CDbCriteria;
 			$criteria->order = 'CONVERT(name USING gbk) ASC';
 			$results = Source::model()->findAll($criteria);
-			$opt = '';
+
 			if ($results) {
-				$opt .= '<ul>';
-				foreach ($results as $r) {
-					$opt .= '<li id="source_'.$r->id.'" class="jstree-closed">'.$r->name.'</li>';
+				for ($i =0; $i < sizeof($results); $i++)
+				{
+					$d[$i] = array(
+						'id' => 'source_'.$results[$i]['id'],
+						'children' => true,
+						'text' => $results[$i]['name'],
+						'state' => array(
+						),
+					);
 				}
-				$opt .= '</ul>';
 			}
-		} else {
+		} else 
+		{
 			$type = explode('_',$_GET['id'])[0];
 			$id = explode('_',$_GET['id'])[1];
+
+			$criteria = new CDbCriteria;
 			if ($type == 'source') {
-				$criteria = new CDbCriteria;
 				$criteria->compare('source_id', $id);
 				$criteria->compare('parent', 0);
-				$criteria->order = 'CONVERT(name USING gbk) ASC';
-				$results = Section::model()->findAll($criteria);
-				$opt = '';
-				if ($results) {
-					$opt .= '<ul>';
-					foreach ($results as $r) {
-						$children = Section::model()->findAllByAttributes(array(
-							'parent' => $r->id,
-						));
-						$class = sizeof($children) == 0 ? '' : 'jstree-closed';
-						$opt .= '<li id="section_'.$r->id.'" class="'.$class.'">'.$r->name.'</li>';
-					}
-					$opt .= '</ul>';
-				}
 			} else {
-				$criteria = new CDbCriteria;
 				$criteria->compare('parent', $id);
-				$criteria->order = 'CONVERT(name USING gbk) ASC';
-				$results = Section::model()->findAll($criteria);
-				$opt = '';
-				if ($results) {
-					$opt .= '<ul>';
-					foreach ($results as $r) {
-						$children = Section::model()->findAllByAttributes(array(
-							'parent' => $r->id,
-						));
-						$class = sizeof($children) == 0 ? '' : 'jstree-closed';
-						$opt .= '<li id="section_'.$r->id.'" class="'.$class.'">'.$r->name.'</li>';
-					}
-					$opt .= '</ul>';
+			}
+			$criteria->order = 'CONVERT(name USING gbk) ASC';
+			$results = Section::model()->findAll($criteria);
+
+			if ($results) {
+				for ($i =0; $i < sizeof($results); $i++)
+				{
+					$children = Section::model()->findAllByAttributes(array( 'parent' => $results[$i]['id']));
+					$hasChildren = sizeof($children) == 0 ? false : true;
+					$d[$i] = array(
+						'id' => 'section_'.$results[$i]['id'],
+						'children' => $hasChildren,
+						'text' => $results[$i]['name'],
+					);
 				}
 			}
 		}
-
-		echo $opt;
+		echo json_encode($d);
 	}
-
 }
