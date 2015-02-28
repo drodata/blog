@@ -87,31 +87,43 @@ class CategoryController extends Controller
 		));
 	}
 
-	public function actionAjaxGetChildren() {
-		if ($_GET['id'] == '#') {
-			$parent = 0;
-		} else {
-			$parent = explode('_',$_GET['id'])[1];
-		}
-
+	public function actionAjaxGetChildren() 
+	{
+		header("Content-type: application/json");
+		$d = array();
+		$parent = $_GET['id'] == '#' ? 0 : explode('_',$_GET['id'])[1];
 		$criteria = new CDbCriteria;
 		$criteria->compare('parent',$parent);
 		$criteria->order = 'CONVERT(name USING gbk) ASC';
 		$results = Category::model()->findAll($criteria);
-		$opt = '';
+
 		if ($results) {
-			$opt .= '<ul>';
-			// This 'category' will be used in search mode
+			$j = 0;
 			if ($parent == 0)
-				$opt .= '<li id="category_0" class="">All Essays</li>';
-			foreach ($results as $r) {
-				$children = Category::model()->findAllByAttributes(array('parent' => $r->id));
-				$class = sizeof($children) == 0 ? '' : 'jstree-closed';
-				$opt .= '<li id="category_'.$r->id.'" class="'.$class.'">'.$r->name.'</li>';
+			{
+				$d[$j] = array(
+					'id' => 'category_0',
+					'text' => 'All Essays',
+					'icon' => 'fa fa-folder',
+				);
+				$j++;
+				
 			}
-			$opt .= '</ul>';
+
+			for ($i=$j; $i < sizeof($results); $i++)
+			{
+				$d[$i] = array(
+					'id' => 'category_'.$results[$i]['id'],
+					'text' => $results[$i]['name'],
+					'icon' => 'fa fa-folder',
+				);
+
+				$children = Category::model()->findAllByAttributes(array('parent' => $results[$i]['id']));
+				if ( sizeof($children) > 0 )
+					$d[$i]['children'] = true;
+			}
 		}
-		echo $opt;
+		echo json_encode($d);
 	}
 
 }

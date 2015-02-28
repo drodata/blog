@@ -15,8 +15,10 @@
 		?>
 		</div>
 	</div>
-	<?php
+<?php
 	echo $this->renderPartial('_CUDialog');
+?>
+	<?php
 
 	Yii::app()->clientScript->registerScriptFile(
 		Yii::app()->baseUrl.'/js/essay.js',

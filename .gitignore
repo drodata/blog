@@ -13,6 +13,7 @@ themes/classic/views/
 
 # vim's
 *.swp
+*.session
 
 # This file contains password.
 protected/config/pswd.php

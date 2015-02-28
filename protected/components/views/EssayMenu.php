@@ -1,8 +1,3 @@
-<?php echo CHtml::link('Create', Yii::app()->request->baseUrl.'/essay/create',array(
-	'accesskey'=>'n',
-	'class' => 'EssayCU',
-	'data-action' => 'create',
-	)); ?>
 <ul>
 <li>
 <?php echo CHtml::link('Category Admin', Yii::app()->request->baseUrl.'/category',array()); ?>

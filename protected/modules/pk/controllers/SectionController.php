@@ -130,6 +130,7 @@ class SectionController extends Controller
 		header("Content-type: application/json");
 		$d = array();
 
+		// Initial State
 		if ($_GET['id'] == '#') {
 			$criteria = new CDbCriteria;
 			$criteria->order = 'CONVERT(name USING gbk) ASC';
@@ -142,8 +143,6 @@ class SectionController extends Controller
 						'id' => 'source_'.$results[$i]['id'],
 						'children' => true,
 						'text' => $results[$i]['name'],
-						'state' => array(
-						),
 					);
 				}
 			}
