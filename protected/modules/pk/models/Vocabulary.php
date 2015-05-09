@@ -48,7 +48,7 @@ class Vocabulary extends CActiveRecord
 			array('name, language', 'required'),
 			array('name', 'unique'),
 			array('language, parent', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>40),
+			array('name', 'length', 'max'=>60),
 			array('pronunciation', 'length', 'max'=>20),
 			array('compare', 'length', 'max'=>100),
 			// The following rule is used by search().

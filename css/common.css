@@ -9,6 +9,15 @@ input[type=text], textarea
 	margin-right:5px;
 	cursor:default;
 }
+	/* Override Bootstrap's default style */
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #111;
+  white-space: nowrap;
+  background-color: #eee;
+  border-radius: 4px;
+}
 
 /* change fontawesome link color in Clip and Explanation view page */
 .modal a i.fa,

@@ -104,6 +104,8 @@
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/">Pk</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/source">Source</a></li>
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/section">Section</a></li>
+				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/explanation/list">Word List</a></li>
+				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/section/create"><i class="fa fa-plus"></i>Create Section</a></li>
 
 				<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/clip">Clip</a></li>
 				<li class="dropdown">
@@ -123,7 +125,9 @@
 	</div>
 	<div>
 		<?php echo 'Yii Version: <code>'.Yii::getVersion().'</code>'; ?>, 
-		<?php echo 'PHP Version: <code>'.phpversion().'</code>'; ?>
+		<?php echo 'PHP Version: <code>'.phpversion().'</code>'; ?>,
+		<?php echo 'SQL Server Version: <code>'.Yii::app()->db->serverVersion.'</code>'; ?>,
+		<?php echo 'SQL Client Version: <code>'.Yii::app()->db->clientVersion.'</code>'; ?>,
 	</div><!-- footer -->
 
 	<div class="modal fade" id="general-modal" tabindex="-1">

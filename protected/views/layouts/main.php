@@ -13,7 +13,7 @@
 	<!-- jstree -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/jstree/themes/default/style.css" />
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/jstree/jstree.min.js"></script>
-	<!-- Highlight.js ['tomorrow-night-blue',]-->
+	<!-- Highlight.js ['tomorrow-night-blue','github']-->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/highlight-style/github.css" />
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/highlight.pack.js"></script>
 	<!-- Misc -->
@@ -69,9 +69,11 @@
 
 		.essay #content p ,
 		.essay #content li {
-			line-height:1.5;
-			font-size:14px;
-			font-family: "Droid sans", "WenQuanYi Zen Hei" ;
+			font-size:16px;
+			/*
+			font-family: Georgia,"Droid sans", "WenQuanYi Zen Hei" ;
+			*/
+			font-family: Georgia,"Droid sans","WenQuanYi Zen Hei" ;
 		}
 
 		label.radio,
@@ -88,7 +90,7 @@
 			max-width:100%;
 		}
 		.essay #content p {
-			line-height: 1.5em;
+			line-height: 1.8em;
 		}
 		.border-1 {
 			border-right:1px solid #333;

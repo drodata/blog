@@ -19,7 +19,7 @@
 )); ?>
 
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-9">
 		
 		<?php 
 		$this->widget('bootstrap.widgets.TbListView', array(
@@ -32,8 +32,10 @@
 		));
 		?>
 	</div>
+	<!--
 	<div class="col-md-6">
 		<?php 
+		/*
 		$this->widget('bootstrap.widgets.TbListView', array(
 			'dataProvider'=>$quotationDataProvider,
 			'itemView'=>'/quotation/_view',
@@ -42,8 +44,10 @@
 			),
 			'template'=>"{items}\n{pager}",
 		)); 
+		*/
 		?>
 	</div>
+	-->
 </div>
 <?php
 	Yii::app()->clientScript->registerScriptFile(

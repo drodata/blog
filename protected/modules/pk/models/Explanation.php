@@ -47,7 +47,8 @@ class Explanation extends CActiveRecord
 			array('vocabulary_id, is_main, class, explanation', 'required'),
 			array('is_main, class', 'numerical', 'integerOnly'=>true),
 			array('vocabulary_id', 'length', 'max'=>20),
-			array('explanation, native_explanation, example', 'length', 'max'=>200),
+			array('native_explanation, example', 'length', 'max'=>200),
+			array('explanation', 'length', 'max'=>300),
 			array('synonym, compare, see_also', 'length', 'max'=>100),
 			array('c_time', 'safe'),
 			// The following rule is used by search().
@@ -124,6 +125,32 @@ class Explanation extends CActiveRecord
 				),
 				'defaultOrder'=>array(
 					'id' => CSort::SORT_ASC,
+				),
+			),
+		));
+	}
+
+	public function searchList()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->alias = 'explanation';
+		$criteria->with = array('vocabulary');
+		$criteria->compare('vocabulary.language',Vocabulary::LANGUAGE_ENGLISH);
+		//$criteria->order = 'explanation.c_time ';
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+			'pagination' => false,
+			'sort'=>array(
+				'attributes'=>array(
+					'*',
+				),
+				'defaultOrder'=>array(
+					'c_time' => CSort::SORT_DESC,
 				),
 			),
 		));

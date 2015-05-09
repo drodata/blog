@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-12">
 <?php 
 	$form = $this->beginWidget('bootstrap.widgets.ActiveForm', array(
 		'id'=> $this->id.'-cu-form',

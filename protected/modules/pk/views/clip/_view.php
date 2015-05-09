@@ -42,12 +42,14 @@
 		</footer>
 	</blockquote>
 	<?php
+	/*
 	if (isset($data->scrap->quotations))
 	{
 		$this->renderPartial('/scrap/_quotation', array(
 			'quotations' => $data->scrap->quotations,
 		));
 	}
+	*/
 	?>
 	<div>
 		<p>

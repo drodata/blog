@@ -42,8 +42,7 @@ class Section extends CActiveRecord
 			array('source_id, name', 'required'),
 			array('position', 'numerical', 'integerOnly'=>true),
 			array('source_id, parent', 'length', 'max'=>20),
-			array('name', 'length', 'max'=>50),
-			array('link', 'length', 'max'=>100),
+			array('name, link', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, source_id, name, link, parent, position', 'safe', 'on'=>'search'),

@@ -32,6 +32,17 @@ class ExplanationController extends Controller
 		}
 		echo json_encode($d);
 	}
+	public function actionList()
+	{
+		$model=new Explanation('search');
+		$model->unsetAttributes();
+		if(isset($_GET['Explanation']))
+			$model->attributes=$_GET['Explanation'];
+                
+		$this->render('list',array(
+			'model'=>$model,
+		));
+	}
 	public function actionCreate()
 	{
 		$model=new Explanation;
