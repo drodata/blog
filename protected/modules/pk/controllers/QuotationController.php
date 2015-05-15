@@ -60,6 +60,9 @@ class QuotationController extends Controller
 
 	public function actionDelete()
 	{
+		$this->loadModel()->delete();
+		$this->redirect( Yii::app()->baseUrl.'/'.$this->module->id);
+		/*
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -71,6 +74,7 @@ class QuotationController extends Controller
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		*/
 	}
 
 	public function actionIndex()

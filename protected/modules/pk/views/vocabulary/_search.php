@@ -41,3 +41,15 @@ $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
 	),
 ));
 ?>
+
+<?php
+Yii::app()->clientScript->registerScript(
+    'ajax-del',
+    '
+        $(document).on("click", ".delQuotation", function(){
+			return confirm("Delete a quotation, please confirm.");
+		});
+    ',
+    CClientScript::POS_END
+);
+?>
