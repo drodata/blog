@@ -13,6 +13,8 @@ class QuotationController extends Controller
 			{
 				$this->_redirectUrl = $_GET['redirect'];
 			}
+			else
+				$this->_redirectUrl = Yii::app()->baseUrl.'/'.$this->module->id;
 		}
 		return $this->_redirectUrl;
 	}
