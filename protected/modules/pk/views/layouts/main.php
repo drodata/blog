@@ -115,6 +115,14 @@
 					</ul>
 				</li>
 			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=Yii::app()->user->name?><b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><?=CHtml::link('logout', array('site/logout'))?></li>
+					</ul>
+				</li>
+			</ul>
 			
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->

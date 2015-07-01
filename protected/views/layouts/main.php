@@ -180,7 +180,7 @@
 
 <?php Yii::app()->bootstrap->register(); ?>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -204,10 +204,12 @@
 			<ul class="nav navbar-nav">
 				<li><?php echo CHtml::link('Pk', Yii::app()->request->baseUrl.'/pk',array( 'accesskey'=>'p',)); ?></li>
 				<li><?php echo CHtml::link('CV', Yii::app()->request->baseUrl.'/pk/vocabulary/create',array( 'accesskey'=>'v',)); ?></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=Yii::app()->user->name?><b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="<?php echo Yii::app()->request->baseUrl; ?>/pk/gii">Gii</a></li>
+						<li><?=CHtml::link('logout', array('site/logout'))?></li>
 					</ul>
 				</li>
 			</ul>

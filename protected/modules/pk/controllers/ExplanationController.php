@@ -4,6 +4,21 @@ class ExplanationController extends Controller
 {
 	public $layout = 'column1';
 	private $_model;
+	public function filters()
+	{
+		return array( 'accessControl',);
+	}
+	public function accessRules()
+	{
+		return array(
+			array('allow',
+				'users'=>array('@'),
+			),
+			array('deny',
+				'users'=>array('*'),
+			),
+		);
+	}
 	public function loadModel()
 	{
 		if($this->_model===null)

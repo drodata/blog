@@ -8,6 +8,21 @@ class SectionController extends Controller
 {
 	//public $layout = 'evernote';
 	private $_model;
+	public function filters()
+	{
+		return array( 'accessControl',);
+	}
+	public function accessRules()
+	{
+		return array(
+			array('allow',
+				'users'=>array('@'),
+			),
+			array('deny',
+				'users'=>array('*'),
+			),
+		);
+	}
 	public function loadModel()
 	{
 		if($this->_model===null)

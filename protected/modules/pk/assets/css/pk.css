@@ -1,10 +1,10 @@
-	.quick-add-taxonomy {
-		background:#ffffee;
-		border:0px solid red;
-	}
-	.quick-add-taxonomy:focus {
-		border:0px solid red;
-	}
+.quick-add-taxonomy {
+	background:#ffffee;
+	border:0px solid red;
+}
+.quick-add-taxonomy:focus {
+	border:0px solid red;
+}
 /* better display in section/view page */
 .clip-item {
 	padding:10px;
@@ -16,4 +16,7 @@
 }
 span.label{
 	font-family: Arial;
+}
+.clip-item img {
+	width:75%;
 }

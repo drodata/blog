@@ -5,6 +5,21 @@ class QuotationController extends Controller
 	public $layout = 'column1';
 	private $_model;
 	private $_redirectUrl;
+	public function filters()
+	{
+		return array( 'accessControl',);
+	}
+	public function accessRules()
+	{
+		return array(
+			array('allow',
+				'users'=>array('@'),
+			),
+			array('deny',
+				'users'=>array('*'),
+			),
+		);
+	}
 	public function loadRedirectUrl()
 	{
 		if($this->_redirectUrl===null)
