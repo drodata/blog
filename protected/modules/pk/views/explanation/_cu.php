@@ -11,26 +11,44 @@
 		echo $form->dropDownListRow($model,'vocabulary_id',Vocabulary::nameList(),array(
 			'empty'=>'',
 			'class'=>'form-control',
+			'tabindex' => 1,
 		));
 		?>
 		<?php echo $form->textFieldRow($formTaxonomy,'taxonomy', array(
 			'class' => 'AutoCompleteExplanationTaxonomy',
-			'tabindex' => 1,
+			'tabindex' => 2,
 		)); ?> 
-		<?php echo $form->radioButtonListInlineRow($model,'is_main',array('1'=>'Yes', '0'=> 'No'),array()); ?>
-		<?php echo $form->dropDownListRow($model,'class',Lookup::items('ExplanationClass'),array(
-			'empty'=>'',
-			'class'=>'form-control',
-		)); ?>
+		<?php echo $form->radioButtonListInlineRow($model,'is_main',array('1'=>'Yes', '0'=> 'No'),array(
+			'tabindex' => 3,
+		)); ?> 
+		
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'class', array(
+				'class' => 'col-sm-2 control-label',
+			)); ?>
+			<div class="col-sm-10">
+				<?php echo Chosen::activeDropDownList($model,'class',Lookup::items('ExplanationClass'),array(
+					'empty'=>'',
+					'class'=>'form-control',
+					'tabindex' => 4,
+					'options' => array(
+						'searchContains' => true,
+					),
+				)); ?>
+			</div>
+		</div>
 		<?php echo $form->textAreaRow($model,'explanation', array(
 			'class'=>'form-control',
+			'tabindex' => 5,
 			'rows' => 4,
 		)); ?> 
 		<?php echo $form->textFieldRow($model,'native_explanation', array(
 			'class'=>'form-control',
+			'tabindex' => 6,
 		)); ?> 
 		<?php echo $form->textAreaRow($model,'example', array(
 			'class'=>'form-control',
+			'tabindex' => 7,
 			'rows' => 2,
 		)); ?> 
 		<?php echo $form->textFieldRow($model,'synonym', array(
