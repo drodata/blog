@@ -70,6 +70,9 @@ return array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
 		),
+		'assetManager'=>array(
+			'forceCopy' => false,
+		),
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,

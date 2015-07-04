@@ -21,5 +21,8 @@ class DemoController extends Controller
 		);
 		echo json_encode($d);
 	}
+	public function actionMytabview() {
+	        $this->render('mytabview');
+	}
 
 }
