@@ -1,4 +1,10 @@
 <h1><code><?php echo $this->module->id . '/' . $this->id . '/' . $this->action->id; ?></code></h1>
+<?php
+$this->breadcrumbs=array(
+	'Comments',
+);
+?>
+
 
 
 <?php

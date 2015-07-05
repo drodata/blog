@@ -6,8 +6,9 @@ spl_autoload_register(array('YiiBase','autoload'));
 
 class SectionController extends Controller
 {
-	//public $layout = 'evernote';
+	public $layout = 'column1';
 	private $_model;
+	public $breadcrumbs;
 	public function filters()
 	{
 		return array( 'accessControl',);

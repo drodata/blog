@@ -217,7 +217,7 @@
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
-	<div class="container-fluid">
+	<div id="main" class="container-fluid">
 			<?php echo $content; ?> 
 	</div>
 

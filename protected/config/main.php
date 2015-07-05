@@ -40,6 +40,11 @@ return array(
 
 	'defaultController'=>'back',
 
+	'controllerMap' => array(
+		'site' => array(
+			'class' => 'ext.controller.site.SiteController',
+		),
+	),
 	// application components
 	'components'=>array(
 		'bootstrap' => array(

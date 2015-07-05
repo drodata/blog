@@ -1,3 +1,7 @@
+/* the width of navbar class is 50px + 20px*/
+#main {
+	margin-top: 70px;
+}
 /* workaround to remove the border of a focus input element in Chrome */
 input[type=text], textarea
 {
