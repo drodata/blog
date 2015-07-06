@@ -64,7 +64,6 @@ class ClipController extends Controller
 
 			$modelClip->attributes=$_POST['Clip'];
 			$modelClip->scrap_id = $modelScrap->id;
-			$modelClip->c_time = new CDbExpression('NOW()');
 			if ($modelClip->save())
 			{
 				// 1. store taxonomy

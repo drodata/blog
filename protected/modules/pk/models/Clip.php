@@ -21,7 +21,15 @@ class Clip extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-	
+
+	public function behaviors()
+	{
+		return array(
+			'nowdate'=>array(
+				'class'=>'ext.behavior.currentDate.CurrentDateBehavior',
+			),
+		);
+	}
 	/**
 	 * @return string the associated database table name
 	 */
