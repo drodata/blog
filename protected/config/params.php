@@ -20,4 +20,9 @@ return array(
 
 	'androMediaBaseDir' => '/home/ts/www/media/andro',
 	'essayItemNumber' => 20,
+
+	// flash messages
+	'flashSaved' => '数据已保存',
+	'flashUpdated' => '修改已保存',
+	'flashDeleted' => '数据已删除',
 );

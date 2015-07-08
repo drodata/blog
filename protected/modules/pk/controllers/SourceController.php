@@ -44,10 +44,10 @@ class SourceController extends Controller
 		if(isset($_POST['Source']) )
 		{
 			$model->attributes=$_POST['Source'];
-                
-			if ( $model->validate()) {
-				if ($model->save())
-					$this->redirect('index');
+			if ($model->save())
+			{
+				Yii::app()->user->setFlash('success',Yii::app()->params['flashSaved']);
+				$this->redirect('index');
 			}
 		}
 		$this->render('create', array( 'model'=>$model,));
