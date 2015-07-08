@@ -7,7 +7,7 @@ class LoginFilter extends CFilter
 			$filterChain->run();
 		else
 		{
-			Yii::app()->request->redirect(Yii::app()->baseUrl.'/site/login');
+			Yii::app()->user->loginRequired();
 			return false;
 		}
 	}
