@@ -33,6 +33,7 @@ return array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>$password,
 			'generatorPaths' => array(
+				'application.gii',
 				'bootstrap.gii',
 			),
 		),
