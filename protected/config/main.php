@@ -1,5 +1,4 @@
 <?php
-
 // uncomment the following to define a path alias
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/ibootstrap');
 
@@ -13,9 +12,8 @@ return array(
 	//'theme' => 'bootstrap',
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Respect Is Earned',
-	'language'=>'zh_cn',
+	//'language'=>'zh_cn',
 
-	// preloading 'log' component
 	'preload'=>array('log'),
 
 	// autoloading model and component classes
@@ -71,6 +69,35 @@ return array(
 			'emulatePrepare' => true,
 			'charset' => 'utf8',
 			'tablePrefix' => 'ts_',
+			'enableProfiling' => true,
+		),
+		'log'=>array(
+			'class'=>'CLogRouter',
+			'routes'=>array(
+				array(
+					'class'=>'CFileLogRoute',
+					'levels'=>'error, warning',
+					// uncomment if you want to log context info
+					//'filter' => 'CLogFilter',
+				),
+				/* append Application Log Message table to the bottom of page 
+				array(
+					'class'=>'CWebLogRoute',
+				),
+				*/
+				/* append SQL execution table to the bottom of page 
+				array(
+					'class'=>'CProfileLogRoute',
+				),
+				*/
+				/* Uncomplete
+				array(
+					'class'=>'CEmailLogRoute',
+					'levels'=>'error, warning',
+					'emails'=> array('drodata@foxmail.com'),
+				),
+				*/
+			),
 		),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
@@ -98,21 +125,6 @@ return array(
 				*/
                'pk/<controller:\w+>'=>'pk/<controller>',
                'pk/<controller:\w+>/<action:\w+>'=>'pk/<controller>/<action>',
-			),
-		),
-		'log'=>array(
-			'class'=>'CLogRouter',
-			'routes'=>array(
-				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
-				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
 			),
 		),
 	),

@@ -132,6 +132,19 @@
 			<?php echo $content; ?> 
 	</div>
 	<div>
+
+		<?php 
+		if (Yii::app()->db->enableProfiling)
+		{
+			$stats = CDbConnection::getStats();
+		?>
+			<span class="bg-danger">
+				<?=$stats[0]?> statements executed totally in 
+				<?=round($stats[1],4)?> second. 
+			</span>
+		<?php
+		}
+		?>
 		<?php echo 'Yii Version: <code>'.Yii::getVersion().'</code>'; ?>, 
 		<?php echo 'PHP Version: <code>'.phpversion().'</code>'; ?>,
 		<?php echo 'SQL Server Version: <code>'.Yii::app()->db->serverVersion.'</code>'; ?>,

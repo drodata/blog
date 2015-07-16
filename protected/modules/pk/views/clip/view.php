@@ -9,6 +9,8 @@ if ( isset($_GET['section_id']) ) {
 <div class="row">
 	<div class="col-md-8">
 		<?php 
+		// profile performance of ListView code block
+		Yii::beginProfile('ClipListView');
 		$this->widget('bootstrap.widgets.TbListView', array(
 			'dataProvider'=>$dataProvider,
 			'itemView'=>'_view',
@@ -16,7 +18,9 @@ if ( isset($_GET['section_id']) ) {
 				'parsedown' => $parsedown,
 			),
 			'template'=>"{items}\n{pager}",
-		)); ?>
+		)); 
+		Yii::endProfile('ClipListView');
+		?>
 	</div>
 </div>
 
