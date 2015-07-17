@@ -171,4 +171,21 @@ class Explanation extends CActiveRecord
 		} else
 			return null;
 	}
+
+	public static function explanationsList()
+	{
+		$criteria=new CDbCriteria;
+		$criteria->alias = 'explanation';
+		$criteria->with = 'vocabulary';
+		$criteria->compare('vocabulary.language', Vocabulary::LANGUAGE_ENGLISH);
+		$criteria->order = 'vocabulary.name, explanation.is_main DESC, explanation.class ASC';
+		$explanations = Explanation::model()->findAll($criteria);
+
+		$values = array();
+		foreach ($explanations as $e) 
+		{
+			$values[$e->id] = $e->vocabulary->name.' ('.Lookup::item('ExplanationClass',$e->class).'): '.$e->native_explanation;
+		}
+		return $values;
+	}
 }

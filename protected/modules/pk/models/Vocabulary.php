@@ -119,27 +119,4 @@ class Vocabulary extends CActiveRecord
 		$model = Vocabulary::model()->findAll();
 		return CHtml::listData($model, 'id', 'name');
 	}
-	public function completeList()
-	{
-		$criteria=new CDbCriteria;
-		$criteria->order = 'name ASC';
-		$results = self::model()->findAll($criteria);
-
-		$values = array();
-		if ($results) {
-			foreach ($results as $r) {
-				$criteria=new CDbCriteria;
-				$criteria->compare('vocabulary_id',$r->id);
-				$criteria->order = 'is_main DESC, class ASC';
-				$explanations = Explanation::model()->findAll($criteria);
-				$sub_lists = array();
-				foreach ($explanations as $s) {
-					$sub_lists[$s->id] = Lookup::item('ExplanationClass',$s->class).': '.$s->native_explanation;
-				}
-
-				$values[ $r->name ] = $sub_lists;
-			}
-		}
-		return $values;
-	}
 }

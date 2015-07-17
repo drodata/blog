@@ -1,5 +1,7 @@
 <?php
-defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',5);
+# Uncomment if you want to log call stack information
+#defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',5);
+
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/../api/yii/framework-16/yii.php';
 $config=dirname(__FILE__).'/protected/config/main.php';

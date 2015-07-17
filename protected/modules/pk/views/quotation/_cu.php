@@ -7,18 +7,29 @@
 	));
 	?>
 
-		<?php
-		echo $form->dropDownListRow($model,'explanation_id',Vocabulary::CompleteList(),array(
-			'empty'=>'',
-			'class'=>'form-control',
-		));
-		?>
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'explanation_id', array(
+				'class' => 'col-sm-2 control-label',
+			)); ?>
+			<div class="col-sm-10">
+				<?php echo Chosen::activeDropDownList($model,'explanation_id',Explanation::explanationsList(),array(
+					'empty'=>'',
+					'class'=>'form-control',
+					'tabindex' => 1,
+					'options' => array(
+						'searchContains' => true,
+					),
+				)); ?>
+			</div>
+		</div>
 		<?php echo $form->textAreaRow($model,'note', array(
 			'rows' => 5,
 			'class'=>'form-control',
+			'tabindex' => 2,
 		)); ?> 
 		<?php echo $form->textFieldRow($model,'scrap_id', array(
 			'class'=>'form-control',
+			'tabindex' => 3,
 		)); ?> 
 
 		<div class="form-actions form-group">
