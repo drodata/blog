@@ -94,7 +94,7 @@ class VocabularyController extends Controller
 			$model->attributes=$_POST['Vocabulary'];
 			if ( $model->validate()) {
 				if ($model->update())
-					$this->redirect('index');
+					$this->redirect(array('clip/view'));
 			}
 		}
 
