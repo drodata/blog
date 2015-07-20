@@ -28,6 +28,7 @@ class Scrap extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('content, section_id', 'required'),
+			array('content', 'filter', 'filter' => array($obj=new CHtmlPurifier(),'purify')),
 			array('page', 'numerical', 'integerOnly'=>true),
 			array('section_id', 'length', 'max'=>20),
 			array('content', 'safe'),

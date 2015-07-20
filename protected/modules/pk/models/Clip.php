@@ -46,6 +46,7 @@ class Clip extends CActiveRecord
 		return array(
 			array('scrap_id', 'required'),
 			array('scrap_id', 'length', 'max'=>20),
+			array('title, note', 'filter', 'filter' => array($obj=new CHtmlPurifier(),'purify')),
 			array('title', 'length', 'max'=>100),
 			array('note', 'safe'),
 			array('id, scrap_id, title, note, c_time', 'safe', 'on'=>'search'),
