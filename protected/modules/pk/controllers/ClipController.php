@@ -11,7 +11,11 @@ class ClipController extends Controller
 	private $_redirectUrl;
 	public function filters()
 	{
-		return array( 'accessControl',);
+		return array( 
+			'accessControl',
+			array('ext.filter.precheck.PostRequestCheckFilter + delete'),
+		);
+
 	}
 	public function accessRules()
 	{
